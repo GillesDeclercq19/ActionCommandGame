@@ -1,5 +1,4 @@
-﻿using ActionCommandGame.Services;
-using ActionCommandGame.Services.Abstractions;
+﻿using ActionCommandGame.Services.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ActionCommandGame.RestApi.Controllers

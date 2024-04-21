@@ -1,10 +1,6 @@
 ﻿using ActionCommandGame.Services.Model.Results;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http.Json;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace ActionCommandGame.Sdk
 {
@@ -49,6 +45,15 @@ namespace ActionCommandGame.Sdk
             var playerItem = await response.Content.ReadFromJsonAsync<PlayerItemResult>();
 
             return playerItem;
+        }
+
+        public async Task Delete(int id)
+        {
+            var httpClient = _httpClientFactory.CreateClient("ActionCommandApi");
+            var route = $"/api/playeritems/{id}";
+            var response = await httpClient.DeleteAsync(route);
+
+            response.EnsureSuccessStatusCode();
         }
     }
 }

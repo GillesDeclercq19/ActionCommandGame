@@ -1,6 +1,4 @@
-﻿using ActionCommandGame.Model.Abstractions;
-
-namespace ActionCommandGame.Services.Model.Results
+﻿namespace ActionCommandGame.Services.Model.Results
 {
     public class PositiveGameEventResult
     {

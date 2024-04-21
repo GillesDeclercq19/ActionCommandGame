@@ -1,6 +1,4 @@
-﻿using ActionCommandGame.Model;
-
-namespace ActionCommandGame.Services.Model.Results
+﻿namespace ActionCommandGame.Services.Model.Results
 {
     public class BuyResult
     {

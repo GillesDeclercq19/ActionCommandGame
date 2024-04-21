@@ -1,5 +1,4 @@
-﻿using ActionCommandGame.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace ActionCommandGame.Services.Model.Results

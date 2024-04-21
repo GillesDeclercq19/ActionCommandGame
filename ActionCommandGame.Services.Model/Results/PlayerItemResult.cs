@@ -1,7 +1,4 @@
-﻿using ActionCommandGame.Model;
-using System.Collections.Generic;
-
-namespace ActionCommandGame.Services.Model.Results
+﻿namespace ActionCommandGame.Services.Model.Results
 {
     public class PlayerItemResult
     {

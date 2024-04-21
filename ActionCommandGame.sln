@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ActionCommandGame.Services.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ActionCommandGame.Settings", "ActionCommandGame.Settings\ActionCommandGame.Settings.csproj", "{AF0610A8-1F84-4E5C-B3CF-3AEF3B4C00C7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ActionCommandGame.UI.Mvc", "ActionCommandGame.UI.Mvc\ActionCommandGame.UI.Mvc.csproj", "{B7B93A8A-31C6-4C80-B05A-790688480E41}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ActionCommandGame.Ui.Mvc", "ActionCommandGame.UI.Mvc\ActionCommandGame.Ui.Mvc.csproj", "{B7B93A8A-31C6-4C80-B05A-790688480E41}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ActionCommandGame.RestApi", "ActionCommandGame.RestApi\ActionCommandGame.RestApi.csproj", "{A63AF528-B855-4FFF-9EF0-73E341D89E96}"
 EndProject

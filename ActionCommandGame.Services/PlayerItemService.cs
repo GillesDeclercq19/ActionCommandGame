@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ActionCommandGame.Model;
@@ -7,7 +6,6 @@ using ActionCommandGame.Repository.Core;
 using ActionCommandGame.Services.Abstractions;
 using ActionCommandGame.Services.Extensions;
 using ActionCommandGame.Services.Model.Core;
-using ActionCommandGame.Services.Model.Requests;
 using ActionCommandGame.Services.Model.Results;
 using Microsoft.EntityFrameworkCore;
 
