@@ -37,6 +37,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{0F
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Model", "Model", "{E9A1AEBC-B276-4367-847F-B29CF9303E99}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Security", "Security", "{14DC2021-AEBE-4E02-A744-C23C6C91BD73}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActionCommandGame.Security.Model", "ActionCommandGame.Security.Model\ActionCommandGame.Security.Model.csproj", "{50BAB008-6882-469B-B383-12B0FDEB5ED4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +91,10 @@ Global
 		{C92CD2EF-5075-4B49-ABD0-692292CF2CA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C92CD2EF-5075-4B49-ABD0-692292CF2CA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C92CD2EF-5075-4B49-ABD0-692292CF2CA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50BAB008-6882-469B-B383-12B0FDEB5ED4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50BAB008-6882-469B-B383-12B0FDEB5ED4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50BAB008-6882-469B-B383-12B0FDEB5ED4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50BAB008-6882-469B-B383-12B0FDEB5ED4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -103,6 +111,7 @@ Global
 		{B7B93A8A-31C6-4C80-B05A-790688480E41} = {A7A7515E-5305-4325-AA0A-81BEBEDF19E1}
 		{A63AF528-B855-4FFF-9EF0-73E341D89E96} = {C521AFEF-38E1-4E40-ACEF-3B5737E3F4E5}
 		{C92CD2EF-5075-4B49-ABD0-692292CF2CA9} = {A7A7515E-5305-4325-AA0A-81BEBEDF19E1}
+		{50BAB008-6882-469B-B383-12B0FDEB5ED4} = {14DC2021-AEBE-4E02-A744-C23C6C91BD73}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AF43B065-5545-4453-A97F-781AE33CE7DC}

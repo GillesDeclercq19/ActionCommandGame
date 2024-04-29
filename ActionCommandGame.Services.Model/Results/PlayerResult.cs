@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using ActionCommandGame.Services.Model.Results.DTO;
 
 namespace ActionCommandGame.Services.Model.Results
 {
@@ -16,9 +17,4 @@ namespace ActionCommandGame.Services.Model.Results
         public IList<ItemDto> Inventory { get; set; }
     }
 
-    public class ItemDto
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-    }
 }

@@ -1,4 +1,5 @@
-﻿using ActionCommandGame.Services.Model.Requests;
+﻿using ActionCommandGame.RestApi.Services;
+using ActionCommandGame.Services.Model.Requests;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -8,16 +9,24 @@ namespace ActionCommandGame.RestApi.Controllers
     [ApiController]
     public class IdentityController : ControllerBase
     {
-        [HttpPost]
-        public IActionResult SignIn(UserSignInRequest request)
+        private readonly IdentityService _identityService;
+        public IdentityController(IdentityService identityService)
         {
-            return Ok();
+            _identityService = identityService;
         }
 
         [HttpPost]
-        public IActionResult Register(RegisterRequest request)
+        public async Task<IActionResult> SignIn(UserSignInRequest request)
         {
-            return Ok();
+            var result = await _identityService.SignIn(request);
+            return Ok(result);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Register(UserRegisterRequest request)
+        {
+            var result = await _identityService.Register(request);
+            return Ok(result);
         }
     }
 }

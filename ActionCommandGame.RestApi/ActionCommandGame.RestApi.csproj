@@ -21,6 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ActionCommandGame.Repository\ActionCommandGame.Repository.csproj" />
     <ProjectReference Include="..\ActionCommandGame.Sdk\ActionCommandGame.Sdk.csproj" />
+    <ProjectReference Include="..\ActionCommandGame.Security.Model\ActionCommandGame.Security.Model.csproj" />
     <ProjectReference Include="..\ActionCommandGame.Services\ActionCommandGame.Services.csproj" />
   </ItemGroup>
 

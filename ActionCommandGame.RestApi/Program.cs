@@ -1,5 +1,6 @@
 using System.Text;
 using ActionCommandGame.Repository.Core;
+using ActionCommandGame.RestApi.Services;
 using ActionCommandGame.RestApi.Settings;
 using ActionCommandGame.Services;
 using ActionCommandGame.Services.Abstractions;
@@ -60,6 +61,7 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
     })
     .AddEntityFrameworkStores<ActionButtonGameDbContext>();
 
+builder.Services.AddScoped<IdentityService>();
 builder.Services.AddScoped<IGameService, GameService>();
 builder.Services.AddScoped<IItemService, ItemService>();
 builder.Services.AddScoped<INegativeGameEventService, NegativeGameEventService>();

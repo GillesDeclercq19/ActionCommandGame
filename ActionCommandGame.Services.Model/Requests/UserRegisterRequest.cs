@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ActionCommandGame.Services.Model.Requests
 {
-    public class RegisterRequest
+    public class UserRegisterRequest
     {
         [Required]
         [EmailAddress]
