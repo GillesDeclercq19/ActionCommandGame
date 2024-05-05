@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using ActionCommandGame.Model;
 using ActionCommandGame.Repository.Core;
 using ActionCommandGame.Services.Abstractions;
+using ActionCommandGame.Services.Mappings;
 using ActionCommandGame.Services.Model.Requests;
 using ActionCommandGame.Services.Model.Results;
 using Microsoft.EntityFrameworkCore;
@@ -22,44 +23,14 @@ namespace ActionCommandGame.Services
         {
             return await _database.Players
                 .Where(p => p.Id == id)
-                .Select(p => new PlayerResult
-                {
-                    Id = p.Id,
-                    Name = p.Name,
-                    Money = p.Money,
-                    Experience = p.Experience,
-                    LastActionExecutedDateTime = p.LastActionExecutedDateTime,
-                    CurrentAttackPlayerItemId = p.CurrentAttackPlayerItemId,
-                    CurrentDefensePlayerItemId = p.CurrentDefensePlayerItemId,
-                    CurrentFuelPlayerItemId = p.CurrentFuelPlayerItemId,
-                    Inventory = p.Inventory.Select(item => new ItemDto
-                    {
-                        Id = item.Id,
-                        Name = item.Item.Name
-                    }).ToList(),
-                })
+                .MapToResults()
                 .FirstOrDefaultAsync();
         }
 
         public async Task<IList<PlayerResult>> Find()
         {
             return await _database.Players
-                .Select(p => new PlayerResult
-                {
-                    Id = p.Id,
-                    Name = p.Name,
-                    Money = p.Money,
-                    Experience = p.Experience,
-                    LastActionExecutedDateTime = p.LastActionExecutedDateTime,
-                    CurrentAttackPlayerItemId = p.CurrentAttackPlayerItemId,
-                    CurrentDefensePlayerItemId = p.CurrentDefensePlayerItemId,
-                    CurrentFuelPlayerItemId = p.CurrentFuelPlayerItemId,
-                    Inventory = p.Inventory.Select(item => new ItemDto
-                    {
-                        Id = item.Id,
-                        Name = item.Item.Name
-                    }).ToList(),
-                })
+                .MapToResults()
                 .ToListAsync();
         }
 

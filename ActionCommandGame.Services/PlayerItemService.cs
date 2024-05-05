@@ -5,6 +5,7 @@ using ActionCommandGame.Model;
 using ActionCommandGame.Repository.Core;
 using ActionCommandGame.Services.Abstractions;
 using ActionCommandGame.Services.Extensions;
+using ActionCommandGame.Services.Mappings;
 using ActionCommandGame.Services.Model.Core;
 using ActionCommandGame.Services.Model.Results;
 using Microsoft.EntityFrameworkCore;
@@ -24,16 +25,7 @@ namespace ActionCommandGame.Services
         {
             return await _database.PlayerItems
                 .Where(p => p.Id == id)
-                .Select(p => new PlayerItemResult()
-                {
-                    Id = p.Id,
-                    PlayerId = p.PlayerId,
-                    ItemId = p.ItemId,
-                    RemainingAttack = p.RemainingAttack,
-                    RemainingDefense = p.RemainingDefense,
-                    RemainingFuel = p.RemainingFuel
-
-                })
+                .MapToResults()
                 .FirstOrDefaultAsync();
         }
 
@@ -48,18 +40,8 @@ namespace ActionCommandGame.Services
                     .Where(p => p.PlayerId == playerId.Value);
             }
 
-            var playerItems = await query.ToListAsync();
-
-            // Mapping PlayerItem to PlayerItemResult
-            var results = playerItems.Select(p => new PlayerItemResult
-            {
-                Id = p.Id,
-                PlayerId = p.PlayerId,
-                ItemId = p.ItemId,
-                RemainingFuel = p.RemainingFuel,
-                RemainingAttack = p.RemainingAttack,
-                RemainingDefense = p.RemainingDefense
-            }).ToList();
+            var results = await query.Select(ProjectionExpressions.ProjectToPlayerItemResult())
+                .ToListAsync();
 
             return results;
         }

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using ActionCommandGame.Model;
 using ActionCommandGame.Repository.Core;
 using ActionCommandGame.Services.Abstractions;
+using ActionCommandGame.Services.Mappings;
 using ActionCommandGame.Services.Model.Requests;
 using ActionCommandGame.Services.Model.Results;
 using Microsoft.EntityFrameworkCore;
@@ -23,44 +24,14 @@ namespace ActionCommandGame.Services
         {
             return await _database.Items
                 .Where(p => p.Id == id)
-                .Select(p => new ItemResult()
-                {
-                    Id = p.Id,
-                    Name = p.Name,
-                    Description = p.Description,
-                    Price = p.Price,
-                    Fuel = p.Fuel,
-                    Attack = p.Attack,
-                    Defense = p.Defense,   
-                    ActionCooldownSeconds = p.ActionCooldownSeconds,
-                    PlayerItems = p.PlayerItems.Select(item => new ItemDto
-                    {
-                        Id = item.Id,
-                        Name = item.Item.Name
-                    }).ToList(),
-                })
+                .MapToResults()
                 .FirstOrDefaultAsync();
         }
 
         public async Task<IList<ItemResult>> Find()
         {
             return await _database.Items
-                .Select(p => new ItemResult()
-                {
-                    Id = p.Id,
-                    Name = p.Name,
-                    Description = p.Description,
-                    Price = p.Price,
-                    Fuel = p.Fuel,
-                    Attack = p.Attack,
-                    Defense = p.Defense,
-                    ActionCooldownSeconds = p.ActionCooldownSeconds,
-                    PlayerItems = p.PlayerItems.Select(item => new ItemDto
-                    {
-                        Id = item.Id,
-                        Name = item.Item.Name
-                    }).ToList(),
-                })
+                .MapToResults()
                 .ToListAsync();
         }
 

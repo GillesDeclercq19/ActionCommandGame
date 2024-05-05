@@ -5,6 +5,7 @@ using ActionCommandGame.Model;
 using ActionCommandGame.Repository.Core;
 using ActionCommandGame.Services.Abstractions;
 using ActionCommandGame.Services.Helpers;
+using ActionCommandGame.Services.Mappings;
 using ActionCommandGame.Services.Model.Requests;
 using ActionCommandGame.Services.Model.Results;
 using Microsoft.EntityFrameworkCore;
@@ -24,15 +25,7 @@ namespace ActionCommandGame.Services
         {
             return await _database.PositiveGameEvents
                 .Where(p => p.Id == id)
-                .Select(p => new PositiveGameEventResult()
-                {
-                    Id = p.Id,
-                    Name = p.Name,
-                    Description = p.Description,
-                    Money = p.Money,
-                    Experience = p.Experience,
-                    Probability = p.Probability
-                })
+                .MapToResults()
                 .FirstOrDefaultAsync();
         }
 
@@ -55,15 +48,7 @@ namespace ActionCommandGame.Services
         public async Task<IList<PositiveGameEventResult>> Find()
         {
             return await _database.PositiveGameEvents
-                .Select(p => new PositiveGameEventResult()
-                {
-                    Id = p.Id,
-                    Name = p.Name,
-                    Description = p.Description,
-                    Money = p.Money,
-                    Experience = p.Experience,
-                    Probability = p.Probability
-                })
+                .MapToResults()
                 .ToListAsync();
         }
 

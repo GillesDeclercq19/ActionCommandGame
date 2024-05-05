@@ -5,6 +5,7 @@ using ActionCommandGame.Model;
 using ActionCommandGame.Repository.Core;
 using ActionCommandGame.Services.Abstractions;
 using ActionCommandGame.Services.Helpers;
+using ActionCommandGame.Services.Mappings;
 using ActionCommandGame.Services.Model.Requests;
 using ActionCommandGame.Services.Model.Results;
 using Microsoft.EntityFrameworkCore;
@@ -24,16 +25,7 @@ namespace ActionCommandGame.Services
         {
             return await _database.NegativeGameEvents
                 .Where(p => p.Id == id)
-                .Select(p => new NegativeGameEventResult()
-                {
-                    Id = p.Id,
-                    Name = p.Name,
-                    Description = p.Description,
-                    DefenseWithGearDescription = p.DefenseWithGearDescription,
-                    DefenseWithoutGearDescription = p.DefenseWithoutGearDescription,
-                    DefenseLoss = p.DefenseLoss,
-                    Probability = p.Probability
-                })
+                .MapToResults()
                 .FirstOrDefaultAsync();
         }
         public async Task<NegativeGameEvent> GetRandomNegativeGameEvent()
@@ -45,16 +37,7 @@ namespace ActionCommandGame.Services
         public async Task<IList<NegativeGameEventResult>> Find()
         {
             return await _database.NegativeGameEvents
-                .Select(p => new NegativeGameEventResult()
-                {
-                    Id = p.Id,
-                    Name = p.Name,
-                    Description = p.Description,
-                    DefenseWithGearDescription = p.DefenseWithGearDescription,
-                    DefenseWithoutGearDescription = p.DefenseWithoutGearDescription,
-                    DefenseLoss = p.DefenseLoss,
-                    Probability = p.Probability
-                })
+                .MapToResults()
                 .ToListAsync();
         }
 

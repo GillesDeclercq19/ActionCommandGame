@@ -20,6 +20,7 @@ namespace ActionCommandGame.RestApi.Services
             _jwtSettings = jwtSettings;
             _userManager = userManager;
         }
+
         public async Task<JwtAuthenticationResult> SignIn(UserSignInRequest request)
         {
             var user = await _userManager.FindByNameAsync(request.UserName);
