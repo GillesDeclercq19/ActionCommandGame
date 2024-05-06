@@ -1,17 +1,23 @@
-﻿using ActionCommandGame.UI.Mvc.Models;
-using Microsoft.AspNetCore.Identity;
+﻿using ActionCommandGame.Sdk;
+using ActionCommandGame.Security.Model.Abstractions;
+using ActionCommandGame.Services.Model.Requests;
+using ActionCommandGame.UI.Mvc.Models;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 namespace ActionCommandGame.Ui.Mvc.Controllers
 {
     public class AccountController(
-        SignInManager<IdentityUser> signInManager,
-        UserManager<IdentityUser> userManager) : Controller
+        IdentitySdk identitySdk,
+        ITokenStore tokenStore) : Controller
     {
         [HttpGet]
         public async Task<IActionResult> SignIn(string? returnUrl)
         {
-            await signInManager.SignOutAsync();
+            await HttpContext.SignOutAsync(); ;
 
             ViewBag.ReturnUrl = returnUrl ?? "/";
             return View();
@@ -33,16 +39,23 @@ namespace ActionCommandGame.Ui.Mvc.Controllers
                 return View();
             }
 
-            var result =
-                await signInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, false);
+            var signInRequest = new UserSignInRequest
+            {
+                UserName = model.Username,
+                Password = model.Password
+            };
+            var signInResult = await identitySdk.SignIn(signInRequest);
 
-            if (!result.Succeeded)
+            if (!signInResult.IsSuccessful)
             {
                 ModelState.AddModelError("", "User/Password combination is wrong.");
-
                 ViewBag.ReturnUrl = returnUrl;
                 return View();
             }
+
+            tokenStore.SaveToken(signInResult.Token);
+            var principal = CreatePrincipalFromToken(signInResult.Token);
+            await HttpContext.SignInAsync(principal);
 
             return LocalRedirect(returnUrl);
         }
@@ -56,7 +69,8 @@ namespace ActionCommandGame.Ui.Mvc.Controllers
                 returnUrl = "/";
             }
 
-            await signInManager.SignOutAsync();
+            tokenStore.SaveToken(string.Empty);
+            await HttpContext.SignOutAsync();
 
             return LocalRedirect(returnUrl);
         }
@@ -83,23 +97,61 @@ namespace ActionCommandGame.Ui.Mvc.Controllers
                 return View(model);
             }
 
-            var user = new IdentityUser(model.Username);
-            var result = await userManager.CreateAsync(user, model.Password);
-
-            if (!result.Succeeded)
+            var request = new UserRegisterRequest
             {
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError("", error.Description);
-                }
+                UserName = model.Username,
+                Password = model.Password
+            };
 
+            var result = await identitySdk.Register(request);
+
+            if (!result.IsSuccessful)
+            {
+                foreach (var error in result.Messages)
+                {
+                    ModelState.AddModelError("", error.Message);
+                }
                 ViewBag.ReturnUrl = returnUrl;
                 return View(model);
             }
 
-            await signInManager.SignInAsync(user, false);
+            tokenStore.SaveToken(result.Token);
+            var principal = CreatePrincipalFromToken(result.Token);
+            await HttpContext.SignInAsync(principal);
 
             return LocalRedirect(returnUrl);
+        }
+        private ClaimsPrincipal CreatePrincipalFromToken(string? bearerToken)
+        {
+            var identity = CreateIdentityFromToken(bearerToken);
+
+            return new ClaimsPrincipal(identity);
+        }
+
+        private ClaimsIdentity CreateIdentityFromToken(string? bearerToken)
+        {
+            if (string.IsNullOrWhiteSpace(bearerToken))
+            {
+                return new ClaimsIdentity();
+            }
+
+            var handler = new JwtSecurityTokenHandler();
+            var token = handler.ReadJwtToken(bearerToken);
+
+            var claims = new List<Claim>();
+            foreach (var claim in token.Claims)
+            {
+                claims.Add(claim);
+            }
+
+            //HttpContext required a "Name" claim to display a User Name
+            var usernameClaim = token.Claims.SingleOrDefault(c => c.Type == JwtRegisteredClaimNames.Sub);
+            if (usernameClaim is not null)
+            {
+                claims.Add(new Claim(ClaimTypes.Name, usernameClaim.Value));
+            }
+
+            return new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
         }
     }
 }

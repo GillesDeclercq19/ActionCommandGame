@@ -17,4 +17,9 @@
     <ProjectReference Include="..\ActionCommandGame.Settings\ActionCommandGame.Settings.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Items\" />
+    <Folder Include="Views\Players\" />
+  </ItemGroup>
+
 </Project>

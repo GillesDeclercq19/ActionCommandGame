@@ -2,8 +2,8 @@
 {
     public class ServiceMessage
     {
-        public string Code { get; set; }
-        public string Message { get; set; }
+        public required string Code { get; set; }
+        public required string Message { get; set; }
         public MessagePriority MessagePriority { get; set; }
     }
 }
