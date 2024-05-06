@@ -20,18 +20,9 @@ namespace ActionCommandGame.Repository.Core
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ConfigureRelationships();
-            //modelBuilder.AddDatabaseContent();
             base.OnModelCreating(modelBuilder);
         }
-        /*
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseMySQL("server=localhost;user=root;password=;database=actionbuttongamedb;");
-            }
-        }
-        */
+        
         public void Initialize()
         {
             GeneratePositiveGameEvents();

@@ -39,7 +39,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Model", "Model", "{E9A1AEBC
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Security", "Security", "{14DC2021-AEBE-4E02-A744-C23C6C91BD73}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActionCommandGame.Security.Model", "ActionCommandGame.Security.Model\ActionCommandGame.Security.Model.csproj", "{50BAB008-6882-469B-B383-12B0FDEB5ED4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ActionCommandGame.Security.Model", "ActionCommandGame.Security.Model\ActionCommandGame.Security.Model.csproj", "{50BAB008-6882-469B-B383-12B0FDEB5ED4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

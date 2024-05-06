@@ -1,11 +1,13 @@
 ﻿using ActionCommandGame.Services.Abstractions;
 using ActionCommandGame.Services.Model.Requests;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ActionCommandGame.RestApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ItemsController : ControllerBase
     {
         private readonly IItemService _itemService;

@@ -2,7 +2,7 @@
 using ActionCommandGame.Model;
 using ActionCommandGame.Services.Model.Results;
 
-namespace ActionCommandGame.Services.Mappings;
+namespace ActionCommandGame.Services.Extensions;
 
 public static class QueryableMappingExtensions
 {

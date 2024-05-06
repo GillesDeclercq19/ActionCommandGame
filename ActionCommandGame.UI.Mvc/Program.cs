@@ -18,6 +18,7 @@ builder.Services.AddHttpClient("ActionCommandApi", options =>
 });
 
 //Register SDK
+builder.Services.AddScoped<IdentitySdk>();
 builder.Services.AddScoped<GameSdk>();
 builder.Services.AddScoped<ItemSdk>();
 builder.Services.AddScoped<PlayerSdk>();

@@ -1,4 +1,6 @@
-﻿using ActionCommandGame.Services.Model.Core;
+﻿using ActionCommandGame.Sdk.Extensions;
+using ActionCommandGame.Security.Model.Abstractions;
+using ActionCommandGame.Services.Model.Core;
 using ActionCommandGame.Services.Model.Results;
 using System.Net.Http.Json;
 
@@ -8,14 +10,19 @@ namespace ActionCommandGame.Sdk
     public class GameSdk
     {
         private readonly IHttpClientFactory _httpClientFactory;
-        public GameSdk(IHttpClientFactory httpClientFactory)
+        private readonly ITokenStore _tokenStore;
+        public GameSdk(IHttpClientFactory httpClientFactory, ITokenStore tokenStore)
         {
             _httpClientFactory = httpClientFactory;
+            _tokenStore = tokenStore;
         }
 
         public async Task<ServiceResult<GameResult>> PerformAction(int playerId)
         {
             var httpClient = _httpClientFactory.CreateClient("ActionCommandApi");
+            var bearerToken = _tokenStore.GetToken();
+            httpClient.AddAuthorization(bearerToken);
+
             var route = $"/api/games/performAction?playerId={playerId}";
             var response = await httpClient.PostAsync(route, null);
 
@@ -28,6 +35,9 @@ namespace ActionCommandGame.Sdk
         public async Task<ServiceResult<BuyResult>> Buy(int playerId, int itemId)
         {
             var httpClient = _httpClientFactory.CreateClient("ActionCommandApi");
+            var bearerToken = _tokenStore.GetToken();
+            httpClient.AddAuthorization(bearerToken);
+
             var route = $"/api/games/buy?playerId={playerId}&itemId={itemId}";
             var response = await httpClient.PostAsync(route, null);
 

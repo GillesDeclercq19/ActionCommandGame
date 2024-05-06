@@ -1,4 +1,6 @@
-﻿using ActionCommandGame.Services.Model.Requests;
+﻿using ActionCommandGame.Sdk.Extensions;
+using ActionCommandGame.Security.Model.Abstractions;
+using ActionCommandGame.Services.Model.Requests;
 using ActionCommandGame.Services.Model.Results;
 using System.Net.Http.Json;
 
@@ -7,14 +9,19 @@ namespace ActionCommandGame.Sdk
     public class ItemSdk
     {
         private readonly IHttpClientFactory _httpClientFactory;
-        public ItemSdk(IHttpClientFactory httpClientFactory)
+        private readonly ITokenStore _tokenStore;
+        public ItemSdk(IHttpClientFactory httpClientFactory, ITokenStore tokenStore)
         {
             _httpClientFactory = httpClientFactory;
+            _tokenStore = tokenStore;
         }
 
         public async Task<IList<ItemResult>> Find()
         {
             var httpClient = _httpClientFactory.CreateClient("ActionCommandApi");
+            var bearerToken = _tokenStore.GetToken();
+            httpClient.AddAuthorization(bearerToken);
+
             var route = "/api/items";
             var response = await httpClient.GetAsync(route);
 
@@ -33,6 +40,9 @@ namespace ActionCommandGame.Sdk
         public async Task<ItemResult?> Get(int id)
         {
             var httpClient = _httpClientFactory.CreateClient("ActionCommandApi");
+            var bearerToken = _tokenStore.GetToken();
+            httpClient.AddAuthorization(bearerToken);
+
             var route = $"/api/items/{id}";
             var response = await httpClient.GetAsync(route);
 
@@ -46,6 +56,9 @@ namespace ActionCommandGame.Sdk
         public async Task<ItemResult?> Create(ItemRequest item)
         {
             var httpClient = _httpClientFactory.CreateClient("ActionCommandApi");
+            var bearerToken = _tokenStore.GetToken();
+            httpClient.AddAuthorization(bearerToken);
+
             var route = "/api/items";
             var response = await httpClient.PostAsJsonAsync(route, item);
 
@@ -60,6 +73,9 @@ namespace ActionCommandGame.Sdk
         public async Task<ItemResult?> Update(int id, ItemRequest item)
         {
             var httpClient = _httpClientFactory.CreateClient("ActionCommandApi");
+            var bearerToken = _tokenStore.GetToken();
+            httpClient.AddAuthorization(bearerToken);
+
             var route = $"/api/items/{id}";
             var response = await httpClient.PutAsJsonAsync(route, item);
 
@@ -73,6 +89,9 @@ namespace ActionCommandGame.Sdk
         public async Task Delete(int id)
         {
             var httpClient = _httpClientFactory.CreateClient("ActionCommandApi");
+            var bearerToken = _tokenStore.GetToken();
+            httpClient.AddAuthorization(bearerToken);
+
             var route = $"/api/items/{id}";
             var response = await httpClient.DeleteAsync(route);
 

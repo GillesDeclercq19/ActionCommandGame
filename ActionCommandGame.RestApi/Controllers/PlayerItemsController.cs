@@ -1,10 +1,12 @@
 ﻿using ActionCommandGame.Services.Abstractions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ActionCommandGame.RestApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class PlayerItemsController : ControllerBase
     {
         private readonly IPlayerItemService _playerItemService;

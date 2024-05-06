@@ -5,7 +5,7 @@ using ActionCommandGame.Model;
 using ActionCommandGame.Services.Model.Results;
 using ActionCommandGame.Services.Model.Results.DTO;
 
-namespace ActionCommandGame.Services.Mappings;
+namespace ActionCommandGame.Services.Extensions;
 
 public static class ProjectionExpressions
 {

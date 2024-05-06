@@ -15,14 +15,14 @@ namespace ActionCommandGame.RestApi.Controllers
             _identityService = identityService;
         }
 
-        [HttpPost]
+        [HttpPost("sign-in")]
         public async Task<IActionResult> SignIn(UserSignInRequest request)
         {
             var result = await _identityService.SignIn(request);
             return Ok(result);
         }
 
-        [HttpPost]
+        [HttpPost("register")]
         public async Task<IActionResult> Register(UserRegisterRequest request)
         {
             var result = await _identityService.Register(request);

@@ -1,9 +1,9 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using ActionCommandGame.RestApi.Services.Helpers;
 using ActionCommandGame.RestApi.Settings;
 using ActionCommandGame.Security.Model;
-using ActionCommandGame.Services.Model.Core;
 using ActionCommandGame.Services.Model.Requests;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
@@ -23,22 +23,23 @@ namespace ActionCommandGame.RestApi.Services
 
         public async Task<JwtAuthenticationResult> SignIn(UserSignInRequest request)
         {
+            if (string.IsNullOrWhiteSpace(_jwtSettings.Secret) || !_jwtSettings.Expiry.HasValue)
+            {
+                return JwtAuthenticationHelpers.JwtConfigurationError();
+            }
+
             var user = await _userManager.FindByNameAsync(request.UserName);
             if (user == null)
             {
-                return LoginFailed();
+                return JwtAuthenticationHelpers.LoginFailed();
             }
 
             var isPasswordValid = await _userManager.CheckPasswordAsync(user, request.Password);
             if (!isPasswordValid)
             {
-                return LoginFailed();
+                return JwtAuthenticationHelpers.LoginFailed();
             }
 
-            if (string.IsNullOrWhiteSpace(_jwtSettings.Secret) || !_jwtSettings.Expiry.HasValue)
-            {
-                return JwtConfigurationError();
-            }
             var token = GenerateJwtToken(user, _jwtSettings.Secret, _jwtSettings.Expiry.Value);
 
             return new JwtAuthenticationResult()
@@ -47,41 +48,33 @@ namespace ActionCommandGame.RestApi.Services
             };
         }
 
-        private JwtAuthenticationResult LoginFailed()
-        {
-            return new JwtAuthenticationResult()
-            {
-                Messages = new List<ServiceMessage>()
-                {
-                    new ServiceMessage()
-                    {
-                        Code = "LoginFailed",
-                        Message = "User/Password combination is incorrect.",
-                        MessagePriority = MessagePriority.Error
-                    }
-                }
-            };
-        }
-
-        private JwtAuthenticationResult JwtConfigurationError()
-        {
-            return new JwtAuthenticationResult()
-            {
-                Messages = new List<ServiceMessage>()
-                {
-                    new ServiceMessage()
-                    {
-                        Code = "JwtConfigurationError",
-                        Message = "JWT Settings are not configured correctly",
-                        MessagePriority = MessagePriority.Error
-                    }
-                }
-            };
-        }
-
         public async Task<JwtAuthenticationResult> Register(UserRegisterRequest request)
         {
+            if (string.IsNullOrWhiteSpace(_jwtSettings.Secret) || !_jwtSettings.Expiry.HasValue)
+            {
+                return JwtAuthenticationHelpers.JwtConfigurationError();
+            }
 
+            var existingUser = await _userManager.FindByNameAsync(request.UserName);
+            if (existingUser is not null)
+            {
+                return JwtAuthenticationHelpers.UserExists();
+            }
+
+            var user = new IdentityUser(request.UserName);
+            var result = await _userManager.CreateAsync(user, request.Password);
+
+            if (!result.Succeeded)
+            {
+                return JwtAuthenticationHelpers.RegisterError(result.Errors);
+            }
+
+            var token = GenerateJwtToken(user, _jwtSettings.Secret, _jwtSettings.Expiry.Value);
+
+            return new JwtAuthenticationResult()
+            {
+                Token = token
+            };
         }
 
         private string GenerateJwtToken(IdentityUser user, string secret, TimeSpan expiry)
@@ -99,9 +92,13 @@ namespace ActionCommandGame.RestApi.Services
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 
+            if (!string.IsNullOrWhiteSpace(user.UserName))
+            {
+                claims.Add(new Claim(JwtRegisteredClaimNames.Sub, user.UserName));
+            }
+
             if (!string.IsNullOrWhiteSpace(user.Email))
             {
-                claims.Add(new Claim(JwtRegisteredClaimNames.Sub, user.Email));
                 claims.Add(new Claim(JwtRegisteredClaimNames.Email, user.Email));
             }
 

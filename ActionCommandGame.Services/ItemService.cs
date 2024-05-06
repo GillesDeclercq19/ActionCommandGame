@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using ActionCommandGame.Model;
 using ActionCommandGame.Repository.Core;
 using ActionCommandGame.Services.Abstractions;
-using ActionCommandGame.Services.Mappings;
+using ActionCommandGame.Services.Extensions;
 using ActionCommandGame.Services.Model.Requests;
 using ActionCommandGame.Services.Model.Results;
 using Microsoft.EntityFrameworkCore;
