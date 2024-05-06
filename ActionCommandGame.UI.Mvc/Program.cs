@@ -1,5 +1,8 @@
 using ActionCommandGame.Sdk;
+using ActionCommandGame.Security.Model.Abstractions;
 using ActionCommandGame.Settings;
+using ActionCommandGame.UI.Mvc.Stores;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +29,14 @@ builder.Services.AddScoped<PlayerItemSdk>();
 builder.Services.AddScoped<PositiveGameEventSdk>();
 builder.Services.AddScoped<NegativeGameEventSdk>();
 
+builder.Services.AddScoped<ITokenStore, TokenStore>();
+builder.Services.AddHttpContextAccessor();
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
+{
+    options.LoginPath = "/Account/SignIn";
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -41,6 +52,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
@@ -48,3 +60,4 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+    
