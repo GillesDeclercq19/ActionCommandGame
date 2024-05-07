@@ -19,7 +19,6 @@
 
   <ItemGroup>
     <Folder Include="Views\Items\" />
-    <Folder Include="Views\Players\" />
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,27 @@
+﻿@model PlayerResult
+
+<tr>
+    <td>@Model.Name</td>
+    <td>@Model.Money</td>
+    <td>@Model.LastActionExecutedDateTime</td>
+    <td>@Model.CurrentFuelPlayerItemId</td>
+    <td>@Model.CurrentAttackPlayerItemId</td>
+    <td>@Model.CurrentDefensePlayerItemId</td>
+    <td>@Model.Inventory</td>
+    <td>
+        <a class="btn btn-secondary" asp-action="Edit" asp-route-id="@Model.Id">
+            Edit
+        </a>
+        <a class="btn btn-warning" asp-action="Delete" asp-route-id="@Model.Id">
+            Delete
+        </a>
+        <button class="btn btn-danger"
+                data-bs-toggle="modal"
+                data-bs-target="#deleteModal"
+                data-id="@Model.Id"
+                data-name="@Model.Name"
+                data-type="delete">
+            Delete with modal
+        </button>
+    </td>
+</tr>
