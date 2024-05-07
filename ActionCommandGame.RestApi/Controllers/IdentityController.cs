@@ -2,7 +2,6 @@
 using ActionCommandGame.Services.Model.Requests;
 using Microsoft.AspNetCore.Mvc;
 
-
 namespace ActionCommandGame.RestApi.Controllers
 {
     [Route("api/[controller]")]
