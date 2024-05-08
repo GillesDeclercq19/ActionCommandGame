@@ -54,10 +54,11 @@ builder.Services.AddAuthentication(options => {
         }
     });
 
-builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
-    {
-        options.SignIn.RequireConfirmedAccount = true;
-    })
+builder.Services.AddIdentityCore<IdentityUser>(options =>
+{
+    options.SignIn.RequireConfirmedAccount = true;
+})
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ActionButtonGameDbContext>();
 
 builder.Services.AddScoped<IdentityService>();

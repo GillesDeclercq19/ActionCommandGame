@@ -1,6 +1,5 @@
 ﻿using ActionCommandGame.Services.Abstractions;
 using ActionCommandGame.Services.Model.Requests;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,7 +7,7 @@ namespace ActionCommandGame.RestApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [Authorize]
     public class PlayersController : ControllerBase
     {
         private readonly IPlayerService _playerService;

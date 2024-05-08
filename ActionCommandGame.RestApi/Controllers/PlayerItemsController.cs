@@ -7,7 +7,7 @@ namespace ActionCommandGame.RestApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [Authorize]
     public class PlayerItemsController : ControllerBase
     {
         private readonly IPlayerItemService _playerItemService;
