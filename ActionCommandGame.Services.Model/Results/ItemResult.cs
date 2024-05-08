@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using ActionCommandGame.Services.Model.Results.DTO;
-
-namespace ActionCommandGame.Services.Model.Results
+﻿namespace ActionCommandGame.Services.Model.Results
 {
     public class ItemResult
     {
@@ -14,7 +11,6 @@ namespace ActionCommandGame.Services.Model.Results
         public int Attack { get; set; }
         public int Defense { get; set; }
         public int ActionCooldownSeconds { get; set; }
-        public IList<ItemDto> PlayerItems { get; set; }
     }
 
 }

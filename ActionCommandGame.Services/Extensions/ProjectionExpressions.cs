@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Linq;
 using System.Linq.Expressions;
 using ActionCommandGame.Model;
 using ActionCommandGame.Services.Model.Results;
-using ActionCommandGame.Services.Model.Results.DTO;
 
 namespace ActionCommandGame.Services.Extensions;
 
@@ -21,11 +19,6 @@ public static class ProjectionExpressions
             CurrentAttackPlayerItemId = entity.CurrentAttackPlayerItemId,
             CurrentDefensePlayerItemId = entity.CurrentDefensePlayerItemId,
             CurrentFuelPlayerItemId = entity.CurrentFuelPlayerItemId,
-            Inventory = entity.Inventory.Select(item => new ItemDto
-            {
-                Id = item.Id,
-                Name = item.Item.Name
-            }).ToList(),
         };
     }
 
@@ -41,11 +34,6 @@ public static class ProjectionExpressions
             Attack = entity.Attack,
             Defense = entity.Defense,
             ActionCooldownSeconds = entity.ActionCooldownSeconds,
-            PlayerItems = entity.PlayerItems.Select(item => new ItemDto
-            {
-                Id = item.Id,
-                Name = item.Item.Name
-            }).ToList(),
         };
     }
 
