@@ -41,7 +41,7 @@ namespace ActionCommandGame.Ui.Mvc.Controllers
 
             var signInRequest = new UserSignInRequest
             {
-                UserName = model.Username,
+                Username = model.Username,
                 Password = model.Password
             };
             var signInResult = await identitySdk.SignIn(signInRequest);
@@ -99,7 +99,7 @@ namespace ActionCommandGame.Ui.Mvc.Controllers
 
             var request = new UserRegisterRequest
             {
-                UserName = model.Username,
+                Username = model.Username,
                 Password = model.Password
             };
 

@@ -28,7 +28,7 @@ namespace ActionCommandGame.RestApi.Services
                 return JwtAuthenticationHelpers.JwtConfigurationError();
             }
 
-            var user = await _userManager.FindByNameAsync(request.UserName);
+            var user = await _userManager.FindByNameAsync(request.Username);
             if (user == null)
             {
                 return JwtAuthenticationHelpers.LoginFailed();
@@ -55,13 +55,13 @@ namespace ActionCommandGame.RestApi.Services
                 return JwtAuthenticationHelpers.JwtConfigurationError();
             }
 
-            var existingUser = await _userManager.FindByNameAsync(request.UserName);
+            var existingUser = await _userManager.FindByNameAsync(request.Username);
             if (existingUser != null)
             {
                 return JwtAuthenticationHelpers.UserExists();
             }
 
-            var user = new IdentityUser(request.UserName);
+            var user = new IdentityUser(request.Username);
             var result = await _userManager.CreateAsync(user, request.Password);
 
             if (!result.Succeeded)
