@@ -1,9 +1,11 @@
 ﻿using ActionCommandGame.Sdk;
 using ActionCommandGame.Services.Model.Requests;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ActionCommandGame.UI.Mvc.Controllers
 {
+    [Authorize]
     public class ItemsController : Controller
     {
         private readonly ItemSdk _itemSdk;
