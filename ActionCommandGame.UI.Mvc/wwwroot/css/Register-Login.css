@@ -1,0 +1,16 @@
+﻿/* Define CSS class for the red asterisk */
+.required::after {
+    content: "*";
+    color: red;
+    margin-left: 5px; /* Adjust the spacing as needed */
+}
+
+/* Optionally, you can style the form labels to make them stand out more */
+.form-label {
+    font-weight: bold;
+}
+
+/* Optionally, style the error messages for better visibility */
+.field-validation-error {
+    color: red;
+}

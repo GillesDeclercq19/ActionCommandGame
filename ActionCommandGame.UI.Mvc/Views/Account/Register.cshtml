@@ -12,18 +12,18 @@
     <div asp-validation-summary="ModelOnly"></div>
 
     <div class="mb-3">
-        <label asp-for="Username" class="form-label"></label>
-        <input asp-for="Username" class="form-control">
+        <label asp-for="Username" class="form-label required">Username</label>
+        <input asp-for="Username" class="form-control" placeholder="Username">
         <span asp-validation-for="Username"></span>
     </div>
     <div class="mb-3">
-        <label asp-for="Password" class="form-label"></label>
-        <input asp-for="Password" class="form-control">
+        <label asp-for="Password" class="form-label required">Create Password</label>
+        <input asp-for="Password" class="form-control" placeholder="Create Password">
         <span asp-validation-for="Password"></span>
     </div>
     <div class="mb-3">
-        <label asp-for="ConfirmPassword" class="form-label"></label>
-        <input asp-for="ConfirmPassword" class="form-control">
+        <label asp-for="ConfirmPassword" class="form-label required">Confirm Password</label>
+        <input asp-for="ConfirmPassword" class="form-control" placeholder="Confirm Password">
         <span asp-validation-for="ConfirmPassword"></span>
     </div>
 
@@ -32,6 +32,9 @@
 
 <a asp-action="SignIn" asp-route-returnUrl="@returnUrl">I already have an account.</a>
 
+@section Styles {
+    <link href="@Url.Content("/css/Register-Login.css")" rel="stylesheet" type="text/css" />
+}
 
 @section Scripts
 {
