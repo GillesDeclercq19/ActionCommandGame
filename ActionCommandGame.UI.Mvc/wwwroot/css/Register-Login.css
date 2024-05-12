@@ -1,16 +1,89 @@
-﻿/* Define CSS class for the red asterisk */
+﻿/* Reset margin for body element */
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url('/images/background.png');
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+}
+
+
 .required::after {
     content: "*";
     color: red;
-    margin-left: 5px; /* Adjust the spacing as needed */
 }
 
-/* Optionally, you can style the form labels to make them stand out more */
+
 .form-label {
     font-weight: bold;
 }
 
-/* Optionally, style the error messages for better visibility */
+
 .field-validation-error {
     color: red;
+}
+
+.centered-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+
+.split-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    background-color: #F3E0BE;
+    border-radius: 20px;
+}
+
+
+.left-side {
+    flex: 1;
+}
+
+
+.right-side {
+    flex: 1;
+    border-left: 1px solid #000000;
+    padding: 20px;
+}
+
+.logo {
+    text-align: center;
+}
+
+
+.logo + .form {
+    margin-top: 20px;
+}
+
+.logo img {
+    max-width: 300px; 
+    max-height: 250px; 
+}
+
+.button-image {
+    width: 150px;
+    height: 100px;
+}
+
+.button-image:hover {
+    cursor: pointer;
+}
+
+.account {
+    text-decoration: none;
+    color: black;
+    font-style: italic
+}
+
+.account:hover {
+    color: red;
+    font-weight: bold;
 }

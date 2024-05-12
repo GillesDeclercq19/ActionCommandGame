@@ -5,36 +5,44 @@
     ViewData["Title"] = "Sign in";
 }
 
-<h1>@ViewData["Title"]</h1>
 
+<div class="centered-container">
+    <div class="split-container">
+        <div class="left-side">
+            <div class="logo">
+                <img src="/images/logo.png" alt="logo">
+            </div>
+        </div>
+        <div class="right-side">
+            <form class="form" method="post" asp-route-returnUrl="@returnUrl">
+                <div asp-validation-summary="ModelOnly"></div>
+                <h1>@ViewData["Title"]</h1>
+                <div class="mb-3">
+                    <label asp-for="Username" class="form-label required">Username</label>
+                    <input asp-for="Username" class="form-control" placeholder="Username">
+                    <span asp-validation-for="Username"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Password" class="form-label required">Create Password</label>
+                    <input asp-for="Password" class="form-control" placeholder="Create Password">
+                    <span asp-validation-for="Password"></span>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">
+                        <input asp-for="RememberMe" class="form-check-input" />
+                        Remember me
+                    </label>
+                    <span asp-validation-for="RememberMe"></span>
+                </div>
 
-<form method="post" asp-route-returnUrl="@returnUrl">
-    <div asp-validation-summary="ModelOnly"></div>
+                <img src="/images/login.png" alt="Register" class="button-image" onclick="this.closest('form').submit()">
 
-    <div class="mb-3">
-        <label asp-for="Username" class="form-label required">Username</label>
-        <input asp-for="Username" class="form-control" placeholder="Username">
-        <span asp-validation-for="Username"></span>
+            </form>
+
+            <a class="account" asp-action="Register" asp-route-returnUrl="@returnUrl">I don't have an account yet.</a>
+        </div>
     </div>
-    <div class="mb-3">
-        <label asp-for="Password" class="form-label required">Create Password</label>
-        <input asp-for="Password" class="form-control" placeholder="Create Password">
-        <span asp-validation-for="Password"></span>
-    </div>
-    <div class="mb-3">
-        <label class="form-label">
-            <input asp-for="RememberMe" class="form-check-input" />
-            Remember me
-        </label>
-        <span asp-validation-for="RememberMe"></span>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Sign in</button>
-    
-    
-</form>
-
-<a asp-action="Register" asp-route-returnUrl="@returnUrl">I don't have an account yet.</a>
+</div>
 
 @section Styles {
     <link href="@Url.Content("/css/Register-Login.css")" rel="stylesheet" type="text/css" />
