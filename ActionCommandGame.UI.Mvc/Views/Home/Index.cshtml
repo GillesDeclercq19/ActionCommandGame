@@ -1,8 +1,33 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Start";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="video-background">
+    <video autoplay muted loop id="video-background">
+        <source src="/videos/intro.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="overlay">
+        <div class="container">
+            <div class="content">
+                <img src="images/logo.png" alt="logo" />
+                <div class="buttons">
+
+                    <a asp-area="" asp-controller="Account" asp-action="Register">
+                        <button class="register-button"><img src="/images/register.png" alt="Register" class="button-image"/></button>
+                    </a>
+
+                    <a asp-area="" asp-controller="Account" asp-action="SignIn">
+                        <button class="login-button"><img src="/images/login.png" alt="Login" class="button-image"/></button>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+@section Styles {
+    <link href="@Url.Content("/css/Startpage.css")" rel="stylesheet" type="text/css" />
+}
+

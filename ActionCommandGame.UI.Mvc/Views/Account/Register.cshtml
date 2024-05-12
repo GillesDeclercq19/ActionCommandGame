@@ -1,7 +1,7 @@
 ﻿@model RegisterModel
 
 @{
-    var returnUrl = ViewBag.ReturnUrl?.ToString();
+    var returnUrl = Url.Action("Index", "Game");
     ViewData["Title"] = "Register as a new user";
 }
 

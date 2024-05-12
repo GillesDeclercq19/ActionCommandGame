@@ -1,7 +1,7 @@
 ﻿@model SignInModel
 
 @{
-    var returnUrl = ViewBag.ReturnUrl?.ToString();
+    var returnUrl = Url.Action("Index", "Game");
     ViewData["Title"] = "Sign in";
 }
 
