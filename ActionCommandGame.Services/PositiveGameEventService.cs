@@ -37,7 +37,7 @@ namespace ActionCommandGame.Services
             //If we don't have an attack item, we can only get low-reward items.
             if (!hasAttackItem)
             {
-                query = query.Where(p => p.Money < 50);
+                query = query.Where(p => p.Zeni < 50);
             }
 
             var gameEvents = await query.ToListAsync();
@@ -58,7 +58,7 @@ namespace ActionCommandGame.Services
             {
                 Name = request.Name,
                 Description = request.Description,
-                Money = request.Money,
+                Zeni = request.Zeni,
                 Experience = request.Experience,
                 Probability = request.Probability
             };
@@ -80,7 +80,7 @@ namespace ActionCommandGame.Services
 
             positiveEvent.Name = request.Name;
             positiveEvent.Description = request.Description;
-            positiveEvent.Money = request.Money;
+            positiveEvent.Zeni = request.Zeni;
             positiveEvent.Experience = request.Experience;
             positiveEvent.Probability = request.Probability;
 

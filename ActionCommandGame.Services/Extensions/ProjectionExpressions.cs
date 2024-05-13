@@ -13,7 +13,7 @@ public static class ProjectionExpressions
         {
             Id = entity.Id,
             Name = entity.Name,
-            Money = entity.Money,
+            Zeni = entity.Zeni,
             Experience = entity.Experience,
             LastActionExecutedDateTime = entity.LastActionExecutedDateTime,
             CurrentAttackPlayerItemId = entity.CurrentAttackPlayerItemId,
@@ -71,7 +71,7 @@ public static class ProjectionExpressions
             Id = entity.Id,
             Name = entity.Name,
             Description = entity.Description,
-            Money = entity.Money,
+            Zeni = entity.Zeni,
             Experience = entity.Experience,
             Probability = entity.Probability
         };

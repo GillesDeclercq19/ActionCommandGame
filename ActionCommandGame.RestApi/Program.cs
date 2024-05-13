@@ -20,9 +20,14 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton(builder.Configuration.GetSection("AppSettings").Get<AppSettings>());
 
-builder.Services.AddDbContext<ActionButtonGameDbContext>(options =>
+/*builder.Services.AddDbContext<ActionButtonGameDbContext>(options =>
 {
     options.UseInMemoryDatabase(nameof(ActionButtonGameDbContext));
+});*/
+
+builder.Services.AddDbContext<ActionButtonGameDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
 var jwtSettings = new JwtSettings();
@@ -71,18 +76,18 @@ builder.Services.AddScoped<IPositiveGameEventService, PositiveGameEventService>(
 
 var app = builder.Build();
 
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var dbContext = services.GetRequiredService<ActionButtonGameDbContext>();
+    //dbContext.Initialize();
+}
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-
-    var scope = app.Services.CreateScope();
-    var dbContext = scope.ServiceProvider.GetRequiredService<ActionButtonGameDbContext>();
-    if (dbContext.Database.IsInMemory())
-    {
-        dbContext.Initialize();
-    }
 }
 
 app.UseHttpsRedirection();

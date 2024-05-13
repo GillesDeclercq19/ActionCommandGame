@@ -2,6 +2,7 @@
 using ActionCommandGame.Repository.Extensions;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 
 namespace ActionCommandGame.Repository.Core
 {
@@ -16,6 +17,17 @@ namespace ActionCommandGame.Repository.Core
         public DbSet<Item> Items { get; set; }
         public DbSet<Player> Players { get; set; }
         public DbSet<PlayerItem> PlayerItems { get; set; }
+
+        public class ActionButtonGameDbContextFactory : IDesignTimeDbContextFactory<ActionButtonGameDbContext>
+        {
+            public ActionButtonGameDbContext CreateDbContext(string[] args)
+            {
+                var optionsBuilder = new DbContextOptionsBuilder<ActionButtonGameDbContext>();
+                optionsBuilder.UseSqlServer("Data Source=GILLES-LAP\\SQLEXPRESS;Initial Catalog=ActionCommandDb;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False");
+
+                return new ActionButtonGameDbContext(optionsBuilder.Options);
+            }
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -32,176 +44,266 @@ namespace ActionCommandGame.Repository.Core
             GenerateFoodItems();
             GenerateDecorativeItems();
 
-            //God Mode Item
-            Items.Add(new Item
-            {
-                Name = "GOD MODE",
-                Description = "This is almost how a GOD must feel.",
-                Attack = 1000000,
-                Defense = 1000000,
-                Fuel = 1000000,
-                ActionCooldownSeconds = 1,
-                Price = 10000000
-            });
-
-            Players.Add(new Player { Name = "John Doe", Money = 100 });
-            Players.Add(new Player { Name = "John Francks", Money = 100000, Experience = 2000 });
-            Players.Add(new Player { Name = "Luc Doleman", Money = 500, Experience = 5 });
-            Players.Add(new Player { Name = "Emilio Fratilleci", Money = 12345, Experience = 200 });
+            Players.Add(new Player { Name = "Gilles Declercq", Zeni = 1000 });
+            Players.Add(new Player { Name = "Goku", Zeni = 0 });
 
             SaveChanges();
         }
 
         private void GeneratePositiveGameEvents()
         {
-            PositiveGameEvents.Add(new PositiveGameEvent { Name = "Nothing but boring rocks", Probability = 1000 });
             PositiveGameEvents.Add(new PositiveGameEvent
             {
-                Name = "The biggest Opal you ever saw.",
-                Description = "It slips out of your hands and rolls inside a crack in the floor. It is out of reach.",
-                Probability = 500
-            });
-            PositiveGameEvents.Add(new PositiveGameEvent { Name = "Sand, dirt and dust", Probability = 1000 });
-            PositiveGameEvents.Add(new PositiveGameEvent
-            {
-                Name = "A piece of empty paper",
-                Description = "You hold it to the light and warm it up to reveal secret texts, but it remains empty.",
+                Name = "Training with Master Roshi",
+                Description = "You undergo intense training sessions with Master Roshi, honing your martial arts skills and increasing your power level.",
                 Probability = 1000
             });
+
             PositiveGameEvents.Add(new PositiveGameEvent
             {
-                Name = "A small water stream",
-                Description = "The water flows around your feet and creates a dirty puddle.", Probability = 1000
+                Name = "Dragon Ball Search",
+                Description = "You find a Dragon Ball hidden in a remote location, bringing you one step closer to making a wish.",
+                Probability = 950
             });
+
             PositiveGameEvents.Add(new PositiveGameEvent
-                { Name = "Junk", Money = 1, Experience = 1, Probability = 2000 });
+            {
+                Name = "Encounter with Friendly Saiyan",
+                Description = "You encounter a friendly Saiyan warrior who offers to spar with you, helping you improve your combat techniques.",
+                Probability = 900
+            });
+
             PositiveGameEvents.Add(new PositiveGameEvent
-                { Name = "Murphy's idea bin", Money = 1, Experience = 1, Probability = 300 });
+            {
+                Name = "Discovering the Hyperbolic Time Chamber",
+                Description = "You stumble upon the Hyperbolic Time Chamber and train inside, mastering new techniques and abilities.",
+                Probability = 850
+            });
+
             PositiveGameEvents.Add(new PositiveGameEvent
-                { Name = "Donald's book of excuses", Money = 1, Experience = 1, Probability = 300 });
+            {
+                Name = "Sensei's Wisdom",
+                Description = "You receive wise counsel from Master Korin, gaining valuable insights into unlocking your hidden potential.",
+                Probability = 800
+            });
+
             PositiveGameEvents.Add(new PositiveGameEvent
-                { Name = "Children's Treasure Map", Money = 1, Experience = 1, Probability = 300 });
+            {
+                Name = "Gathering Senzu Beans",
+                Description = "You find a field of Senzu Beans and collect them, ensuring you have plenty of healing supplies for your journey.",
+                Probability = 750
+            });
+
             PositiveGameEvents.Add(new PositiveGameEvent
-                { Name = "Trinket", Money = 5, Experience = 3, Probability = 1000 });
+            {
+                Name = "A Visit to Kami's Lookout",
+                Description = "You visit Kami's Lookout and receive training from Mr. Popo, enhancing your spiritual strength and focus.",
+                Probability = 700
+            });
+
             PositiveGameEvents.Add(new PositiveGameEvent
-                { Name = "Old Tool", Money = 10, Experience = 5, Probability = 800 });
+            {
+                Name = "Uncovering Ancient Saiyan Artifact",
+                Description = "You unearth an ancient Saiyan artifact that amplifies your Saiyan powers, boosting your combat abilities.",
+                Probability = 650
+            });
+
             PositiveGameEvents.Add(new PositiveGameEvent
-                { Name = "Old Equipment", Money = 10, Experience = 5, Probability = 800 });
+            {
+                Name = "Assistance from Capsule Corp",
+                Description = "You receive technological support from Capsule Corp, upgrading your equipment for better performance in battles.",
+                Probability = 600
+            });
+
             PositiveGameEvents.Add(new PositiveGameEvent
-                { Name = "Ornate Shell", Money = 10, Experience = 5, Probability = 800 });
+            {
+                Name = "Befriending a Namekian Elder",
+                Description = "You befriend a wise Namekian elder who teaches you ancient Namekian techniques, expanding your repertoire of abilities.",
+                Probability = 550
+            });
+
+            
             PositiveGameEvents.Add(new PositiveGameEvent
-                { Name = "Fossil", Money = 12, Experience = 6, Probability = 700 });
+            {
+                Name = "Fusion Training with Goku",
+                Description = "You train with Goku to master the Fusion technique, allowing you to fuse with a partner for increased strength in battles.",
+                Zeni = 1,
+                Experience = 1,
+                Probability = 500
+            });
+
             PositiveGameEvents.Add(new PositiveGameEvent
-                { Name = "Cave Shroom", Money = 20, Experience = 8, Probability = 650 });
+            {
+                Name = "Gathering Energy for Spirit Bomb",
+                Description = "You gather energy from across the universe to create a Spirit Bomb, a powerful weapon against evil forces.",
+                Zeni = 1,
+                Experience = 1,
+                Probability = 450
+            });
+
             PositiveGameEvents.Add(new PositiveGameEvent
-                { Name = "Artifact", Money = 30, Experience = 10, Probability = 500 });
+            {
+                Name = "Unlocking Potential with Elder Kai",
+                Description = "You undergo a ritual with Elder Kai that unlocks your hidden potential, pushing your power level beyond its limits.",
+                Zeni = 1,
+                Experience = 1,
+                Probability = 400
+            });
+
             PositiveGameEvents.Add(new PositiveGameEvent
-                { Name = "Scrap Metal", Money = 50, Experience = 13, Probability = 400 });
+            {
+                Name = "Mastering Instant Transmission",
+                Description = "You master the Instant Transmission technique, allowing you to teleport instantly to any location in the universe.",
+                Zeni = 5,
+                Experience = 3,
+                Probability = 350
+            });
+
             PositiveGameEvents.Add(new PositiveGameEvent
-                { Name = "Jewelry", Money = 60, Experience = 15, Probability = 400 });
+            {
+                Name = "Attaining Super Saiyan Transformation",
+                Description = "You achieve the legendary Super Saiyan transformation, unlocking immense power and strength.",
+                Zeni = 10,
+                Experience = 5,
+                Probability = 300
+            });
+
             PositiveGameEvents.Add(new PositiveGameEvent
-                { Name = "Peculiar Mask", Money = 100, Experience = 40, Probability = 350 });
+            {
+                Name = "Evolving into Super Saiyan Blue",
+                Description = "You evolve your Super Saiyan form into Super Saiyan Blue, reaching a new pinnacle of Saiyan power.",
+                Zeni = 10,
+                Experience = 5,
+                Probability = 250
+            });
+
             PositiveGameEvents.Add(new PositiveGameEvent
-                { Name = "Quartz Geode", Money = 140, Experience = 50, Probability = 300 });
+            {
+                Name = "Unlocking Ultra Instinct",
+                Description = "You unlock the Ultra Instinct form, achieving a state of heightened awareness and reflexes in battle.",
+                Zeni = 10,
+                Experience = 5,
+                Probability = 200
+            });
+
             PositiveGameEvents.Add(new PositiveGameEvent
-                { Name = "Ancient Weapon", Money = 160, Experience = 80, Probability = 300 });
+            {
+                Name = "Learning Kaio-Ken Technique",
+                Description = "You learn the Kaio-Ken technique, allowing you to multiply your power for short bursts of incredible strength.",
+                Zeni = 12,
+                Experience = 6,
+                Probability = 150
+            });
+
             PositiveGameEvents.Add(new PositiveGameEvent
-                { Name = "Ancient Instrument", Money = 160, Experience = 80, Probability = 300 });
+            {
+                Name = "Mastering Kamehameha Wave",
+                Description = "You master the Kamehameha wave, unleashing devastating energy blasts with precision and control.",
+                Zeni = 20,
+                Experience = 8,
+                Probability = 100
+            });
+
             PositiveGameEvents.Add(new PositiveGameEvent
-                { Name = "Ancient Texts", Money = 180, Experience = 80, Probability = 300 });
-            PositiveGameEvents.Add(new PositiveGameEvent
-                { Name = "Gemstone", Money = 300, Experience = 100, Probability = 110 });
-            PositiveGameEvents.Add(new PositiveGameEvent
-                { Name = "Mysterious Potion", Money = 300, Experience = 100, Probability = 80 });
-            PositiveGameEvents.Add(new PositiveGameEvent
-                { Name = "Meteorite", Money = 400, Experience = 150, Probability = 200 });
-            PositiveGameEvents.Add(new PositiveGameEvent
-                { Name = "Ancient Bust", Money = 500, Experience = 150, Probability = 150 });
-            PositiveGameEvents.Add(new PositiveGameEvent
-                { Name = "Buried Treasure", Money = 1000, Experience = 200, Probability = 100 });
-            PositiveGameEvents.Add(new PositiveGameEvent
-                { Name = "Alien DNA", Money = 60000, Experience = 1500, Probability = 5 });
-            PositiveGameEvents.Add(new PositiveGameEvent
-                { Name = "Rare Collector's Item", Money = 3000, Experience = 400, Probability = 30 });
-            PositiveGameEvents.Add(new PositiveGameEvent
-                { Name = "Pure Gold", Money = 2000, Experience = 350, Probability = 30 });
-            PositiveGameEvents.Add(new PositiveGameEvent
-                { Name = "Safe Deposit Box Key", Money = 20000, Experience = 1000, Probability = 10 });
-            PositiveGameEvents.Add(new PositiveGameEvent
-                { Name = "Advanced Bio Tech", Money = 30000, Experience = 1500, Probability = 10 });
+            {
+                Name = "Achieving Perfect Ultra Instinct",
+                Description = "You achieve Perfect Ultra Instinct, transcending mortal limits and attaining godlike power and speed.",
+                Zeni = 30,
+                Experience = 10,
+                Probability = 50
+            });
         }
 
         public void GenerateNegativeGameEvents()
         {
             NegativeGameEvents.Add(new NegativeGameEvent
             {
-                Name = "Rockfall",
-                Description = "As you are mining, the cave walls rumble and rocks tumble down on you",
-                DefenseWithGearDescription = "Your mining gear allows you and your tools to escape unscathed",
-                DefenseWithoutGearDescription = "You try to cover your face but the rocks are too heavy. That hurt!",
+                Name = "Power Level Drain",
+                Description = "You encounter a powerful enemy who drains your power level, leaving you weakened and vulnerable.",
+                DefenseWithGearDescription = "Your protective gear shields you from some of the drain, but you still feel weakened.",
+                DefenseWithoutGearDescription = "Unable to defend against the drain, you feel your energy slipping away rapidly.",
                 DefenseLoss = 2,
-                Probability = 100
+                Probability = 80
             });
+
             NegativeGameEvents.Add(new NegativeGameEvent
             {
-                Name = "Cave Rat",
-                Description = "As you are mining, you feel something scurry between your feet!",
-                DefenseWithGearDescription =
-                    "It tries to bite you, but your mining gear keeps the rat's teeth from sinking in.",
-                DefenseWithoutGearDescription =
-                    "It tries to bite you and nicks you in the ankles. It already starts to glow dangerously.",
+                Name = "Mysterious Energy Barrier",
+                Description = "You come across a barrier of mysterious energy that blocks your path, preventing you from progressing.",
+                DefenseWithGearDescription = "Your gear helps you analyze the barrier, but you're still unable to bypass it.",
+                DefenseWithoutGearDescription = "Lacking the necessary tools, you're unable to overcome the barrier and are forced to retreat.",
+                DefenseLoss = 1,
+                Probability = 70
+            });
+
+            NegativeGameEvents.Add(new NegativeGameEvent
+            {
+                Name = "Gravity Distortion",
+                Description = "You encounter a region with distorted gravity, making movement and combat difficult.",
+                DefenseWithGearDescription = "Your gear provides some resistance to the gravity distortion, but it's still challenging to navigate.",
+                DefenseWithoutGearDescription = "Without specialized gear, you struggle to move under the extreme gravitational forces.",
+                DefenseLoss = 2,
+                Probability = 60
+            });
+
+            NegativeGameEvents.Add(new NegativeGameEvent
+            {
+                Name = "Temporal Anomaly",
+                Description = "You stumble into a temporal anomaly, causing time to fluctuate unpredictably in the area.",
+                DefenseWithGearDescription = "Your gear offers some protection against the temporal fluctuations, but time still behaves erratically.",
+                DefenseWithoutGearDescription = "Caught without protection, you experience disorienting shifts in time, making it difficult to act effectively.",
                 DefenseLoss = 3,
                 Probability = 50
             });
+
             NegativeGameEvents.Add(new NegativeGameEvent
             {
-                Name = "Sinkhole",
-                Description = "As you are mining, the ground suddenly gives way and you fall down into a chasm!",
-                DefenseWithGearDescription = "Your gear grants a safe landing, protecting you and your pickaxe.",
-                DefenseWithoutGearDescription =
-                    "You tumble down the dark hole and take a really bad landing. That hurt!",
-                DefenseLoss = 2,
-                Probability = 100
-            });
-            NegativeGameEvents.Add(new NegativeGameEvent
-            {
-                Name = "Ancient Bacteria",
-                Description = "As you are mining, you uncover a green slime oozing from the cracks!",
-                DefenseWithGearDescription = "Your gear barely covers you from the noxious goop. You are safe.",
-                DefenseWithoutGearDescription =
-                    "The slime covers your hands and arms and starts biting through your flesh. This hurts!",
+                Name = "Mystic Curse",
+                Description = "You're cursed by a mysterious entity, causing your abilities to falter and misfire.",
+                DefenseWithGearDescription = "Your gear mitigates some of the curse's effects, but you still struggle to perform at your best.",
+                DefenseWithoutGearDescription = "Lacking any protection, you suffer the full brunt of the curse, leaving you weakened and vulnerable.",
                 DefenseLoss = 3,
+                Probability = 40
+            });
+
+            NegativeGameEvents.Add(new NegativeGameEvent
+            {
+                Name = "Dark Energy Surge",
+                Description = "A surge of dark energy sweeps through the area, disrupting your senses and draining your strength.",
+                DefenseWithGearDescription = "Your gear provides partial protection, but you still feel the effects of the dark energy surge.",
+                DefenseWithoutGearDescription = "Without any protective measures, you're overwhelmed by the dark energy, leaving you drained and disoriented.",
+                DefenseLoss = 2,
                 Probability = 50
             });
         }
 
         private void GenerateAttackItems()
         {
-            Items.Add(new Item { Name = "Basic Pickaxe", Attack = 50, Price = 50 });
-            Items.Add(new Item { Name = "Enhanced Pick", Attack = 300, Price = 300 });
-            Items.Add(new Item { Name = "Turbo Pick", Attack = 500, Price = 500 });
-            Items.Add(new Item { Name = "Mithril Warpick", Attack = 5000, Price = 15000 });
-            Items.Add(new Item { Name = "Thor's Hammer", Attack = 50, Price = 1000000 });
+            Items.Add(new Item { Name = "Power Pole", Attack = 50, Price = 50 });
+            Items.Add(new Item { Name = "Launch's Gun", Attack = 100, Price = 150 });
+            Items.Add(new Item { Name = "Z-Sword", Attack = 300, Price = 300 });
+            Items.Add(new Item { Name = "Kienzan (Destructo Disc)", Attack = 500, Price = 500 });
+            Items.Add(new Item { Name = "Supreme Kamehameha", Attack = 5000, Price = 15000 });
         }
 
         private void GenerateDefenseItems()
         {
-            Items.Add(new Item { Name = "Torn Clothes", Defense = 20, Price = 20 });
-            Items.Add(new Item { Name = "Hardened Leather Gear", Defense = 150, Price = 200 });
-            Items.Add(new Item { Name = "Iron plated Armor", Defense = 500, Price = 1000 });
-            Items.Add(new Item { Name = "Rock Shield", Defense = 2000, Price = 10000 });
-            Items.Add(new Item { Name = "Emerald Shield", Defense = 2000, Price = 10000 });
-            Items.Add(new Item { Name = "Diamond Shield", Defense = 20000, Price = 10000 });
+            Items.Add(new Item { Name = "Turtle School Gi", Defense = 20, Price = 20 });
+            Items.Add(new Item { Name = "Namekian Regeneration Band", Defense = 150, Price = 200 });
+            Items.Add(new Item { Name = "Saiyan Battle Armor", Defense = 500, Price = 1000 });
+            Items.Add(new Item { Name = "Frieza's Armor", Defense = 2000, Price = 10000 });
+            Items.Add(new Item { Name = "Android Barrier Device", Defense = 2000, Price = 10000 });
+            Items.Add(new Item { Name = "Mystic Robe", Defense = 20000, Price = 10000 });
         }
 
         private void GenerateFoodItems()
         {
-            Items.Add(new Item { Name = "Apple", ActionCooldownSeconds = 50, Fuel = 4, Price = 8 });
-            Items.Add(new Item { Name = "Energy Bar", ActionCooldownSeconds = 45, Fuel = 5, Price = 10 });
-            Items.Add(new Item { Name = "Field Rations", ActionCooldownSeconds = 30, Fuel = 30, Price = 300 });
-            Items.Add(new Item { Name = "Abbye cheese", ActionCooldownSeconds = 25, Fuel = 100, Price = 500 });
-            Items.Add(new Item { Name = "Abbye Beer", ActionCooldownSeconds = 25, Fuel = 100, Price = 500 });
-            Items.Add(new Item { Name = "Celestial Burrito", ActionCooldownSeconds = 15, Fuel = 500, Price = 10000 });
+            Items.Add(new Item { Name = "Senzu Bean", ActionCooldownSeconds = 50, Fuel = 4, Price = 8 });
+            Items.Add(new Item { Name = "Dino Meat", ActionCooldownSeconds = 45, Fuel = 5, Price = 10 });
+            Items.Add(new Item { Name = "Kami's Sacred Water", ActionCooldownSeconds = 30, Fuel = 30, Price = 300 });
+            Items.Add(new Item { Name = "Sacred Fruit of the Tree of Might", ActionCooldownSeconds = 25, Fuel = 100, Price = 500 });
+            Items.Add(new Item { Name = "King Yemma's Enchanted Rice Cake", ActionCooldownSeconds = 25, Fuel = 100, Price = 500 });
+            Items.Add(new Item { Name = "Ramen", ActionCooldownSeconds = 15, Fuel = 500, Price = 10000 });
 #if DEBUG
             Items.Add(new Item { Name = "Developer Food", ActionCooldownSeconds = 1, Fuel = 1000, Price = 1 });
 #endif
@@ -210,17 +312,41 @@ namespace ActionCommandGame.Repository.Core
         private void GenerateDecorativeItems()
         {
             Items.Add(new Item
-                { Name = "Balloon", Description = "Does nothing. Do you feel special now?", Price = 10 });
-            Items.Add(new Item
             {
-                Name = "Blue Medal", Description = "For those who cannot afford the Crown of Flexing.", Price = 100000
+                Name = "Dragon Ball", 
+                Description = "You bought a Dragon Ball from AliExpress! This will definitely do something, right?", 
+                Price = 10
             });
             Items.Add(new Item
             {
-                Name = "Crown of Flexing",
-                Description = "Yes, show everyone how much money you are willing to spend on something useless!",
+                Name = "Super Saiyan", 
+                Description = "You thought it was that easy to achieve it, huh?", 
+                Price = 100000
+            });
+            Items.Add(new Item
+            {
+                Name = "Time Machine",
+                Description = "All that money spend, just to die to Cell again",
                 Price = 500000
             });
+            Items.Add(new Item
+            {
+                Name = "Dragon Radar", 
+                Description = "A device that locates the Dragon Balls. Collect them all!", 
+                Price = 1000
+            });
+            Items.Add(new Item
+            {
+                Name = "Capsule Corp Capsule",
+                Description = "Compact storage device from Capsule Corporation. Convenient!",
+                Price = 500
+            });
+            Items.Add(new Item
+            {
+                Name = "Flying Nimbus",
+                Description = "The magical cloud that Goku used to travel. Beware of falling off!",
+                Price = 1500
+            });
         } 
-    }
+    } 
 }

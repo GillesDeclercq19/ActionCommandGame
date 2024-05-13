@@ -13,7 +13,7 @@ namespace ActionCommandGame.Model
 
         public int Id { get; set; }
         public string Name { get; set; }
-        public int Money { get; set; }
+        public int Zeni { get; set; }
         public int Experience { get; set; }
         public DateTime? LastActionExecutedDateTime { get; set; }
 
