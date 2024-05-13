@@ -2,9 +2,27 @@
     ViewData["Title"] = "Game";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="header">
+    <div class="logo-container">
+        <img class="logo" src="/images/logo.png" alt="logo">
+        <ul class="nav-items">
+            <li><a href="#">Shop</a></li>
+            <li><a href="#">Leaderboard</a></li>
+            <li>
+                @if (User.Identity != null && User.Identity.IsAuthenticated)
+                {
+                    <li>
+                        <form method="post"  asp-area="" asp-controller="Account" asp-action="LogOut" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                            <button  type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+                        </form>
+                    </li>
+                }
+            </li>
+        </ul>
+    </div>
 </div>
 
-<partial name="_LoginPartial" />
+
+@section Styles {
+    <link href="@Url.Content("/css/Game.css")" rel="stylesheet" type="text/css"/>
+}
