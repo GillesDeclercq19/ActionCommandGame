@@ -55,7 +55,7 @@ namespace ActionCommandGame.Ui.Mvc.Controllers
             {
                 Name = positiveGameEvent.Name,
                 Description = positiveGameEvent.Description,
-                Money = positiveGameEvent.Money,
+                Zeni = positiveGameEvent.Zeni,
                 Experience = positiveGameEvent.Experience,
                 Probability = positiveGameEvent.Probability
             };

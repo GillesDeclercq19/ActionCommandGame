@@ -115,9 +115,12 @@ namespace ActionCommandGame.Ui.Mvc.Controllers
                 return View(model);
             }
 
+
             tokenStore.SaveToken(result.Token);
             var principal = CreatePrincipalFromToken(result.Token);
             await HttpContext.SignInAsync(principal);
+
+
 
             return LocalRedirect(returnUrl);
         }
