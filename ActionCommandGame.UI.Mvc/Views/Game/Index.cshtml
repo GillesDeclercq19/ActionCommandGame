@@ -1,26 +1,28 @@
 ﻿@{
     ViewData["Title"] = "Game";
 }
-
-<div class="header">
-    <div class="logo-container">
-        <img class="logo" src="/images/logo.png" alt="logo">
-        <ul class="nav-items">
-            <li><a href="#">Shop</a></li>
-            <li><a href="#">Leaderboard</a></li>
-            <li>
-                @if (User.Identity != null && User.Identity.IsAuthenticated)
-                {
-                    <li>
-                        <form method="post"  asp-area="" asp-controller="Account" asp-action="LogOut" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                            <button  type="submit" class="nav-link btn btn-link text-dark">Logout</button>
-                        </form>
-                    </li>
-                }
-            </li>
-        </ul>
+    <div class="header">
+        <div class="nav-center">
+            <!-- Added a div to center align navigation items -->
+            <ul class="nav-items">
+                <li><img class="nav-img-s" src="images/shop.png" alt="shop" /></li>
+                <li class="logo-container">
+                    <img class="logo" src="/images/logo.png" alt="logo">
+                </li>
+                <li><img class="nav-img-l" src="images/leaderboard.png" alt="leaderboard" /></li>
+            </ul>
+        </div>
+        <div class="logout-container">
+            <!-- No changes -->
+            <form method="post" asp-area="" asp-controller="Account" asp-action="LogOut" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button type="submit" class="nav-link btn btn-link">
+                    <img class="nav-img" src="images/logout.png" alt="Logout">
+                </button>
+            </form>
+        </div>
     </div>
-</div>
+
+
 
 
 @section Styles {

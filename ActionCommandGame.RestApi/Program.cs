@@ -18,12 +18,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddSingleton(builder.Configuration.GetSection("AppSettings").Get<AppSettings>());
-
-/*builder.Services.AddDbContext<ActionButtonGameDbContext>(options =>
-{
-    options.UseInMemoryDatabase(nameof(ActionButtonGameDbContext));
-});*/
+builder.Services.AddSingleton<AppSettings>();
 
 builder.Services.AddDbContext<ActionButtonGameDbContext>(options =>
 {

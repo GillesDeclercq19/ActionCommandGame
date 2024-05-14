@@ -1,52 +1,60 @@
-﻿/* Set background image for the entire page */
-body {
+﻿body {
     margin: 0;
     overflow: hidden;
-    background-image: url('/images/background.png');
+    background-image: url('/images/background2.jpg');
     background-size: cover;
     background-position: center;
-    height: 100vh; /* Set body height to cover the entire viewport */
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.header {
+    display: flex;
+    justify-content: space-between; /* Adjusted to space between */
+    align-items: center; /* Added */
+    padding: 0 20px; /* Added padding for space */
 }
 
 .logo-container {
     display: flex;
     align-items: center;
-    justify-content: left;
 }
 
-/* Styling for the smiley circle */
 .logo {
-    background-color: yellow;
     border-radius: 50%;
-    cursor: pointer;
     margin: 10px;
-    width: 60px;
-    height: 60px;
+    width: 100px;
+    height: 100px;
 }
 
-    .logo:hover {
-        background-color: rgba(255, 0, 0, 0.3);
-    }
-
-
-/* Styling for the navigation items */
 .nav-items {
-    display: none;
     list-style-type: none;
-    padding: 0;
-    margin: 0;
-    
+    display: flex;
+    align-items: center;
+    margin: 0; /* Removed default margin */
 }
 
     .nav-items li {
-        display: inline-block;
         padding: 10px;
-        text-decoration: none;
     }
 
-/* Show navigation items when hovering over the smiley circle */
-.logo-container:hover .nav-items,
-.logo-container:hover + .login-partial {
-    display: block;
+.nav-img {
+    width: 88px;
+    height: 55px;
 }
 
+.nav-img-s {
+    width: 88px;
+    height: 55px;
+}
+
+.nav-img-l {
+    width: 150px;
+    height: 50px;
+}
+
+.logout-container {
+    margin-left: auto;
+}

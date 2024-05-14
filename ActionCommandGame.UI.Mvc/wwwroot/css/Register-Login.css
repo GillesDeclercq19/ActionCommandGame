@@ -7,6 +7,7 @@ body {
     background-size: cover;
     background-position: center;
     overflow: hidden;
+    height: 100vh;
 }
 
 
@@ -29,7 +30,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh;
 }
 
 
@@ -37,7 +37,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 80%;
     background-color: #F3E0BE;
     border-radius: 20px;
 }
