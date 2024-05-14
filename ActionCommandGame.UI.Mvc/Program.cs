@@ -9,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+
 var apiSettings = new ApiSettings();
 builder.Configuration.GetSection(nameof(ApiSettings)).Bind(apiSettings);
 

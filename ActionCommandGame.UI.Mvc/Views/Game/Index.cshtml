@@ -1,29 +1,27 @@
 ﻿@{
     ViewData["Title"] = "Game";
 }
-    <div class="header">
+<nav>
+    <div class="nav-left">
+        <img class="dragonball" src="https://png.pngtree.com/png-vector/20221208/ourmid/pngtree-4-dragon-ball-icon-vector-drgon-illustrtion-png-image_6515607.png" alt="Spinning Dragon Ball">
+    </div>
         <div class="nav-center">
-            <!-- Added a div to center align navigation items -->
-            <ul class="nav-items">
-                <li><img class="nav-img-s" src="images/shop.png" alt="shop" /></li>
+            <ul>
+                <li><img class="nav-img-s" src="images/shop.png" alt="shop"/></li>
                 <li class="logo-container">
                     <img class="logo" src="/images/logo.png" alt="logo">
                 </li>
-                <li><img class="nav-img-l" src="images/leaderboard.png" alt="leaderboard" /></li>
+                <li><img class="nav-img-l" src="images/leaderboard.png" alt="leaderboard"/></li>
             </ul>
         </div>
-        <div class="logout-container">
-            <!-- No changes -->
+        <div class="nav-right">
             <form method="post" asp-area="" asp-controller="Account" asp-action="LogOut" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                 <button type="submit" class="nav-link btn btn-link">
                     <img class="nav-img" src="images/logout.png" alt="Logout">
                 </button>
             </form>
         </div>
-    </div>
-
-
-
+</nav>
 
 @section Styles {
     <link href="@Url.Content("/css/Game.css")" rel="stylesheet" type="text/css"/>

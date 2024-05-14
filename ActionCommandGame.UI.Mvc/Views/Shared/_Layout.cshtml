@@ -9,7 +9,11 @@
 </head>
 <body>
 
-    @RenderBody()
+    <div class="mw-100 mh-100">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main> 
+    </div>
         
 
     @await RenderSectionAsync("Modals", required: false)

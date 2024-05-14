@@ -1,9 +1,8 @@
-﻿/* Reset margin for body element */
-body {
+﻿body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: url('/images/background.png');
+    background-image: url('/images/background2.jpg');
     background-size: cover;
     background-position: center;
     overflow: hidden;
@@ -30,6 +29,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 1000px;
 }
 
 
@@ -39,6 +39,7 @@ body {
     align-items: center;
     background-color: #F3E0BE;
     border-radius: 20px;
+    width: 1000px;
 }
 
 
