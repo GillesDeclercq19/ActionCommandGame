@@ -13,6 +13,7 @@ namespace ActionCommandGame.UI.Mvc.Models
 
         [Required]
         [DataType(DataType.Password)]
+        [Display(Name = "Confirm Password")]
         [Compare(nameof(Password))]
         public required string ConfirmPassword { get; set; }
     }

@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "Shop";
+}
+<nav>
+    <div class="nav-left">
+        <img class="dragonball" src="https://png.pngtree.com/png-vector/20221208/ourmid/pngtree-4-dragon-ball-icon-vector-drgon-illustrtion-png-image_6515607.png" alt="Spinning Dragon Ball">
+    </div>
+    <div class="nav-center">
+        <ul>
+            <li>
+                <a asp-controller="Game" asp-action="Index">
+                <img class="nav-img-s" src="images/game.png" alt="game" />
+                </a>
+            </li>
+            <li class="logo-container">
+                <img class="logo" src="/images/logo.png" alt="logo">
+            </li>
+            <li>
+                <a asp-controller="Game" asp-action="Leaderboard">
+                <img class="nav-img-l" src="images/leaderboard.png" alt="leaderboard" />
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="nav-right">
+        <form method="post" asp-area="" asp-controller="Account" asp-action="LogOut" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+            <button type="submit" class="nav-link btn btn-link">
+                <img class="nav-img" src="images/logout.png" alt="Logout">
+            </button>
+        </form>
+    </div>
+</nav>
+
+@section Styles {
+    <link href="@Url.Content("/css/Shop.css")" rel="stylesheet" type="text/css" />
+}
