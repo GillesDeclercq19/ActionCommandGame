@@ -1,4 +1,25 @@
-﻿// Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿document.addEventListener('DOMContentLoaded', () => {
+    const rows = document.querySelectorAll('tr');
 
-// Write your JavaScript code.
+    rows.forEach((row, index) => {
+        if (index === 0) return; // Skip the first row (header)
+
+        // Set data-rank starting from 1 for the second row (index 1)
+        row.dataset.rank = index;
+
+        row.addEventListener('mouseover', () => {
+            rows.forEach(r => r.style.backgroundColor = ''); // Reset all rows
+            if (index === 1) {
+                row.style.backgroundColor = 'gold';
+            } else if (index === 2) {
+                row.style.backgroundColor = 'silver';
+            } else if (index === 3) {
+                row.style.backgroundColor = 'bronze';
+            }
+        });
+
+        row.addEventListener('mouseout', () => {
+            row.style.backgroundColor = ''; // Reset the color when mouse leaves
+        });
+    });
+});

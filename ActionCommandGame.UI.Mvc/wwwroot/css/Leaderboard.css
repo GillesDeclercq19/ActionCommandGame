@@ -16,6 +16,7 @@ nav {
     justify-content: space-between;
     align-items: center;
     position: relative;
+    margin-bottom: 50px;
 }
 
 .nav-left {
@@ -106,6 +107,7 @@ tr {
     font-weight: bold;
     color: yellow;
     text-shadow: 2px 2px 2px red, 3px 3px 3px black;
+    transition: background-color 0.3s;
 }
 
 
@@ -140,4 +142,18 @@ td {
 
 .rows{
     text-align: center;
+}
+
+
+
+table tr[data-rank="1"]:hover {
+    background-color: goldenrod;
+}
+
+table tr[data-rank="2"]:hover {
+    background-color: silver;
+}
+
+table tr[data-rank="3"]:hover {
+    background-color: #CD7F32;
 }
