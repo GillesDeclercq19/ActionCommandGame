@@ -44,8 +44,10 @@ namespace ActionCommandGame.Repository.Core
             GenerateFoodItems();
             GenerateDecorativeItems();
 
-            Players.Add(new Player { Name = "Dev", Zeni = 10000, Experience = 500 });
-            
+            Players.Add(new Player { Name = "Dev", Zeni = 10000, Experience = 500});
+            Players.Add(new Player { Name = "Sander", Zeni = 100, Experience = 5 });
+            Players.Add(new Player { Name = "Gilles", Zeni = 10, Experience = 50 });
+
 
             SaveChanges();
         }

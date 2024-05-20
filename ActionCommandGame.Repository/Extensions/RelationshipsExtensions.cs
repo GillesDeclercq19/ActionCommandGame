@@ -40,6 +40,10 @@ namespace ActionCommandGame.Repository.Extensions
                 .HasOne(a => a.CurrentDefensePlayerItem)
                 .WithMany(u => u.DefensePlayers)
                 .HasForeignKey(a => a.CurrentDefensePlayerItemId);
+
+            builder.Entity<Player>()
+                .HasOne(a => a.User)
+                .WithMany();
         } 
     }
 }

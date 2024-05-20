@@ -17,7 +17,7 @@ namespace ActionCommandGame.Ui.Mvc.Controllers
         [HttpGet]
         public async Task<IActionResult> SignIn(string? returnUrl)
         {
-            await HttpContext.SignOutAsync(); ;
+            await HttpContext.SignOutAsync(); 
 
             ViewBag.ReturnUrl = returnUrl ?? "/";
             return View();
