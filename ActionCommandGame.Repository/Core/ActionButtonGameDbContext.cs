@@ -298,14 +298,14 @@ namespace ActionCommandGame.Repository.Core
 
         private void GenerateFoodItems()
         {
-            Items.Add(new Item { Name = "Senzu Bean", ActionCooldownSeconds = 50, Fuel = 4, Price = 8 });
-            Items.Add(new Item { Name = "Dino Meat", ActionCooldownSeconds = 45, Fuel = 5, Price = 10 });
-            Items.Add(new Item { Name = "Kami's Sacred Water", ActionCooldownSeconds = 30, Fuel = 30, Price = 300 });
-            Items.Add(new Item { Name = "Sacred Fruit of the Tree of Might", ActionCooldownSeconds = 25, Fuel = 100, Price = 500 });
-            Items.Add(new Item { Name = "King Yemma's Enchanted Rice Cake", ActionCooldownSeconds = 25, Fuel = 100, Price = 500 });
-            Items.Add(new Item { Name = "Ramen", ActionCooldownSeconds = 15, Fuel = 500, Price = 10000 });
+            Items.Add(new Item { Name = "Senzu Bean", ActionCooldownSeconds = 50, Ki = 4, Price = 8 });
+            Items.Add(new Item { Name = "Dino Meat", ActionCooldownSeconds = 45, Ki = 5, Price = 10 });
+            Items.Add(new Item { Name = "Kami's Sacred Water", ActionCooldownSeconds = 30, Ki = 30, Price = 300 });
+            Items.Add(new Item { Name = "Sacred Fruit of the Tree of Might", ActionCooldownSeconds = 25, Ki = 100, Price = 500 });
+            Items.Add(new Item { Name = "King Yemma's Enchanted Rice Cake", ActionCooldownSeconds = 25, Ki = 100, Price = 500 });
+            Items.Add(new Item { Name = "Ramen", ActionCooldownSeconds = 15, Ki = 500, Price = 10000 });
 #if DEBUG
-            Items.Add(new Item { Name = "Developer Food", ActionCooldownSeconds = 1, Fuel = 1000, Price = 1 });
+            Items.Add(new Item { Name = "Developer Food", ActionCooldownSeconds = 1, Ki = 1000, Price = 1 });
 #endif
         }
 

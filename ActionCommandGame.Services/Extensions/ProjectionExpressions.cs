@@ -18,7 +18,7 @@ public static class ProjectionExpressions
             LastActionExecutedDateTime = entity.LastActionExecutedDateTime,
             CurrentAttackPlayerItemId = entity.CurrentAttackPlayerItemId,
             CurrentDefensePlayerItemId = entity.CurrentDefensePlayerItemId,
-            CurrentFuelPlayerItemId = entity.CurrentFuelPlayerItemId,
+            CurrentKiPlayerItemId = entity.CurrentKiPlayerItemId,
         };
     }
 
@@ -30,7 +30,7 @@ public static class ProjectionExpressions
             Name = entity.Name,
             Description = entity.Description,
             Price = entity.Price,
-            Fuel = entity.Fuel,
+            Ki = entity.Ki,
             Attack = entity.Attack,
             Defense = entity.Defense,
             ActionCooldownSeconds = entity.ActionCooldownSeconds,
@@ -46,7 +46,7 @@ public static class ProjectionExpressions
             ItemId = entity.ItemId,
             RemainingAttack = entity.RemainingAttack,
             RemainingDefense = entity.RemainingDefense,
-            RemainingFuel = entity.RemainingFuel
+            RemainingKi = entity.RemainingKi
         };
     }
 

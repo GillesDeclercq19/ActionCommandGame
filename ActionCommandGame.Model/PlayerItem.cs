@@ -7,7 +7,7 @@ namespace ActionCommandGame.Model
     {
         public PlayerItem()
         {
-            FuelPlayers = new List<Player>();
+            KiPlayers = new List<Player>();
             AttackPlayers = new List<Player>();
             DefensePlayers = new List<Player>();
         }
@@ -20,11 +20,11 @@ namespace ActionCommandGame.Model
         public int ItemId { get; set; }
         public Item Item { get; set; }
 
-        public int RemainingFuel { get; set; }
+        public int RemainingKi { get; set; }
         public int RemainingAttack { get; set; }
         public int RemainingDefense { get; set; }
 
-        public IList<Player> FuelPlayers { get; set; }
+        public IList<Player> KiPlayers { get; set; }
         public IList<Player> AttackPlayers { get; set; }
         public IList<Player> DefensePlayers { get; set; }
     }

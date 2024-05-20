@@ -27,9 +27,9 @@ namespace ActionCommandGame.Repository.Extensions
         private static void ConfigurePlayer(this ModelBuilder builder)
         {
             builder.Entity<Player>()
-                .HasOne(a => a.CurrentFuelPlayerItem)
-                .WithMany(u => u.FuelPlayers)
-                .HasForeignKey(a => a.CurrentFuelPlayerItemId);
+                .HasOne(a => a.CurrentKiPlayerItem)
+                .WithMany(u => u.KiPlayers)
+                .HasForeignKey(a => a.CurrentKiPlayerItemId);
 
             builder.Entity<Player>()
                 .HasOne(a => a.CurrentAttackPlayerItem)

@@ -71,11 +71,11 @@ namespace ActionCommandGame.Services
             item.PlayerItems.Add(playerItem);
 
             // Auto Equip the item you bought
-            if (item.Fuel > 0)
+            if (item.Ki > 0)
             {
-                playerItem.RemainingFuel = item.Fuel;
-                player.CurrentFuelPlayerItemId = playerItem.Id;
-                player.CurrentFuelPlayerItem = playerItem;
+                playerItem.RemainingKi = item.Ki;
+                player.CurrentKiPlayerItemId = playerItem.Id;
+                player.CurrentKiPlayerItem = playerItem;
             }
             if (item.Attack > 0)
             {
@@ -97,7 +97,7 @@ namespace ActionCommandGame.Services
                 Id = playerItem.Id,
                 PlayerId = playerItem.PlayerId,
                 ItemId = playerItem.ItemId,
-                RemainingFuel = playerItem.RemainingFuel,
+                RemainingKi = playerItem.RemainingKi,
                 RemainingAttack = playerItem.RemainingAttack,
                 RemainingDefense = playerItem.RemainingDefense
             };
@@ -124,10 +124,10 @@ namespace ActionCommandGame.Services
             item.PlayerItems.Remove(playerItem);
 
             //Clear up equipment
-            if (player.CurrentFuelPlayerItemId == id)
+            if (player.CurrentKiPlayerItemId == id)
             {
-                player.CurrentFuelPlayerItemId = null;
-                player.CurrentFuelPlayerItem = null;
+                player.CurrentKiPlayerItemId = null;
+                player.CurrentKiPlayerItem = null;
             }
             if (player.CurrentAttackPlayerItemId == id)
             {

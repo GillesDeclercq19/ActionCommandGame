@@ -45,7 +45,7 @@ namespace ActionCommandGame.Services
         {
             //Check Cooldown
             var player = await _database.Players
-                .Include(p => p.CurrentFuelPlayerItem.Item)
+                .Include(p => p.CurrentKiPlayerItem.Item)
                 .Include(p => p.CurrentAttackPlayerItem.Item)
                 .Include(p => p.CurrentDefensePlayerItem.Item)
                 .FirstOrDefaultAsync(p => p.Id == playerId);
@@ -55,9 +55,9 @@ namespace ActionCommandGame.Services
             }
             var elapsedSeconds = DateTime.UtcNow.Subtract(player.LastActionExecutedDateTime.Value).TotalSeconds;
             var cooldownSeconds = _appSettings.DefaultCooldown;
-            if (player.CurrentFuelPlayerItem != null)
+            if (player.CurrentKiPlayerItem != null)
             {
-                cooldownSeconds = player.CurrentFuelPlayerItem.Item.ActionCooldownSeconds;
+                cooldownSeconds = player.CurrentKiPlayerItem.Item.ActionCooldownSeconds;
             }
 
             if (elapsedSeconds < cooldownSeconds)
@@ -106,8 +106,8 @@ namespace ActionCommandGame.Services
                 levelMessages = new List<ServiceMessage> { new ServiceMessage { Code = "LevelUp", Message = $"Congratulations, you arrived at level {newLevel}" } };
             }
 
-            //Consume fuel
-            var fuelMessages =  await ConsumeFuel(player);
+            //Consume ki
+            var kiMessages =  await ConsumeKi(player);
 
             var attackMessages = new List<ServiceMessage>();
             //Consume attack when we got some loot
@@ -130,8 +130,8 @@ namespace ActionCommandGame.Services
                 {
                     negativeGameEventMessages.Add(new ServiceMessage { Code = "DefenseWithoutGear", Message = negativeGameEvent.DefenseWithoutGearDescription });
 
-                    //If we have no defense item, consume the defense loss from Fuel and Attack
-                    defenseMessages.AddRange(await ConsumeFuel(player, negativeGameEvent.DefenseLoss));
+                    //If we have no defense item, consume the defense loss from Ki and Attack
+                    defenseMessages.AddRange(await ConsumeKi(player, negativeGameEvent.DefenseLoss));
                     defenseMessages.AddRange(await ConsumeAttack(player, negativeGameEvent.DefenseLoss));
                 }
             }
@@ -159,7 +159,7 @@ namespace ActionCommandGame.Services
             //Add all the messages to the player
             serviceResult.WithMessages(levelMessages);
             serviceResult.WithMessages(warningMessages);
-            serviceResult.WithMessages(fuelMessages);
+            serviceResult.WithMessages(kiMessages);
             serviceResult.WithMessages(attackMessages);
             serviceResult.WithMessages(defenseMessages);
 
@@ -202,28 +202,28 @@ namespace ActionCommandGame.Services
             return new ServiceResult<BuyResult> { Data = buyResult };
         }
 
-        private async Task<IList<ServiceMessage>> ConsumeFuel(Player player, int fuelLoss = 1)
+        private async Task<IList<ServiceMessage>> ConsumeKi(Player player, int kiLoss = 1)
         {
-            if (player.CurrentFuelPlayerItem != null && player.CurrentFuelPlayerItemId.HasValue)
+            if (player.CurrentKiPlayerItem != null && player.CurrentKiPlayerItemId.HasValue)
             {
-                player.CurrentFuelPlayerItem.RemainingFuel -= fuelLoss;
-                if (player.CurrentFuelPlayerItem.RemainingFuel <= 0)
+                player.CurrentKiPlayerItem.RemainingKi -= kiLoss;
+                if (player.CurrentKiPlayerItem.RemainingKi <= 0)
                 {
-                    await _playerItemService.Delete(player.CurrentFuelPlayerItemId.Value);
+                    await _playerItemService.Delete(player.CurrentKiPlayerItemId.Value);
 
-                    //Load a new Fuel Item from inventory
-                    var newFuelItem = player.Inventory
-                        .Where(pi => pi.Item.Fuel > 0)
-                        .MaxBy(pi => pi.Item.Fuel);
+                    //Load a new Ki Item from inventory
+                    var newKiItem = player.Inventory
+                        .Where(pi => pi.Item.Ki > 0)
+                        .MaxBy(pi => pi.Item.Ki);
 
-                    if (newFuelItem != null)
+                    if (newKiItem != null)
                     {
-                        player.CurrentFuelPlayerItem = newFuelItem;
-                        player.CurrentFuelPlayerItemId = newFuelItem.Id;
+                        player.CurrentKiPlayerItem = newKiItem;
+                        player.CurrentKiPlayerItemId = newKiItem.Id;
                         return new List<ServiceMessage>{new ServiceMessage
                         {
-                            Code = "ReloadedFuel",
-                            Message = $"You are hungry and open a new {newFuelItem.Item.Name}. Yummy!"
+                            Code = "ReloadedKi",
+                            Message = $"You are hungry and open a new {newKiItem.Item.Name}. Yummy!"
                         }};
                     }
 
@@ -275,8 +275,8 @@ namespace ActionCommandGame.Services
             }
             else
             {
-                //If we don't have any attack tools, just consume more fuel in stead
-                await ConsumeFuel(player);
+                //If we don't have any attack tools, just consume more ki in stead
+                await ConsumeKi(player);
             }
 
             return new List<ServiceMessage>();
@@ -319,8 +319,8 @@ namespace ActionCommandGame.Services
             }
             else
             {
-                //If we don't have defensive gear, just consume more fuel in stead.
-                await ConsumeFuel(player);
+                //If we don't have defensive gear, just consume more ki in stead.
+                await ConsumeKi(player);
             }
 
             return new List<ServiceMessage>();
@@ -330,19 +330,19 @@ namespace ActionCommandGame.Services
         {
             var serviceMessages = new List<ServiceMessage>();
 
-            if (player.CurrentFuelPlayerItem == null)
+            if (player.CurrentKiPlayerItem == null)
             {
                 var infoText = "Playing without food is hard. You need a long time to recover. Consider buying food from the shop.";
                 serviceMessages.Add(new ServiceMessage { Code = "NoFood", Message = infoText, MessagePriority = MessagePriority.Warning });
             }
             if (player.CurrentAttackPlayerItem == null)
             {
-                var infoText = "Playing without tools is hard. You lost extra fuel. Consider buying tools from the shop.";
+                var infoText = "Playing without tools is hard. You lost extra ki. Consider buying tools from the shop.";
                 serviceMessages.Add(new ServiceMessage { Code = "NoTools", Message = infoText, MessagePriority = MessagePriority.Warning });
             }
             if (player.CurrentDefensePlayerItem == null)
             {
-                var infoText = "Playing without gear is hard. You lost extra fuel. Consider buying gear from the shop.";
+                var infoText = "Playing without gear is hard. You lost extra ki. Consider buying gear from the shop.";
                 serviceMessages.Add(new ServiceMessage { Code = "NoGear", Message = infoText, MessagePriority = MessagePriority.Warning });
             }
 

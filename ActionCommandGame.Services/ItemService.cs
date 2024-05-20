@@ -42,7 +42,7 @@ namespace ActionCommandGame.Services
                 Name = request.Name,
                 Description = request.Description,
                 Price = request.Price,
-                Fuel = request.Fuel,
+                Ki = request.Ki,
                 Attack = request.Attack,
                 Defense = request.Defense,
                 ActionCooldownSeconds = request.ActionCooldownSeconds
@@ -66,7 +66,7 @@ namespace ActionCommandGame.Services
             item.Name = request.Name;
             item.Description = request.Description;
             item.Price = request.Price;
-            item.Fuel = request.Fuel;
+            item.Ki = request.Ki;
             item.Attack = request.Attack;
             item.Defense = request.Defense;
             item.ActionCooldownSeconds = request.ActionCooldownSeconds;

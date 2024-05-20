@@ -17,8 +17,8 @@ namespace ActionCommandGame.Model
         public int Experience { get; set; }
         public DateTime? LastActionExecutedDateTime { get; set; }
 
-        public int? CurrentFuelPlayerItemId { get; set; }
-        public PlayerItem CurrentFuelPlayerItem { get; set; }
+        public int? CurrentKiPlayerItemId { get; set; }
+        public PlayerItem CurrentKiPlayerItem { get; set; }
         public int? CurrentAttackPlayerItemId { get; set; }
         public PlayerItem CurrentAttackPlayerItem { get; set; }
         public int? CurrentDefensePlayerItemId { get; set; }

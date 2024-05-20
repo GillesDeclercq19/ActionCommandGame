@@ -58,7 +58,7 @@ namespace ActionCommandGame.UI.Mvc.Controllers
                 ActionCooldownSeconds = item.ActionCooldownSeconds,
                 Attack = item.Attack,
                 Defense = item.Defense,
-                Fuel = item.Fuel,
+                Ki = item.Ki,
                 Price = item.Price
             };
 
