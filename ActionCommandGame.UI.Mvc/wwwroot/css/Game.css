@@ -32,13 +32,16 @@ nav {
     margin: 0 10px;
 }
 
+ul {
+    padding-left: 5.2rem;
+}
+
 .nav-center {
     flex-grow: 1;
     text-align: center;
 }
 
     .nav-center ul {
-        padding: 0;
         margin: 0;
         list-style: none;
     }
@@ -87,5 +90,70 @@ nav {
     100% {
         transform: translateX(-50%) rotate(360deg);
     }
+}
+
+section {
+    margin: auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #F3E0BE;
+    border-radius: 20px;
+    width: 1400px;
+    height: 430px;
+}
+
+.howtoplayheader{
+   display: flex;
+   justify-content: center;
+}
+
+.howtoplay{
+    width: 350px;
+    height: 100px;
+}
+
+.train-img{
+    width: 79px;
+    height: 45px;
+}
+
+.leaderboard-img {
+    width: 150px;
+    height: 50px;
+}
+
+.shop-img {
+    width: 79px;
+    height: 50px;
+}
+
+.stats-img {
+    width: 79px;
+    height: 45px;
+}
+
+.howtoplaytext {
+    margin-top: 15px;
+    font-weight: bold;
+    margin-left: 80px;
+    margin-right: 80px;
+    text-align: center;
+    
+}
+
+#howToPlaySection {
+    position: relative;
+    padding-bottom: 50px; /* Ensure there is space for the button */
+}
+
+.toggle-button {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    outline: none;
 }
 

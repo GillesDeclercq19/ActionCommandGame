@@ -32,13 +32,16 @@ nav {
     margin: 0 10px;
 }
 
+ul {
+    padding-left: 5.2rem;
+}
+
 .nav-center {
     flex-grow: 1;
     text-align: center;
 }
 
     .nav-center ul {
-        padding: 0;
         margin: 0;
         list-style: none;
     }
@@ -88,4 +91,3 @@ nav {
         transform: translateX(-50%) rotate(360deg);
     }
 }
-

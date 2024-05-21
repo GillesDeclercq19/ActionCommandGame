@@ -117,18 +117,18 @@ namespace ActionCommandGame.Services
             }
 
             var defenseMessages = new List<ServiceMessage>();
-            var negativeGameEventMessages = new List<ServiceMessage>();
+            var eventMessages = new List<ServiceMessage>();
             if (negativeGameEvent != null)
             {
                 //Check defense consumption
                 if (player.CurrentDefensePlayerItem != null)
                 {
-                    negativeGameEventMessages.Add(new ServiceMessage { Code = "DefenseWithGear", Message = negativeGameEvent.DefenseWithGearDescription });
+                    eventMessages.Add(new ServiceMessage { Code = "DefenseWithGear", Message = negativeGameEvent.DefenseWithGearDescription });
                     defenseMessages.AddRange(await ConsumeDefense(player, negativeGameEvent.DefenseLoss));
                 }
                 else
                 {
-                    negativeGameEventMessages.Add(new ServiceMessage { Code = "DefenseWithoutGear", Message = negativeGameEvent.DefenseWithoutGearDescription });
+                    eventMessages.Add(new ServiceMessage { Code = "DefenseWithoutGear", Message = negativeGameEvent.DefenseWithoutGearDescription });
 
                     //If we have no defense item, consume the defense loss from Ki and Attack
                     defenseMessages.AddRange(await ConsumeKi(player, negativeGameEvent.DefenseLoss));
@@ -148,7 +148,7 @@ namespace ActionCommandGame.Services
                 PlayerId = player.Id,
                 PositiveGameEvent = positiveGameEvent,
                 NegativeGameEvent = negativeGameEvent,
-                NegativeGameEventMessages = negativeGameEventMessages
+                EventMessages = eventMessages
             };
 
             var serviceResult = new ServiceResult<GameResult>

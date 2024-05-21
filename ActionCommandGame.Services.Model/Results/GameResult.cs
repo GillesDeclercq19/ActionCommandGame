@@ -9,6 +9,6 @@ namespace ActionCommandGame.Services.Model.Results
         public int PlayerId { get; set; }
         public PositiveGameEvent PositiveGameEvent { get; set; }
         public NegativeGameEvent NegativeGameEvent { get; set; }
-        public IList<ServiceMessage> NegativeGameEventMessages { get; set; }
+        public IList<ServiceMessage> EventMessages { get; set; }
     }
 }

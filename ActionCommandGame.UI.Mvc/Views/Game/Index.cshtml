@@ -1,36 +1,137 @@
-﻿@{
+﻿@using Microsoft.IdentityModel.Tokens
+@model PlayModel
+
+@{
     ViewData["Title"] = "Game";
 }
 <nav>
     <div class="nav-left">
         <img class="dragonball" src="https://png.pngtree.com/png-vector/20221208/ourmid/pngtree-4-dragon-ball-icon-vector-drgon-illustrtion-png-image_6515607.png" alt="Spinning Dragon Ball">
     </div>
-        <div class="nav-center">
-            <ul>
-                <li>
-                    <a asp-controller="Shop" asp-action="Index">
+    <div class="nav-center">
+        <ul>
+            <li>
+                <a asp-controller="Shop" asp-action="Index">
                     <img class="nav-img-s" src="images/shop.png" alt="shop"/>
-                    </a>    
-                </li>
-                <li class="logo-container">
-                    <img class="logo" src="/images/logo.png" alt="logo">
-                </li>
-                <li>
-                    <a asp-controller="Game" asp-action="Leaderboard">
+                </a>    
+            </li>
+            <li class="logo-container">
+                <img class="logo" src="/images/logo.png" alt="logo">
+            </li>
+            <li>
+                <a asp-controller="Game" asp-action="Leaderboard">
                     <img class="nav-img-l" src="images/leaderboard.png" alt="leaderboard" />
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <div class="nav-right">
-            <form method="post" asp-area="" asp-controller="Account" asp-action="LogOut" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                <button type="submit" class="nav-link btn btn-link">
-                    <img class="nav-img" src="images/logout.png" alt="Logout">
-                </button>
-            </form>
-        </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="nav-right">
+        <form method="post" asp-area="" asp-controller="Account" asp-action="LogOut" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+            <button type="submit" class="nav-link btn btn-link">
+                <img class="nav-img" src="images/logout.png" alt="Logout">
+            </button>
+        </form>
+    </div>
 </nav>
+
+<section id="howToPlaySection">
+    <div class="howtoplayheader">
+        <img class="howtoplay" src="images/howtoplay.png" alt="how to play" />
+    </div>
+    <div>
+        <p class="howtoplaytext">
+            You are a lost Saiyan that has stumbled on Earth. After noticing high power levels,
+            you decide to go and see where the power is coming from. You land next to Capsule Corporation and attack Goku on sight.
+            After a humiliating defeat, Goku offers to train you. Your goal is to get stronger and win against Goku!
+            Beware, Goku is not the only one you will face. You will face many other events that will test your strength.
+
+            <br />
+            <br />
+
+            You start training by clicking on the <img class="train-img" src="images/train.png" alt="train" /> button.
+            <br />
+            You can check your <img class="stats-img" src="images/stats.png" alt="stats" /> to the left of the train section.
+            <br />
+            You can also go to the <img class="shop-img" src="images/shop.png" alt="shop" /> to buy items to make you stronger.
+            <br />
+            See if you are the best? Check the <img class="leaderboard-img" src="images/leaderboard.png" alt="leaderboard" /> to see where you stand!
+        </p>
+    </div>
+</section>
+<button id="toggleButton" class="toggle-button" onclick="toggleSection()">
+    &#9650; <!-- Up arrow -->
+</button>
+
+<article>
+        <div class="left-side">
+            <div>
+                <img class="stats-img-l" src="images/stats.png" alt="stats"/>
+            </div>
+            <div class="stats">
+                <p>Experience: </p>
+                <p>Zeni: </p>
+                <p>Ki: </p>
+                <p>Attack: </p>
+                <p>Defense: </p>
+            </div>
+        </div>
+
+        <div class="right-side">
+             <div class="GameResults">
+                 @*
+                @if (Model.GameResults != null)
+                {
+                    @if (Model.GameResults.PositiveGameEvent != null && Model.GameResults.NegativeGameEvent == null)
+                    {
+                        <h1>@Model.GameResults.PositiveGameEvent.Name</h1>
+                        <h2>@Model.GameResults.PositiveGameEvent.Description</h2>
+                        <p>The training earned @Model.GameResults.PositiveGameEvent.Zeni zeni</p>
+                        <p>You also earned @Model.GameResults.PositiveGameEvent.Experience experience from this.</p>
+                    }
+                    else if (Model.GameResults.NegativeGameEvent != null)
+                    {
+                        <h1>@Model.GameResults.NegativeGameEvent.Name</h1>
+                        <h2>@Model.GameResults.NegativeGameEvent.Description</h2>
+                        @if (Model.GameResults.NegativeGameEvent.DefenseLoss > Model.PlayerResult.CurrentDefensePlayerItem)
+                        {
+                            <p>A true Saiyan warrior wears his Saiyan Armor!, @Model.GameResults.NegativeGameEvent.DefenseWithGearDescription</p>
+                            <p>Your armor gained @Model.GameResults.NegativeGameEvent.DefenseLoss cracks.</p>
+                        }
+                        else
+                        {
+                            <p>Who goes into battle or training without armor?, @Model.GameResults.NegativeGameEvent.DefenseWithoutGearDescription</p>
+                            <p>You lost @Model.GameResults.NegativeGameEvent.DefenseLoss assets on defence, attack, or ki.</p>
+                        }
+                        <p>-------------------------------------</p>
+                    }
+                    @if (!Model.GameResults.EventMessages.IsNullOrEmpty())
+                    {
+                        <h5>Notification:</h5>
+                        @foreach (var msg in Model.GameResults.EventMessages)
+                        {
+                            <p>@msg.Message</p>
+                        }
+                    }
+                } *@
+            </div>
+
+            <div>
+            <form id="performActionForm" asp-action="PerformAction" asp-controller="Game" method="post">
+                <div class="buttons">
+                    <button type="submit" class="button button-action">
+                        <img src="/images/train.png" alt="train">
+                    </button>
+                </div>
+            </form>
+            </div>
+        </div>
+</article>
+
 
 @section Styles {
     <link href="@Url.Content("/css/Game.css")" rel="stylesheet" type="text/css"/>
+}
+
+@section Scripts {
+    <script src="@Url.Content("/js/game.js")"></script>
 }

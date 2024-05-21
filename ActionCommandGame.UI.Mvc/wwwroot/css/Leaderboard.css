@@ -16,7 +16,6 @@ nav {
     justify-content: space-between;
     align-items: center;
     position: relative;
-    margin-bottom: 50px;
 }
 
 .nav-left {
@@ -33,13 +32,16 @@ nav {
     margin: 0 10px;
 }
 
+ul {
+    padding-left: 2.1rem
+}
+
 .nav-center {
     flex-grow: 1;
     text-align: center;
 }
 
     .nav-center ul {
-        padding: 0;
         margin: 0;
         list-style: none;
     }
@@ -128,7 +130,7 @@ td {
 
 .leaderboard-img{
     width: 200px;
-    height: 90px;
+    height: 85px;
 }
 
 .tablename{

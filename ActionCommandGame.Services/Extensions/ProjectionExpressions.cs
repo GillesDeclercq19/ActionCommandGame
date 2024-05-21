@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Linq.Expressions;
 using ActionCommandGame.Model;
 using ActionCommandGame.Services.Model.Results;
@@ -16,9 +17,10 @@ public static class ProjectionExpressions
             Zeni = entity.Zeni,
             Experience = entity.Experience,
             LastActionExecutedDateTime = entity.LastActionExecutedDateTime,
-            CurrentAttackPlayerItemId = entity.CurrentAttackPlayerItemId,
-            CurrentDefensePlayerItemId = entity.CurrentDefensePlayerItemId,
-            CurrentKiPlayerItemId = entity.CurrentKiPlayerItemId,
+            CurrentKiPlayerItem = entity.CurrentKiPlayerItem.RemainingKi,
+            CurrentAttackPlayerItem = entity.CurrentAttackPlayerItem.RemainingAttack,
+            CurrentDefensePlayerItem = entity.CurrentDefensePlayerItem.RemainingDefense,
+            Inventory = entity.Inventory.Select(pi => pi.ItemId).ToList()
         };
     }
 

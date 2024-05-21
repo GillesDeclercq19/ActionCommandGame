@@ -9,5 +9,10 @@ namespace ActionCommandGame.UI.Mvc.Controllers
         {
             return View();
         }
+
+        public IActionResult Error()
+        {
+            return View("Error");
+        } 
     }
 }

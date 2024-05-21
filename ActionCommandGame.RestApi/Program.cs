@@ -75,7 +75,7 @@ using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
     var dbContext = services.GetRequiredService<ActionButtonGameDbContext>();
-    dbContext.Initialize();
+    //dbContext.Initialize();
 }
 
 // Configure the HTTP request pipeline.
