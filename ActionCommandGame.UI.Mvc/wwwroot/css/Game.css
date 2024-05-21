@@ -1,12 +1,15 @@
 ﻿body {
     margin: 0;
-    overflow: hidden;
+    /* overflow: hidden; */ /* Remove this line */
+    overflow: auto; /* Add this line to enable scrolling */
     background-image: url('/images/background.png');
     background-size: cover;
     background-position: center;
     height: 100vh;
     display: flex;
     flex-direction: column;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 nav {
@@ -99,7 +102,7 @@ section {
     background-color: #F3E0BE;
     border-radius: 20px;
     width: 1400px;
-    height: 430px;
+    min-height: 450px;
 }
 
 .howtoplayheader{
@@ -135,19 +138,19 @@ section {
 .howtoplaytext {
     margin-top: 15px;
     font-weight: bold;
-    margin-left: 80px;
-    margin-right: 80px;
+    margin-left: 250px;
+    margin-right: 250px;
     text-align: center;
     
 }
 
 #howToPlaySection {
-    position: relative;
-    padding-bottom: 50px; /* Ensure there is space for the button */
+    max-height: 80vh;
+    overflow-y: auto;
 }
 
 .toggle-button {
-    position: fixed;
+    position: relative;
     left: 50%;
     transform: translateX(-50%);
     background: none;
@@ -157,3 +160,110 @@ section {
     outline: none;
 }
 
+article {
+    margin: auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #F3E0BE;
+    border-radius: 20px;
+    width: 1400px;
+    min-height: 450px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.left-side {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 40%
+}
+
+.right-side {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-left: 1px solid black;
+    width: 60%
+}
+
+.left-side img.stats-img-l {
+    display: block;
+    margin: auto;
+}
+
+.stats{
+    margin-left: 20px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.left-side .stats {
+    margin-top: 20px;
+}
+
+.button-action {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.buttons {
+    margin-top: auto;
+    text-align: center;
+}
+
+.button-action img.nav-img {
+    height: 50px;
+}
+
+.stats-img-l {
+    width: 120px;
+    height: 60px;
+}
+
+.exp-icon{
+    height: 50px;
+    width: 130px;
+}
+
+.zeni-icon {
+    height: 50px;
+    width: 70px;
+}
+
+.ki-icon {
+    height: 50px;
+    width: 50px;
+}
+
+.attack-icon {
+    height: 50px;
+    width: 130px;
+}
+
+.defense-icon {
+    height: 50px;
+    width: 130px;
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+
+.item {
+    height: 55px;
+}
+
+.positive-event {
+    height: 75px;
+}
+
+.negative-event {
+    height: 75px;
+}

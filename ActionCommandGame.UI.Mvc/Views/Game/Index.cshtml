@@ -59,74 +59,96 @@
     </div>
 </section>
 <button id="toggleButton" class="toggle-button" onclick="toggleSection()">
-    &#9650; <!-- Up arrow -->
+    &#9650; 
 </button>
 
 <article>
-        <div class="left-side">
-            <div>
-                <img class="stats-img-l" src="images/stats.png" alt="stats"/>
-            </div>
-            <div class="stats">
-                <p>Experience: </p>
-                <p>Zeni: </p>
-                <p>Ki: </p>
-                <p>Attack: </p>
-                <p>Defense: </p>
-            </div>
+    <div class="left-side">
+        <div>
+            <img class="stats-img-l" src="images/stats.png" alt="stats"/>
+        </div>
+        <div class="stats">
+            <p><img src="images/experience.png" alt="Experience" class="exp-icon"> 25</p>
+            <p><img src="images/zeni.png" alt="Zeni" class="zeni-icon"> 100</p>
+            <p><img src="images/ki.png" alt="Ki" class="ki-icon"> 5</p>
+            <p><img src="images/attack.png" alt="Attack" class="attack-icon"> 5</p>
+            <p><img src="images/defense.png" alt="Defense" class="defense-icon"> 5</p>
         </div>
 
-        <div class="right-side">
-             <div class="GameResults">
-                 @*
-                @if (Model.GameResults != null)
-                {
-                    @if (Model.GameResults.PositiveGameEvent != null && Model.GameResults.NegativeGameEvent == null)
-                    {
-                        <h1>@Model.GameResults.PositiveGameEvent.Name</h1>
-                        <h2>@Model.GameResults.PositiveGameEvent.Description</h2>
-                        <p>The training earned @Model.GameResults.PositiveGameEvent.Zeni zeni</p>
-                        <p>You also earned @Model.GameResults.PositiveGameEvent.Experience experience from this.</p>
-                    }
-                    else if (Model.GameResults.NegativeGameEvent != null)
-                    {
-                        <h1>@Model.GameResults.NegativeGameEvent.Name</h1>
-                        <h2>@Model.GameResults.NegativeGameEvent.Description</h2>
-                        @if (Model.GameResults.NegativeGameEvent.DefenseLoss > Model.PlayerResult.CurrentDefensePlayerItem)
-                        {
-                            <p>A true Saiyan warrior wears his Saiyan Armor!, @Model.GameResults.NegativeGameEvent.DefenseWithGearDescription</p>
-                            <p>Your armor gained @Model.GameResults.NegativeGameEvent.DefenseLoss cracks.</p>
-                        }
-                        else
-                        {
-                            <p>Who goes into battle or training without armor?, @Model.GameResults.NegativeGameEvent.DefenseWithoutGearDescription</p>
-                            <p>You lost @Model.GameResults.NegativeGameEvent.DefenseLoss assets on defence, attack, or ki.</p>
-                        }
-                        <p>-------------------------------------</p>
-                    }
-                    @if (!Model.GameResults.EventMessages.IsNullOrEmpty())
-                    {
-                        <h5>Notification:</h5>
-                        @foreach (var msg in Model.GameResults.EventMessages)
-                        {
-                            <p>@msg.Message</p>
-                        }
-                    }
-                } *@
-            </div>
+    </div>
 
-            <div>
+    <div class="right-side">
+        <div class="GameResults">
+            @*
+            @if (Model.GameResults != null)
+            {
+                @if (Model.GameResults.PositiveGameEvent != null && Model.GameResults.NegativeGameEvent == null)
+                {
+                    <h1>@Model.GameResults.PositiveGameEvent.Name</h1>
+                    <h2>@Model.GameResults.PositiveGameEvent.Description</h2>
+                    <p>The training earned @Model.GameResults.PositiveGameEvent.Zeni zeni</p>
+                    <p>You also earned @Model.GameResults.PositiveGameEvent.Experience experience from this.</p>
+                }
+                else if (Model.GameResults.NegativeGameEvent != null)
+                {
+                    <h1>@Model.GameResults.NegativeGameEvent.Name</h1>
+                    <h2>@Model.GameResults.NegativeGameEvent.Description</h2>
+                    @if (Model.GameResults.NegativeGameEvent.DefenseLoss > Model.PlayerResult.CurrentDefensePlayerItem)
+                    {
+                        <p>A true Saiyan warrior wears his Saiyan Armor!, @Model.GameResults.NegativeGameEvent.DefenseWithGearDescription</p>
+                        <p>Your armor gained @Model.GameResults.NegativeGameEvent.DefenseLoss cracks.</p>
+                    }
+                    else
+                    {
+                        <p>Who goes into battle or training without armor?, @Model.GameResults.NegativeGameEvent.DefenseWithoutGearDescription</p>
+                        <p>You lost @Model.GameResults.NegativeGameEvent.DefenseLoss assets on defence, attack, or ki.</p>
+                    }
+                    <p>-------------------------------------</p>
+                }
+                @if (!Model.GameResults.EventMessages.IsNullOrEmpty())
+                {
+                    <h5>Notification:</h5>
+                    @foreach (var msg in Model.GameResults.EventMessages)
+                    {
+                        <p>@msg.Message</p>
+                    }
+                }
+            }
+            *@
+        </div>
+
+        <div>
             <form id="performActionForm" asp-action="PerformAction" asp-controller="Game" method="post">
                 <div class="buttons">
                     <button type="submit" class="button button-action">
-                        <img src="/images/train.png" alt="train">
+                        <img class="nav-img" src="/images/train.png" alt="train">
                     </button>
                 </div>
             </form>
-            </div>
         </div>
+    </div>
 </article>
 
+@if (User.IsInRole("Admin"))
+{
+    <footer>
+        <div class="footer">
+
+            <a asp-action="Index" asp-controller="Items">
+                <img class="item" src="images/item.png" alt="item">
+            </a>
+
+            <a asp-action="Index" asp-controller="PositiveGameEvents">
+                <img class="positive-event" src="images/positive-event.png" alt="positive event">
+            </a>
+            
+            <a asp-action="Index" asp-controller="NegativeGameEvents">
+                <img class="negative-event" src="images/negative-event.png" alt="negative event">
+            </a>
+
+        </div>
+    </footer>
+}
 
 @section Styles {
     <link href="@Url.Content("/css/Game.css")" rel="stylesheet" type="text/css"/>
