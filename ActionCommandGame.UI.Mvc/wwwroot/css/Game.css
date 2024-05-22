@@ -271,3 +271,12 @@ article {
 .player{
     height: 55px;
 }
+
+.name {
+    font-size: 25px;
+    text-align: center;
+    width: 95%;
+    color: yellow;
+    text-shadow: 2px 2px 2px red, 3px 3px 3px black;
+    transition: background-color 0.3s;
+}

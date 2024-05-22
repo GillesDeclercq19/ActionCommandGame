@@ -7,5 +7,7 @@ namespace ActionCommandGame.Services.Model.Requests
         [Required]
         [Display(Name = "Name")]
         public required string Name { get; set; }
+        public int Zeni { get; set; }
+        public int Experience { get; set; }
     }
 }
