@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ActionCommandGame.UI.Mvc.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class ItemsController : Controller
     {
         private readonly ItemSdk _itemSdk;

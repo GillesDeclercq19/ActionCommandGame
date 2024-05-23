@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace ActionCommandGame.Services.Model.Requests
 {
@@ -9,7 +10,7 @@ namespace ActionCommandGame.Services.Model.Requests
         public required string Name { get; set; }
         public int Zeni { get; set; }
         public int Experience { get; set; }
-
+        public int playerId { get; set; }
         public string UserId { get; set; }
     }
 }

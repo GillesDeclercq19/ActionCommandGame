@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ActionCommandGame.Ui.Mvc.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class NegativeGameEventsController : Controller
     {
         private readonly NegativeGameEventSdk _negativeGameEventSdk;

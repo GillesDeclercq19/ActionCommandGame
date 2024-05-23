@@ -22,6 +22,11 @@
                     <span asp-validation-for="Username"></span>
                 </div>
                 <div class="mb-3">
+                    <label asp-for="Player" class="form-label required">Player</label>
+                    <input asp-for="Player" class="form-control" placeholder="Name your player">
+                    <span asp-validation-for="Player"></span>
+                </div>
+                <div class="mb-3">
                     <label asp-for="Password" class="form-label required">Create Password</label>
                     <input asp-for="Password" class="form-control" placeholder="Create Password">
                     <span asp-validation-for="Password"></span>

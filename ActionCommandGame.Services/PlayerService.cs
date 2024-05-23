@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ActionCommandGame.Model;
@@ -44,12 +45,18 @@ namespace ActionCommandGame.Services
         {
             var player = new Player()
             {
-                Name = request.Name
+                Name = request.Name,
+                Zeni = request.Zeni,
+                Experience = request.Experience,
+                LastActionExecutedDateTime = DateTime.UtcNow,
+                CurrentAttackPlayerItem = null,
+                CurrentDefensePlayerItem = null,
+                CurrentKiPlayerItem = null,
+                UserId = request.UserId
             };
 
             _database.Players.Add(player);
             await _database.SaveChangesAsync();
-
             return await Get(player.Id);
         }
 
@@ -63,7 +70,9 @@ namespace ActionCommandGame.Services
             }
 
             player.Name = request.Name;
-           
+            player.Zeni = request.Zeni;
+            player.Experience = request.Experience;
+
 
             await _database.SaveChangesAsync();
 

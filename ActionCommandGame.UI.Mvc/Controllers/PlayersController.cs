@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ActionCommandGame.UI.Mvc.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class PlayersController : Controller
     {
         private readonly PlayerSdk _playerSdk;
@@ -36,6 +36,8 @@ namespace ActionCommandGame.UI.Mvc.Controllers
                 return View(player);
             }
 
+            var userId = User.Claims.Where(o => o.Type == "Id").Select(o => o.Value).First();
+            player.UserId = userId;
             await _playerSdk.Create(player);
 
             return RedirectToAction("Index");
@@ -54,7 +56,10 @@ namespace ActionCommandGame.UI.Mvc.Controllers
             var playerRequest = new PlayerRequest()
             {
                 Name = player.Name,
-                
+                Zeni = player.Zeni,
+                Experience = player.Experience,
+                playerId = player.Id,
+                UserId = player.UserId,
             };
 
             return View(playerRequest);

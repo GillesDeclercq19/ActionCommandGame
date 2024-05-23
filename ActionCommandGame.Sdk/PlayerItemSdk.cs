@@ -56,17 +56,5 @@ namespace ActionCommandGame.Sdk
 
             return playerItem;
         }
-
-        public async Task Delete(int id)
-        {
-            var httpClient = _httpClientFactory.CreateClient("ActionCommandApi");
-            var bearerToken = _tokenStore.GetToken();
-            httpClient.AddAuthorization(bearerToken);
-
-            var route = $"/api/playeritems/{id}";
-            var response = await httpClient.DeleteAsync(route);
-
-            response.EnsureSuccessStatusCode();
-        }
     }
 }

@@ -96,7 +96,10 @@ namespace ActionCommandGame.Services
             {
                 Id = playerItem.Id,
                 PlayerId = playerItem.PlayerId,
+                PlayerName = player.Name,
                 ItemId = playerItem.ItemId,
+                ItemName = item.Name,
+                ItemDescription = item.Description,
                 RemainingKi = playerItem.RemainingKi,
                 RemainingAttack = playerItem.RemainingAttack,
                 RemainingDefense = playerItem.RemainingDefense

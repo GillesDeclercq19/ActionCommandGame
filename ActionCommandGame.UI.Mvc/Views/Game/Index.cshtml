@@ -68,19 +68,21 @@
             <img class="stats-img-l" src="images/stats.png" alt="stats"/>
         </div>
         <div class="stats">
-            <p class="name">test@*@Model.PlayerResult.Name*@</p>
-            <p><img src="images/experience.png" alt="Experience" class="exp-icon"> 25</p>
-            <p><img src="images/zeni.png" alt="Zeni" class="zeni-icon"> 100</p>
-            <p><img src="images/ki.png" alt="Ki" class="ki-icon"> 5</p>
-            <p><img src="images/attack.png" alt="Attack" class="attack-icon"> 5</p>
-            <p><img src="images/defense.png" alt="Defense" class="defense-icon"> 5</p>
+            @if (Model.PlayerResult != null)
+            {
+                <p class="name">@Model.PlayerResult.Name</p>
+                <p><img src="images/experience.png" alt="Experience" class="exp-icon">@Model.PlayerResult.Experience</p>
+                <p><img src="images/zeni.png" alt="Zeni" class="zeni-icon">@Model.PlayerResult.Zeni</p>
+                <p><img src="images/ki.png" alt="Ki" class="ki-icon">@ViewData["Ki"]</p>
+                <p><img src="images/attack.png" alt="Attack" class="attack-icon">@ViewData["Attack"]</p>
+                <p><img src="images/defense.png" alt="Defense" class="defense-icon">@ViewData["Defence"]</p>
+            }
         </div>
 
     </div>
 
     <div class="right-side">
         <div class="GameResults">
-            @*
             @if (Model.GameResults != null)
             {
                 @if (Model.GameResults.PositiveGameEvent != null && Model.GameResults.NegativeGameEvent == null)
@@ -115,7 +117,7 @@
                     }
                 }
             }
-            *@
+
         </div>
 
         <div>
@@ -130,7 +132,8 @@
     </div>
 </article>
 
-
+@if (User.IsInRole("Admin"))
+{
     <footer>
         <div class="footer">
 
@@ -152,7 +155,7 @@
 
         </div>
     </footer>
-
+}
 
 @section Styles {
     <link href="@Url.Content("/css/Game.css")" rel="stylesheet" type="text/css"/>

@@ -2,7 +2,7 @@
 
 namespace ActionCommandGame.UI.Mvc.Stores
 {
-    public class TokenStore: ITokenStore
+    public class TokenStore : ITokenStore
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
         public TokenStore(IHttpContextAccessor httpContextAccessor)
@@ -27,22 +27,18 @@ namespace ActionCommandGame.UI.Mvc.Stores
 
         public void SaveToken(string? bearerToken)
         {
-            if (string.IsNullOrWhiteSpace(bearerToken))
-            {
-                return;
-            }
-
             if (_httpContextAccessor.HttpContext is null)
             {
                 return;
             }
-
-            if (_httpContextAccessor.HttpContext.Request.Cookies.ContainsKey("Token"))
+            if (string.IsNullOrEmpty(bearerToken))
             {
                 _httpContextAccessor.HttpContext.Response.Cookies.Delete("Token");
             }
-
-            _httpContextAccessor.HttpContext.Response.Cookies.Append("Token", bearerToken, new CookieOptions { HttpOnly = true });
+            else
+            {
+                _httpContextAccessor.HttpContext.Response.Cookies.Append("Token", bearerToken, new CookieOptions { HttpOnly = true });
+            }
         }
     }
 }

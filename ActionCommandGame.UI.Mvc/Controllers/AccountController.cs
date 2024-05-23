@@ -100,7 +100,8 @@ namespace ActionCommandGame.Ui.Mvc.Controllers
             var request = new UserRegisterRequest
             {
                 Username = model.Username,
-                Password = model.Password
+                Password = model.Password,
+                Player = model.Player
             };
 
             var result = await identitySdk.Register(request);
@@ -144,9 +145,16 @@ namespace ActionCommandGame.Ui.Mvc.Controllers
             var claims = new List<Claim>();
             foreach (var claim in token.Claims)
             {
-                claims.Add(claim);
+                if (claim.Type != ClaimTypes.Role)
+                {
+                    claims.Add(claim);
+                }
             }
-
+            var roles = token.Claims.Where(c => c.Type == "role").Select(c => c.Value);
+            foreach (var role in roles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
             //HttpContext required a "Name" claim to display a User Name
             var usernameClaim = token.Claims.SingleOrDefault(c => c.Type == JwtRegisteredClaimNames.Sub);
             if (usernameClaim is not null)
