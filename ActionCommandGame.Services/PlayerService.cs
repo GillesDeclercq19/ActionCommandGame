@@ -34,6 +34,12 @@ namespace ActionCommandGame.Services
                 .ToListAsync();
         }
 
+        public async Task<int> GetPlayerIdOfUser(string userId)
+        {
+            var player = await _database.Players.Where(o => o.UserId == userId).FirstOrDefaultAsync();
+            return player.Id;
+        }
+
         public async Task<PlayerResult?> Create(PlayerRequest request)
         {
             var player = new Player()

@@ -4,6 +4,7 @@ using ActionCommandGame.RestApi.Services;
 using ActionCommandGame.RestApi.Settings;
 using ActionCommandGame.Services;
 using ActionCommandGame.Services.Abstractions;
+using ActionCommandGame.Services.Model.Requests;
 using ActionCommandGame.Settings;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -91,5 +92,44 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+using (var scope = app.Services.CreateScope())
+{
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+    var roles = new[] { "Admin", "User" };
+    foreach (var role in roles)
+    {
+        if (!await roleManager.RoleExistsAsync(role))
+        {
+            await roleManager.CreateAsync(new IdentityRole(role));
+        }
+    }
+}
+
+using (var scope = app.Services.CreateScope())
+{
+    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+    string name = app.Configuration["Admin"];
+
+    if (await userManager.FindByNameAsync(name) == null)
+    {
+        var _playerService = scope.ServiceProvider.GetRequiredService<IPlayerService>();
+        string password = "Test1234.";
+        var user = new IdentityUser();
+        user.UserName = name;
+        await userManager.CreateAsync(user, password);
+        await userManager.AddToRoleAsync(user, "Admin");
+        var playerRequest = new PlayerRequest
+        {
+            Zeni = 999999,
+            Experience = 10000,
+            Name = "Admin",
+            UserId = user.Id
+        };
+
+        await _playerService.Create(playerRequest);
+    }
+}
 
 app.Run();

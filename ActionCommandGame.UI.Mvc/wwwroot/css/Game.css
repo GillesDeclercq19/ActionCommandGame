@@ -256,20 +256,12 @@ article {
     padding-bottom: 10px;
 }
 
-.item {
+.item, .player {
     height: 55px;
 }
 
-.positive-event {
+.positive-event, .negative-event {
     height: 75px;
-}
-
-.negative-event {
-    height: 75px;
-}
-
-.player{
-    height: 55px;
 }
 
 .name {

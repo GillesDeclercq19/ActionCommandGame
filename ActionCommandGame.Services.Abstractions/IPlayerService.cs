@@ -9,6 +9,7 @@ namespace ActionCommandGame.Services.Abstractions
     {
         Task<PlayerResult> Get(int id);
         Task<IList<PlayerResult>> Find();
+        Task<int> GetPlayerIdOfUser(string userId);
         Task<PlayerResult> Create(PlayerRequest request);
         Task<PlayerResult> Update(int id, PlayerRequest request);
         Task<bool> Delete(int id);

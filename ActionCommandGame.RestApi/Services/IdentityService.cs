@@ -4,6 +4,7 @@ using System.Text;
 using ActionCommandGame.RestApi.Services.Helpers;
 using ActionCommandGame.RestApi.Settings;
 using ActionCommandGame.Security.Model;
+using ActionCommandGame.Services.Abstractions;
 using ActionCommandGame.Services.Model.Requests;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
@@ -14,11 +15,13 @@ namespace ActionCommandGame.RestApi.Services
     {
         private readonly JwtSettings _jwtSettings;
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly IPlayerService _playerService;
 
-        public IdentityService(JwtSettings jwtSettings, UserManager<IdentityUser> userManager)
+        public IdentityService(JwtSettings jwtSettings, UserManager<IdentityUser> userManager, IPlayerService playerService)
         {
             _jwtSettings = jwtSettings;
             _userManager = userManager;
+            _playerService = playerService;
         }
 
         public async Task<JwtAuthenticationResult> SignIn(UserSignInRequest request)
@@ -40,12 +43,7 @@ namespace ActionCommandGame.RestApi.Services
                 return JwtAuthenticationHelpers.LoginFailed();
             }
 
-            var token = GenerateJwtToken(user, _jwtSettings.Secret, _jwtSettings.Expiry.Value);
-
-            return new JwtAuthenticationResult()
-            {
-                Token = token
-            };
+            return await GenerateJwtToken(user, _jwtSettings.Secret, _jwtSettings.Expiry.Value);
         }
 
         public async Task<JwtAuthenticationResult> Register(UserRegisterRequest request)
@@ -64,29 +62,44 @@ namespace ActionCommandGame.RestApi.Services
             var user = new IdentityUser(request.Username);
             var result = await _userManager.CreateAsync(user, request.Password);
 
+            await _userManager.AddToRoleAsync(user, "User");
+
+            var playerRequest = new PlayerRequest
+            {
+                Zeni = 100,
+                Experience = 0,
+                Name = request.Player, 
+                UserId = user.Id
+            };
+
+            await _playerService.Create(playerRequest);
+
             if (!result.Succeeded)
             {
                 return JwtAuthenticationHelpers.RegisterError(result.Errors);
             }
 
-            var token = GenerateJwtToken(user, _jwtSettings.Secret, _jwtSettings.Expiry.Value);
-
-            return new JwtAuthenticationResult()
-            {
-                Token = token
-            };
+            return await GenerateJwtToken(user, _jwtSettings.Secret, _jwtSettings.Expiry.Value);
         }
 
-        private string GenerateJwtToken(IdentityUser user, string secret, TimeSpan expiry)
+        public async Task<JwtAuthenticationResult> GenerateJwtToken(IdentityUser user, string secret, TimeSpan expiry)
         {
             var jwtTokenHandler = new JwtSecurityTokenHandler();
+            var userRoles = await _userManager.GetRolesAsync(user);
             var key = Encoding.ASCII.GetBytes(secret);
+            var playerId = await _playerService.GetPlayerIdOfUser(user.Id);
 
             var claims = new List<Claim>()
             {
                 new Claim("Id", user.Id),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim("PlayerId", playerId.ToString())
             };
+
+            foreach (var role in userRoles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
 
             if (!string.IsNullOrWhiteSpace(user.UserName))
             {
@@ -107,8 +120,9 @@ namespace ActionCommandGame.RestApi.Services
             };
 
             var token = jwtTokenHandler.CreateToken(tokenDescriptor);
+            var jwtToken = jwtTokenHandler.WriteToken(token);
 
-            return jwtTokenHandler.WriteToken(token);
+            return new JwtAuthenticationResult { Token = jwtToken };
         }
     }
 }

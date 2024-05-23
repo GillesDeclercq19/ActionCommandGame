@@ -16,7 +16,7 @@ namespace ActionCommandGame.Model
         public string Name { get; set; }
         public int Zeni { get; set; }
         public int Experience { get; set; }
-        public DateTime? LastActionExecutedDateTime { get; set; }
+        public DateTime LastActionExecutedDateTime { get; set; }
         public int? CurrentKiPlayerItemId { get; set; }
         public PlayerItem CurrentKiPlayerItem { get; set; }
         public int? CurrentAttackPlayerItemId { get; set; }

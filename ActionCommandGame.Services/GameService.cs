@@ -49,11 +49,13 @@ namespace ActionCommandGame.Services
                 .Include(p => p.CurrentAttackPlayerItem.Item)
                 .Include(p => p.CurrentDefensePlayerItem.Item)
                 .FirstOrDefaultAsync(p => p.Id == playerId);
-            if (player.LastActionExecutedDateTime == null)
+            
+            if (player == null)
             {
-                player.LastActionExecutedDateTime= DateTime.MinValue;
+                return new ServiceResult<GameResult>().PlayerNotFound();
             }
-            var elapsedSeconds = DateTime.UtcNow.Subtract(player.LastActionExecutedDateTime.Value).TotalSeconds;
+
+            var elapsedSeconds = DateTime.UtcNow.Subtract(player.LastActionExecutedDateTime).TotalSeconds;
             var cooldownSeconds = _appSettings.DefaultCooldown;
             if (player.CurrentKiPlayerItem != null)
             {
@@ -77,9 +79,8 @@ namespace ActionCommandGame.Services
             {
                 return new ServiceResult<GameResult>
                 {
-                    Messages =
-                    new List<ServiceMessage>
-                    {
+                    Messages = new List<ServiceMessage>
+                        {
                         new ServiceMessage
                         {
                             Code = "Error",
@@ -94,7 +95,7 @@ namespace ActionCommandGame.Services
 
             var oldLevel = player.GetLevel();
 
-            player.Zeni += positiveGameEvent.Zeni.Value;
+            player.Zeni += positiveGameEvent.Zeni;
             player.Experience += positiveGameEvent.Experience;
 
             var newLevel = player.GetLevel();
@@ -103,19 +104,13 @@ namespace ActionCommandGame.Services
             //Check if we leveled up
             if (oldLevel < newLevel)
             {
-                levelMessages = new List<ServiceMessage> { new ServiceMessage { Code = "LevelUp", Message = $"Congratulations, you arrived at level {newLevel}" } };
+                levelMessages = [new ServiceMessage { Code = "LevelUp", Message = $"Congratulations, you arrived at level {newLevel}" }];
             }
 
             //Consume ki
             var kiMessages =  await ConsumeKi(player);
 
             var attackMessages = new List<ServiceMessage>();
-            //Consume attack when we got some loot
-            if (positiveGameEvent.Zeni > 0)
-            {
-                attackMessages.AddRange(await ConsumeAttack(player));
-            }
-
             var defenseMessages = new List<ServiceMessage>();
             var eventMessages = new List<ServiceMessage>();
             if (negativeGameEvent != null)
@@ -130,10 +125,15 @@ namespace ActionCommandGame.Services
                 {
                     eventMessages.Add(new ServiceMessage { Code = "DefenseWithoutGear", Message = negativeGameEvent.DefenseWithoutGearDescription });
 
-                    //If we have no defense item, consume the defense loss from Ki and Attack
+                    //If we have no defense item, consume the defense loss from Health and Attack
                     defenseMessages.AddRange(await ConsumeKi(player, negativeGameEvent.DefenseLoss));
                     defenseMessages.AddRange(await ConsumeAttack(player, negativeGameEvent.DefenseLoss));
                 }
+            }
+           
+            else if (positiveGameEvent.Zeni > 500)
+            {
+                attackMessages.AddRange(await ConsumeAttack(player));
             }
 
             var warningMessages = GetWarningMessages(player);
@@ -223,7 +223,7 @@ namespace ActionCommandGame.Services
                         return new List<ServiceMessage>{new ServiceMessage
                         {
                             Code = "ReloadedKi",
-                            Message = $"You are hungry and open a new {newKiItem.Item.Name}. Yummy!"
+                            Message = $"You are low on Ki and eat {newKiItem.Item.Name}. Yummy!"
                         }};
                     }
 
@@ -260,7 +260,7 @@ namespace ActionCommandGame.Services
                         return new List<ServiceMessage>{new ServiceMessage
                         {
                             Code = "ReloadedAttack",
-                            Message = $"You just broke {oldAttackItem.Item.Name}. No worries, you swiftly wield a new {newAttackItem.Item.Name}. Yeah!",
+                            Message = $"You just broke {oldAttackItem.Item.Name}. No worries, you swiftly equip a new {newAttackItem.Item.Name}. Yeah!",
 
                         }};
                     }
@@ -268,15 +268,15 @@ namespace ActionCommandGame.Services
                     return new List<ServiceMessage>{new ServiceMessage
                     {
                         Code = "NoAttack",
-                        Message = $"You just broke {oldAttackItem.Item.Name}. This was your last tool. Bummer!",
+                        Message = $"You just broke {oldAttackItem.Item.Name}. This was your last tool. Idiot!",
                         MessagePriority = MessagePriority.Warning
                     }};
                 }
             }
-            else
+            else if (player.CurrentDefensePlayerItem != null) 
             {
-                //If we don't have any attack tools, just consume more ki in stead
-                await ConsumeKi(player);
+                
+                await ConsumeDefense(player);
             }
 
             return new List<ServiceMessage>();
@@ -305,7 +305,7 @@ namespace ActionCommandGame.Services
                         return new List<ServiceMessage>{new ServiceMessage
                         {
                             Code = "ReloadedDefense",
-                            Message = $"Your {oldDefenseItem.Item.Name} is starting to smell. No worries, you swiftly put on a freshly washed {newDefenseItem.Item.Name}. Yeah!"
+                            Message = $"Your {oldDefenseItem.Item.Name} is starting to tear from the cracks. No worries, you swiftly put on a newly made {newDefenseItem.Item.Name}."
                         }};
                     }
 
@@ -332,17 +332,17 @@ namespace ActionCommandGame.Services
 
             if (player.CurrentKiPlayerItem == null)
             {
-                var infoText = "Playing without food is hard. You need a long time to recover. Consider buying food from the shop.";
+                var infoText = "Training without ki is hard. You need a long time to recover. Consider buying food from the shop.";
                 serviceMessages.Add(new ServiceMessage { Code = "NoFood", Message = infoText, MessagePriority = MessagePriority.Warning });
             }
             if (player.CurrentAttackPlayerItem == null)
             {
-                var infoText = "Playing without tools is hard. You lost extra ki. Consider buying tools from the shop.";
+                var infoText = "Training without tools is hard. You can't keep on training like this! Consider buying tools from the shop.";
                 serviceMessages.Add(new ServiceMessage { Code = "NoTools", Message = infoText, MessagePriority = MessagePriority.Warning });
             }
             if (player.CurrentDefensePlayerItem == null)
             {
-                var infoText = "Playing without gear is hard. You lost extra ki. Consider buying gear from the shop.";
+                var infoText = "Training without gear is hard. You will take more damage! Consider buying gear from the shop.";
                 serviceMessages.Add(new ServiceMessage { Code = "NoGear", Message = infoText, MessagePriority = MessagePriority.Warning });
             }
 
