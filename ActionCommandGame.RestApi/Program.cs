@@ -24,7 +24,7 @@ builder.Services.AddSingleton<AppSettings>();
 builder.Services.AddDbContext<ActionButtonGameDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-}, ServiceLifetime.Singleton, ServiceLifetime.Singleton);
+});
 
 var jwtSettings = new JwtSettings();
 builder.Configuration.GetSection(nameof(JwtSettings)).Bind(jwtSettings);

@@ -33,6 +33,6 @@ namespace ActionCommandGame.Services.Model.Core
             Data = data;
         }
 
-        public T? Data { get; set; }
+        public T Data { get; set; }
     }
 }

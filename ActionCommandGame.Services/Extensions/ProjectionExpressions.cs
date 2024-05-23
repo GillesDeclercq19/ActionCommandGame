@@ -15,6 +15,7 @@ public static class ProjectionExpressions
             Id = entity.Id,
             Name = entity.Name,
             Zeni = entity.Zeni,
+            UserId = entity.UserId,
             Experience = entity.Experience,
             LastActionExecutedDateTime = entity.LastActionExecutedDateTime,
             CurrentKiPlayerItem = entity.CurrentKiPlayerItem.RemainingKi,

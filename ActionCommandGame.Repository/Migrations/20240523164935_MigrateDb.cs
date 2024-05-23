@@ -95,7 +95,7 @@ namespace ActionCommandGame.Repository.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Zeni = table.Column<int>(type: "int", nullable: true),
+                    Zeni = table.Column<int>(type: "int", nullable: false),
                     Experience = table.Column<int>(type: "int", nullable: false),
                     Probability = table.Column<int>(type: "int", nullable: false)
                 },
@@ -242,7 +242,7 @@ namespace ActionCommandGame.Repository.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Zeni = table.Column<int>(type: "int", nullable: false),
                     Experience = table.Column<int>(type: "int", nullable: false),
-                    LastActionExecutedDateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastActionExecutedDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CurrentKiPlayerItemId = table.Column<int>(type: "int", nullable: true),
                     CurrentAttackPlayerItemId = table.Column<int>(type: "int", nullable: true),
                     CurrentDefensePlayerItemId = table.Column<int>(type: "int", nullable: true),

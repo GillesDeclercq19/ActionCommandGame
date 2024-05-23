@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ActionCommandGame.Repository.Migrations
 {
     [DbContext(typeof(ActionButtonGameDbContext))]
-    [Migration("20240520120513_MigrateDb")]
+    [Migration("20240523164935_MigrateDb")]
     partial class MigrateDb
     {
         /// <inheritdoc />
@@ -110,7 +110,7 @@ namespace ActionCommandGame.Repository.Migrations
                     b.Property<int>("Experience")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("LastActionExecutedDateTime")
+                    b.Property<DateTime>("LastActionExecutedDateTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
@@ -187,7 +187,7 @@ namespace ActionCommandGame.Repository.Migrations
                     b.Property<int>("Probability")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Zeni")
+                    b.Property<int>("Zeni")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
