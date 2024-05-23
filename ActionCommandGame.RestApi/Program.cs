@@ -24,7 +24,7 @@ builder.Services.AddSingleton<AppSettings>();
 builder.Services.AddDbContext<ActionButtonGameDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-});
+}, ServiceLifetime.Singleton, ServiceLifetime.Singleton);
 
 var jwtSettings = new JwtSettings();
 builder.Configuration.GetSection(nameof(JwtSettings)).Bind(jwtSettings);
@@ -110,7 +110,7 @@ using (var scope = app.Services.CreateScope())
 using (var scope = app.Services.CreateScope())
 {
     var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
-    string name = app.Configuration["Admin"];
+    string name = app.Configuration["AdminName"];
 
     if (await userManager.FindByNameAsync(name) == null)
     {
@@ -122,9 +122,9 @@ using (var scope = app.Services.CreateScope())
         await userManager.AddToRoleAsync(user, "Admin");
         var playerRequest = new PlayerRequest
         {
-            Zeni = 999999,
-            Experience = 10000,
-            Name = "Admin",
+            Zeni = 100000,
+            Experience = 0,
+            Name = "AdminPlayer",
             UserId = user.Id
         };
 
