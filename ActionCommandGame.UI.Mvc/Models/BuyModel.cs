@@ -1,4 +1,4 @@
-﻿namespace ActionCommandGame.Ui.Mvc.Models
+﻿namespace ActionCommandGame.UI.Mvc.Models
 {
     public class BuyModel
     {

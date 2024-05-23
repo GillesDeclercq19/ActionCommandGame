@@ -1,9 +1,9 @@
 ﻿using ActionCommandGame.Sdk;
-using ActionCommandGame.Ui.Mvc.Models;
+using ActionCommandGame.UI.Mvc.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ActionCommandGame.Ui.Mvc.Controllers
+namespace ActionCommandGame.UI.Mvc.Controllers
 {
     [Authorize]
     public class ShopController : Controller

@@ -1,8 +1,12 @@
 ﻿using ActionCommandGame.Model;
 using ActionCommandGame.Repository.Extensions;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.Extensions.DependencyInjection;
+using System.Threading.Tasks;
+using System;
 
 namespace ActionCommandGame.Repository.Core
 {
@@ -34,8 +38,10 @@ namespace ActionCommandGame.Repository.Core
             modelBuilder.ConfigureRelationships();
             base.OnModelCreating(modelBuilder);
         }
-        
-        public void Initialize()
+
+
+
+        public async Task InitializeAsync(IServiceProvider serviceProvider)
         {
             GeneratePositiveGameEvents();
             GenerateNegativeGameEvents();
@@ -44,12 +50,35 @@ namespace ActionCommandGame.Repository.Core
             GenerateFoodItems();
             GenerateDecorativeItems();
 
+            var userManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
+            var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var adminName = "Stockey";
+            var adminUser = await userManager.FindByNameAsync(adminName);
+            if (adminUser == null)
+            {
+                adminUser = new IdentityUser { UserName = adminName };
+                await userManager.CreateAsync(adminUser, "Test1234."); // Set the password for the admin user
+            }
+
+            // Check if the "Admin" role exists, if not, create it
+            if (!await roleManager.RoleExistsAsync("Admin"))
+            {
+                await roleManager.CreateAsync(new IdentityRole("Admin"));
+            }
+
+            // Add the "Admin" role to the admin user
+            await userManager.AddToRoleAsync(adminUser, "Admin");
+
+            // Add your admin player here and link it to the user
+
+            Players.Add(new Player { Name = "StockeyAdmin", Zeni = 100000, Experience = 10000, UserId = adminUser.Id });
+
             Players.Add(new Player { Name = "Dev", Zeni = 10000, Experience = 500});
             Players.Add(new Player { Name = "Bavo", Zeni = 100, Experience = 5 });
             Players.Add(new Player { Name = "Gilles", Zeni = 10, Experience = 50 });
 
 
-            SaveChanges();
+            await SaveChangesAsync();
         }
 
         private void GeneratePositiveGameEvents()

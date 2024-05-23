@@ -4,7 +4,6 @@ using ActionCommandGame.RestApi.Services;
 using ActionCommandGame.RestApi.Settings;
 using ActionCommandGame.Services;
 using ActionCommandGame.Services.Abstractions;
-using ActionCommandGame.Services.Model.Requests;
 using ActionCommandGame.Settings;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -69,14 +68,13 @@ builder.Services.AddScoped<INegativeGameEventService, NegativeGameEventService>(
 builder.Services.AddScoped<IPlayerItemService, PlayerItemService>();
 builder.Services.AddScoped<IPlayerService, PlayerService>();
 builder.Services.AddScoped<IPositiveGameEventService, PositiveGameEventService>();
-
+builder.Services.AddTransient<DbInitializer>();
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
 {
-    var services = scope.ServiceProvider;
-    var dbContext = services.GetRequiredService<ActionButtonGameDbContext>();
-    //dbContext.Initialize();
+    var dbInitializer = app.Services.GetRequiredService<DbInitializer>();
+    //await dbInitializer.InitializeAsync();
 }
 
 // Configure the HTTP request pipeline.
@@ -104,31 +102,6 @@ using (var scope = app.Services.CreateScope())
         {
             await roleManager.CreateAsync(new IdentityRole(role));
         }
-    }
-}
-
-using (var scope = app.Services.CreateScope())
-{
-    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
-    string name = app.Configuration["AdminName"];
-
-    if (await userManager.FindByNameAsync(name) == null)
-    {
-        var _playerService = scope.ServiceProvider.GetRequiredService<IPlayerService>();
-        string password = "Test1234.";
-        var user = new IdentityUser();
-        user.UserName = name;
-        await userManager.CreateAsync(user, password);
-        await userManager.AddToRoleAsync(user, "Admin");
-        var playerRequest = new PlayerRequest
-        {
-            Zeni = 100000,
-            Experience = 0,
-            Name = "AdminPlayer",
-            UserId = user.Id
-        };
-
-        await _playerService.Create(playerRequest);
     }
 }
 

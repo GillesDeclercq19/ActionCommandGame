@@ -3,7 +3,7 @@ using ActionCommandGame.Services.Model.Requests;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ActionCommandGame.Ui.Mvc.Controllers
+namespace ActionCommandGame.UI.Mvc.Controllers
 {
     [Authorize(Roles = "Admin")]
     public class NegativeGameEventsController : Controller

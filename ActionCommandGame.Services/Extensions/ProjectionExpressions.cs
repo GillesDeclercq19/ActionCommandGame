@@ -46,7 +46,10 @@ public static class ProjectionExpressions
         {
             Id = entity.Id,
             PlayerId = entity.PlayerId,
+            PlayerName = entity.Player.Name,
             ItemId = entity.ItemId,
+            ItemName = entity.Item.Name,
+            ItemDescription = entity.Item.Description,
             RemainingAttack = entity.RemainingAttack,
             RemainingDefense = entity.RemainingDefense,
             RemainingKi = entity.RemainingKi

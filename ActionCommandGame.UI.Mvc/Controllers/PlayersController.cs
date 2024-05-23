@@ -58,8 +58,7 @@ namespace ActionCommandGame.UI.Mvc.Controllers
                 Name = player.Name,
                 Zeni = player.Zeni,
                 Experience = player.Experience,
-                playerId = player.Id,
-                UserId = player.UserId,
+                UserId = player.UserId
             };
 
             return View(playerRequest);

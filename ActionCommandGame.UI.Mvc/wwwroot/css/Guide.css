@@ -45,11 +45,6 @@ nav {
         list-style: none;
     }
 
-        .nav-center ul li {
-            display: inline;
-            margin: 0 10px;
-        }
-
 .logo {
     border-radius: 50%;
     margin: 10px;
@@ -190,7 +185,7 @@ article {
 
 .stats{
     margin-left: 20px;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
 }
 
@@ -227,7 +222,6 @@ article {
 .zeni-icon {
     height: 50px;
     width: 70px;
-    color: goldenrod;
 }
 
 .ki-icon {
@@ -285,5 +279,5 @@ article {
 }
 
 .logo-guide {
-    margin-right: 100px;
+    margin-right: 150px;
 }

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ActionCommandGame.Repository.Migrations
 {
     [DbContext(typeof(ActionButtonGameDbContext))]
-    [Migration("20240523164935_MigrateDb")]
+    [Migration("20240523222716_MigrateDb")]
     partial class MigrateDb
     {
         /// <inheritdoc />

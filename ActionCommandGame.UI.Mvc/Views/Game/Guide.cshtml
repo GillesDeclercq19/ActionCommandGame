@@ -1,0 +1,55 @@
+﻿@{
+    ViewData["Title"] = "How to Play";
+}
+<nav>
+    <div class="nav-left">
+        <img class="dragonball" src="https://png.pngtree.com/png-vector/20221208/ourmid/pngtree-4-dragon-ball-icon-vector-drgon-illustrtion-png-image_6515607.png" alt="Spinning Dragon Ball">
+    </div>
+    <div class="nav-center">
+        <ul>
+            <li class="logo-container logo-guide">
+                <img class="logo" src="/images/logo.png" alt="logo">
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<section id="howToPlaySection">
+
+    <div class="howtoplayheader">
+        <img class="howtoplay" src="/images/howtoplay.png" alt="how to play"/>
+    </div>
+
+    <div>
+        <p class="howtoplaytext">
+            You are a lost Saiyan that has stumbled on Earth. After noticing high power levels,
+            you decide to go and see where the power is coming from. You land next to Capsule Corporation and attack Goku on sight.
+            After a humiliating defeat, Goku offers to train you. Your goal is to get stronger and win against Goku!
+            Beware, Goku is not the only one you will face. You will face many other events that will test your strength.
+
+            <br/>
+            <br/>
+
+            You start training by clicking on the <img class="train-img" src="/images/train.png" alt="train"/> button.
+            <br/>
+            You can check your <img class="stats-img" src="/images/stats.png" alt="stats"/> to the left of the train section.
+            <br/>
+            You can also go to the <img class="shop-img" src="/images/shop.png" alt="shop"/> to buy items to make you stronger.
+            <br/>
+            See if you are the best? Check the <img class="leaderboard-img" src="/images/leaderboard.png" alt="leaderboard"/> to see where you stand!
+        </p>
+    </div>
+
+    <div class="button-container">
+        <a asp-action="Play" asp-controller="Game">
+            <img class="image-button" src="/images/play.png" alt="play">
+        </a>
+    </div>
+</section>
+
+
+
+@section Styles {
+    <link href="@Url.Content("/css/Guide.css")" rel="stylesheet" type="text/css"/>
+}
+

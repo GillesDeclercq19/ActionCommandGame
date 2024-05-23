@@ -10,5 +10,6 @@ namespace ActionCommandGame.Services.Model.Requests
         [DataType(DataType.Password)]
         [Required]
         public required string Password { get; set; }
+
     }
 }

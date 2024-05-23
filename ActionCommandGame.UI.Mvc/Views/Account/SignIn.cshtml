@@ -1,7 +1,6 @@
 ﻿@model SignInModel
 
 @{
-    var returnUrl = Url.Action("Index", "Game");
     ViewData["Title"] = "Sign in";
 }
 
@@ -14,7 +13,7 @@
             </div>
         </div>
         <div class="right-side">
-            <form class="form" method="post" asp-route-returnUrl="@returnUrl">
+            <form class="form" method="post">
                 <h1>@ViewData["Title"]</h1>
                 <div class="mb-3">
                     <label asp-for="Username" class="form-label required">Username</label>
@@ -39,16 +38,17 @@
 
             </form>
 
-            <a class="account" asp-action="Register" asp-route-returnUrl="@returnUrl">I don't have an account yet.</a>
+            <a class="account" asp-action="Register">I don't have an account yet.</a>
         </div>
     </div>
 </div>
-
-@section Styles {
-    <link href="@Url.Content("/css/Register-Login.css")" rel="stylesheet" type="text/css" />
-}
 
 @section Scripts
 {
     <partial name="_ValidationScriptsPartial" />
 }
+
+@section Styles {
+    <link href="@Url.Content("/css/Register-Login.css")" rel="stylesheet" type="text/css" />
+}
+

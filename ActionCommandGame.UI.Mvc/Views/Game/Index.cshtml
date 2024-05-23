@@ -12,7 +12,7 @@
         <ul>
             <li>
                 <a asp-controller="Shop" asp-action="Index">
-                    <img class="nav-img-s" src="images/shop.png" alt="shop"/>
+                    <img class="nav-img-s" src="/images/shop.png" alt="shop"/>
                 </a>    
             </li>
             <li class="logo-container">
@@ -20,7 +20,7 @@
             </li>
             <li>
                 <a asp-controller="Game" asp-action="Leaderboard">
-                    <img class="nav-img-l" src="images/leaderboard.png" alt="leaderboard" />
+                    <img class="nav-img-l" src="/images/leaderboard.png" alt="leaderboard" />
                 </a>
             </li>
         </ul>
@@ -28,54 +28,26 @@
     <div class="nav-right">
         <form method="post" asp-area="" asp-controller="Account" asp-action="LogOut" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
             <button type="submit" class="nav-link btn btn-link">
-                <img class="nav-img" src="images/logout.png" alt="Logout">
+                <img class="nav-img" src="/images/logout.png" alt="Logout">
             </button>
         </form>
     </div>
 </nav>
 
-<section id="howToPlaySection">
-    <div class="howtoplayheader">
-        <img class="howtoplay" src="images/howtoplay.png" alt="how to play" />
-    </div>
-    <div>
-        <p class="howtoplaytext">
-            You are a lost Saiyan that has stumbled on Earth. After noticing high power levels,
-            you decide to go and see where the power is coming from. You land next to Capsule Corporation and attack Goku on sight.
-            After a humiliating defeat, Goku offers to train you. Your goal is to get stronger and win against Goku!
-            Beware, Goku is not the only one you will face. You will face many other events that will test your strength.
-
-            <br />
-            <br />
-
-            You start training by clicking on the <img class="train-img" src="images/train.png" alt="train" /> button.
-            <br />
-            You can check your <img class="stats-img" src="images/stats.png" alt="stats" /> to the left of the train section.
-            <br />
-            You can also go to the <img class="shop-img" src="images/shop.png" alt="shop" /> to buy items to make you stronger.
-            <br />
-            See if you are the best? Check the <img class="leaderboard-img" src="images/leaderboard.png" alt="leaderboard" /> to see where you stand!
-        </p>
-    </div>
-</section>
-<button id="toggleButton" class="toggle-button" onclick="toggleSection()">
-    &#9650; 
-</button>
-
 <article>
     <div class="left-side">
         <div>
-            <img class="stats-img-l" src="images/stats.png" alt="stats"/>
+            <img class="stats-img-l" src="/images/stats.png" alt="stats"/>
         </div>
         <div class="stats">
             @if (Model.PlayerResult != null)
             {
                 <p class="name">@Model.PlayerResult.Name</p>
-                <p><img src="images/experience.png" alt="Experience" class="exp-icon">@Model.PlayerResult.Experience</p>
-                <p><img src="images/zeni.png" alt="Zeni" class="zeni-icon">@Model.PlayerResult.Zeni</p>
-                <p><img src="images/ki.png" alt="Ki" class="ki-icon">@ViewData["Ki"]</p>
-                <p><img src="images/attack.png" alt="Attack" class="attack-icon">@ViewData["Attack"]</p>
-                <p><img src="images/defense.png" alt="Defense" class="defense-icon">@ViewData["Defence"]</p>
+                <p><img src="/images/experience.png" alt="Experience" class="exp-icon"> @Model.PlayerResult.Experience</p>
+                <p><img src="/images/zeni.png" alt="Zeni" class="zeni-icon"> @Model.PlayerResult.Zeni</p>
+                <p><img src="/images/ki.png" alt="Ki" class="ki-icon"> @ViewData["Ki"]</p>
+                <p><img src="/images/attack.png" alt="Attack" class="attack-icon"> @ViewData["Attack"]</p>
+                <p><img src="/images/defense.png" alt="Defense" class="defense-icon"> @ViewData["Defence"]</p>
             }
         </div>
     </div>
@@ -137,19 +109,19 @@
         <div class="footer">
 
             <a asp-action="Index" asp-controller="Players">
-                <img class="player" src="images/player.png" alt="player">
+                <img class="player" src="/images/player.png" alt="player">
             </a>
 
             <a asp-action="Index" asp-controller="Items">
-                <img class="item" src="images/item.png" alt="item">
+                <img class="item" src="/images/item.png" alt="item">
             </a>
 
             <a asp-action="Index" asp-controller="PositiveGameEvents">
-                <img class="positive-event" src="images/positive-event.png" alt="positive event">
+                <img class="positive-event" src="/images/positive-event.png" alt="positive event">
             </a>
 
             <a asp-action="Index" asp-controller="NegativeGameEvents">
-                <img class="negative-event" src="images/negative-event.png" alt="negative event">
+                <img class="negative-event" src="/images/negative-event.png" alt="negative event">
             </a>
 
         </div>
@@ -160,6 +132,3 @@
     <link href="@Url.Content("/css/Game.css")" rel="stylesheet" type="text/css"/>
 }
 
-@section Scripts {
-    <script src="@Url.Content("/js/game.js")"></script>
-}

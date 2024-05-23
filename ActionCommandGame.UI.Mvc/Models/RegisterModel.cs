@@ -8,7 +8,7 @@ namespace ActionCommandGame.UI.Mvc.Models
         public required string Username { get; set; }
 
         [Required]
-        public string Player { get; set; }
+        public required string Player { get; set; }
 
         [Required]
         [DataType(DataType.Password)]

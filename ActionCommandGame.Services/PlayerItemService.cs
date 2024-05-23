@@ -23,6 +23,8 @@ namespace ActionCommandGame.Services
         public async Task<PlayerItemResult?> Get(int id)
         {
             return await _database.PlayerItems
+                .Include(pi => pi.Player)
+                .Include(pi => pi.Item)
                 .Where(p => p.Id == id)
                 .MapToResults()
                 .FirstOrDefaultAsync();

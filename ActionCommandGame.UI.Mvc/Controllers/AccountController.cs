@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
-namespace ActionCommandGame.Ui.Mvc.Controllers
+namespace ActionCommandGame.UI.Mvc.Controllers
 {
     public class AccountController(
         IdentitySdk identitySdk,
@@ -24,18 +24,11 @@ namespace ActionCommandGame.Ui.Mvc.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SignIn(SignInModel model, string? returnUrl)
+        //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> SignIn(SignInModel model)
         {
-
-            if (string.IsNullOrWhiteSpace(returnUrl))
-            {
-                returnUrl = "/";
-            }
-
             if (!ModelState.IsValid)
             {
-                ViewBag.ReturnUrl = returnUrl;
                 return View();
             }
 
@@ -44,35 +37,36 @@ namespace ActionCommandGame.Ui.Mvc.Controllers
                 Username = model.Username,
                 Password = model.Password
             };
+
             var signInResult = await identitySdk.SignIn(signInRequest);
 
             if (!signInResult.IsSuccessful)
             {
                 ModelState.AddModelError("", "User/Password combination is wrong.");
-                ViewBag.ReturnUrl = returnUrl;
                 return View();
+            }
+
+            var token = tokenStore.GetToken();
+            if (token != null)
+            {
+                tokenStore.SaveToken(string.Empty);
             }
 
             tokenStore.SaveToken(signInResult.Token);
             var principal = CreatePrincipalFromToken(signInResult.Token);
             await HttpContext.SignInAsync(principal);
 
-            return LocalRedirect(returnUrl);
+            return RedirectToActionPermanent("Play", "Game");
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> LogOut(string? returnUrl)
+        public async Task<IActionResult> LogOut()
         {
-            if (string.IsNullOrWhiteSpace(returnUrl))
-            {
-                returnUrl = "/";
-            }
-
             tokenStore.SaveToken(string.Empty);
             await HttpContext.SignOutAsync();
 
-            return LocalRedirect(returnUrl);
+            return RedirectToActionPermanent("Index", "Home");
         }
 
         [HttpGet]
@@ -123,8 +117,9 @@ namespace ActionCommandGame.Ui.Mvc.Controllers
 
 
 
-            return LocalRedirect(returnUrl);
+            return RedirectToActionPermanent("Guide", "Game");
         }
+
         private ClaimsPrincipal CreatePrincipalFromToken(string? bearerToken)
         {
             var identity = CreateIdentityFromToken(bearerToken);

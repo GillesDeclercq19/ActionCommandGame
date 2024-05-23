@@ -65,7 +65,7 @@ namespace ActionCommandGame.Services
             if (elapsedSeconds < cooldownSeconds)
             {
                 var waitSeconds = Math.Ceiling(cooldownSeconds - elapsedSeconds);
-                var waitText = $"You are still a bit tired. You have to wait another {waitSeconds} seconds.";
+                var waitText = $"You feel a bit tired. You have to wait another {waitSeconds} seconds.";
                 return new ServiceResult<GameResult>
                 {
                     Data = new GameResult { PlayerId = player.Id },
@@ -75,18 +75,19 @@ namespace ActionCommandGame.Services
 
             var hasAttackItem = player.CurrentAttackPlayerItem != null;
             var positiveGameEvent = await _positiveGameEventService.GetRandomPositiveGameEvent(hasAttackItem);
+
             if (positiveGameEvent == null)
             {
                 return new ServiceResult<GameResult>
                 {
                     Messages = new List<ServiceMessage>
                         {
-                        new ServiceMessage
-                        {
-                            Code = "Error",
-                            Message = "Something went wrong getting the Positive Game Event.",
-                            MessagePriority = MessagePriority.Error
-                        }
+                            new ServiceMessage
+                            {
+                                Code = "Error",
+                                Message = "Something went wrong getting the Positive Game Event.",
+                                MessagePriority = MessagePriority.Error
+                            }
                     }
                 };
             }
@@ -195,9 +196,7 @@ namespace ActionCommandGame.Services
             var buyResult = new BuyResult
             {
                 PlayerId = player.Id,
-                ItemId = item.Id,
-                ItemName = item.Name,
-                ItemDescription = item.Description,
+                ItemId = item.Id
             };
             return new ServiceResult<BuyResult> { Data = buyResult };
         }
@@ -230,7 +229,7 @@ namespace ActionCommandGame.Services
                     return new List<ServiceMessage>{new ServiceMessage
                     {
                         Code = "NoFood",
-                        Message = "You are so hungry. You look into your bag and find ... nothing!",
+                        Message = "You are hungry. You look into your bag and find ... nothing!",
                         MessagePriority = MessagePriority.Warning
                     }};
                 }

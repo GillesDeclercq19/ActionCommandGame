@@ -14,8 +14,6 @@ namespace ActionCommandGame.Services.Model.Results
         public int? CurrentAttackPlayerItem { get; set; }
         public int? CurrentDefensePlayerItem { get; set; }
         public IList<int> Inventory { get; set; }
-
-        public string UserId { get; set; }
+        public String UserId { get; set; }
     }
-
 }
