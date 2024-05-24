@@ -1,12 +1,14 @@
 ﻿body {
     margin: 0;
-    overflow: hidden;
+    overflow: auto;
     background-image: url('/images/background.png');
     background-size: cover;
     background-position: center;
     height: 100vh;
     display: flex;
     flex-direction: column;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 nav {
@@ -90,4 +92,15 @@ ul {
     100% {
         transform: translateX(-50%) rotate(360deg);
     }
+}
+
+section {
+    margin: auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #F3E0BE;
+    border-radius: 20px;
+    width: 1400px;
+    min-height: 450px;
+    margin-bottom: 20px;
 }

@@ -1,7 +1,6 @@
 ﻿body {
     margin: 0;
-    /* overflow: hidden; */ /* Remove this line */
-    overflow: auto; /* Add this line to enable scrolling */
+    overflow: auto; 
     background-image: url('/images/background.png');
     background-size: cover;
     background-position: center;

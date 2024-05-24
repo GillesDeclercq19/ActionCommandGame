@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IList<ItemResult>
+
+@{
     ViewData["Title"] = "Shop";
 }
 <nav>
@@ -31,9 +33,117 @@
     </div>
 </nav>
 
-<section>
+<article>
 
-</section>
+    <section>
+
+        <div>
+            <img class="attack-header" src="/images/attack-header.png" alt="attack header"/>
+        </div>
+
+        <div>
+            @foreach (var item in Model.Where(x => x.Attack != 0))
+            {
+                <div>
+                    <h3>@item.Name</h3>
+                    <p>@item.Description</p>
+                    <p>Price: @item.Price</p>
+                    <p>Attack: @item.Attack</p>
+                    <div>
+                        <form asp-action="Confirm" asp-controller="Shop" method="get">
+                            <input type="hidden" name="itemId" value="@item.Id"/>
+                            <button type="submit" class="btn btn-danger">Buy</button>
+                        </form>
+                    </div>
+                </div>
+            }
+        </div>
+
+    </section>
+    
+    <section>
+        
+        <div>
+            <img class="defense-header" src="/images/defense-header.png" alt="defense header"/>
+        </div>
+        
+        <div>
+            @foreach (var item in Model.Where(x => x.Defense != 0))
+            {
+                <div>
+                    <h3>@item.Name</h3>
+                    <p>@item.Description</p>
+                    <p>Price: @item.Price</p>
+                    <p>Defense: @item.Defense</p>
+                    <div>
+                        <form asp-action="Confirm" asp-controller="Shop" method="get">
+                            <input type="hidden" name="itemId" value="@item.Id"/>
+                            <button type="submit" class="btn btn-danger">Buy</button>
+                        </form>
+                    </div>
+                </div>
+            }
+        </div>
+
+    </section>
+
+    <section>
+
+        <div>
+            <img class="ki-header" src="/images/ki-header.png" alt="ki header"/>
+        </div>
+
+        <div>
+            @foreach (var item in Model.Where(x => x.Ki != 0))
+            {
+                <div>
+                    <h3>@item.Name</h3>
+                    <p>@item.Description</p>
+                    <p>Price: @item.Price</p>
+                    <p>Energy: @item.Ki</p>
+                    <p>Cooldown: @item.ActionCooldownSeconds</p>
+                    <div>
+                        <form asp-action="Confirm" asp-controller="Shop" method="get">
+                            <input type="hidden" name="itemId" value="@item.Id"/>
+                            <button type="submit" class="btn btn-danger">Buy</button>
+                        </form>
+                    </div>
+                </div>
+            }
+        </div>
+
+    </section>
+    
+    <section>
+
+        <div>
+            <img class="decorative-header" src="/images/decorative-header.png" alt="decorative header"/>
+        </div>
+
+        <div>
+            @foreach (var item in Model)
+            {
+                if (item.Attack == 0 && item.Ki == 0 && item.Defense == 0)
+                {
+                    <div>
+                        <h3>@item.Name</h3>
+                        <p>@item.Description</p>
+                        <p>Price: @item.Price</p>
+                        <div>
+                            <form asp-action="Confirm" asp-controller="Shop" method="get">
+                                <input type="hidden" name="itemId" value="@item.Id"/>
+                                <button type="submit" class="btn btn-danger">Buy</button>
+                            </form>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+
+    </section>
+
+
+</article>
 
 @section Styles {
     <link href="@Url.Content("/css/Shop.css")" rel="stylesheet" type="text/css" />

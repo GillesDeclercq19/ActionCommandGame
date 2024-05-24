@@ -17,9 +17,10 @@ namespace ActionCommandGame.UI.Mvc.Controllers
             _gameSdk = gameSdk;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var items = await _itemSdk.Find();
+            return View(items);
         }
 
         [HttpPost]
