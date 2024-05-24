@@ -34,6 +34,15 @@ namespace ActionCommandGame.UI.Mvc.Controllers
             return View();
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Inventory()
+        {
+            var playerId = int.Parse(User.Claims.FirstOrDefault(o => o.Type == "PlayerId")?.Value ?? "0");
+            var playerInfo = await _playerSdk.Get(playerId) ?? new PlayerResult();
+
+            return View("Inventory", playerInfo);
+        }
+
         public async Task<IActionResult> Leaderboard()
         {
             var players = await _playerSdk.Find();

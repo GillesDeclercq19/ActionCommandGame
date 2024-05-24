@@ -1,0 +1,31 @@
+﻿@model PlayerResult
+
+<div class="background-image">
+    <a class="btn btn-primary" asp-controller="Game" asp-action="Index">
+        <i class="fa fa-edit"></i> Go back to Game
+    </a>
+    
+
+    <h1>Your full inventory:</h1>
+
+    @if (Model.Inventory != null && Model.Inventory.Any())
+    {
+        @foreach (var item in Model.Inventory)
+        {
+            <div class="product">
+                <div class="product-info">
+                    <h2>@item.ItemName</h2>
+                    <p>@item.RemainingAttack</p>
+                    <p>@item.RemainingDefense</p>
+                    <p>@item.RemainingKi</p>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <p>No items in inventory.</p>
+    }
+</div>
+
+

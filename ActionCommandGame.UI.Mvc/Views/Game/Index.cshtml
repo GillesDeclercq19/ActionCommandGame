@@ -82,7 +82,7 @@
                 <p><img src="/images/ki.png" alt="Ki" class="ki-icon"> @ViewData["Ki"]</p>
                 <p><img src="/images/attack.png" alt="Attack" class="attack-icon"> @ViewData["Attack"]</p>
                 <p><img src="/images/defense.png" alt="Defense" class="defense-icon"> @ViewData["Defence"]</p>
-                <p><img src="/images/inventory.png" alt="Inventory" class="inventory-icon"></p>
+                <a asp-controller="Game" asp-action="Inventory"><p><img src="/images/inventory.png" alt="Inventory" class="inventory-icon"></p></a>
                 @if(Model.PlayerResult.CurrentAttackPlayerItemName != null)
                 {
                     <p class="center-text">Tool: @Model.PlayerResult.CurrentAttackPlayerItemName</p>

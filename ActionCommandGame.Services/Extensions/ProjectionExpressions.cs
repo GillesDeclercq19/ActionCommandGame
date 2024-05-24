@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Numerics;
 using ActionCommandGame.Model;
 using ActionCommandGame.Services.Model.Results;
 
@@ -19,9 +21,23 @@ public static class ProjectionExpressions
             Experience = entity.Experience,
             LastActionExecutedDateTime = entity.LastActionExecutedDateTime,
             CurrentKiPlayerItem = entity.CurrentKiPlayerItem.RemainingKi,
+            CurrentKiPlayerItemName = entity.CurrentKiPlayerItem.Item.Name,
             CurrentAttackPlayerItem = entity.CurrentAttackPlayerItem.RemainingAttack,
+            CurrentAttackPlayerItemName = entity.CurrentAttackPlayerItem.Item.Name,
             CurrentDefensePlayerItem = entity.CurrentDefensePlayerItem.RemainingDefense,
-            Inventory = entity.Inventory.Select(pi => pi.ItemId).ToList()
+            CurrentDefensePlayerItemName = entity.CurrentDefensePlayerItem.Item.Name,
+            Inventory = entity.Inventory.Select(pi => new PlayerItemResult
+            {
+                Id = pi.Id,
+                PlayerId = pi.PlayerId,
+                PlayerName = entity.Name,
+                ItemId = pi.ItemId,
+                ItemName = pi.Item.Name,
+                ItemDescription = pi.Item.Description,
+                RemainingKi = pi.RemainingKi,
+                RemainingAttack = pi.RemainingAttack,
+                RemainingDefense = pi.RemainingDefense
+            }).ToList() ?? new List<PlayerItemResult>()
         };
     }
 
