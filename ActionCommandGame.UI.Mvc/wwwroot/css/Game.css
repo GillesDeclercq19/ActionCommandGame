@@ -154,6 +154,7 @@ section {
     font-size: 24px;
     cursor: pointer;
     outline: none;
+    padding-right: 55px;
 }
 
 article {
@@ -271,8 +272,7 @@ article {
 }
 
 .GameResults {
-    overflow-y: auto;
-    max-height: 350px
+    margin-left: 15px;
 }
 
 .button-container{
@@ -286,4 +286,20 @@ article {
 
 .logo-guide {
     margin-right: 100px;
+}
+
+h2 {
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.inventory-icon {
+    height: 50px;
+    width: 130px;
+    margin-left: 205px;
+}
+
+.center-text{
+    text-align: center;
 }

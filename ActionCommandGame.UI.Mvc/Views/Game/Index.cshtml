@@ -34,6 +34,40 @@
     </div>
 </nav>
 
+<section id="howToPlaySection">
+
+    <div class="howtoplayheader">
+        <img class="howtoplay" src="/images/howtoplay.png" alt="how to play"/>
+    </div>
+
+    <div>
+        <p class="howtoplaytext">
+            You are a lost Saiyan that has stumbled on Earth. After noticing high power levels,
+            you decide to go and see where the power is coming from. You land next to Capsule Corporation and attack Goku on sight.
+            After a humiliating defeat, Goku offers to train you. Your goal is to get stronger and win against Goku!
+            Beware, Goku is not the only one you will face. You will face many other events that will test your strength.
+
+            <br/>
+            <br/>
+
+            You start training by clicking on the <img class="train-img" src="/images/train.png" alt="train"/> button.
+            <br/>
+            You can check your <img class="stats-img" src="/images/stats.png" alt="stats"/> to the left of the train section.
+            <br/>
+            You can also go to the <img class="shop-img" src="/images/shop.png" alt="shop"/> to buy items to make you stronger.
+            <br/>
+            See if you are the best? Check the <img class="leaderboard-img" src="/images/leaderboard.png" alt="leaderboard"/> to see where you stand!
+        </p>
+    </div>
+
+</section>
+
+<div>
+    <button id="toggleButton" class="toggle-button" onclick="toggleSection()">
+        &#9650;
+    </button>
+</div>
+
 <article>
     <div class="left-side">
         <div>
@@ -48,6 +82,33 @@
                 <p><img src="/images/ki.png" alt="Ki" class="ki-icon"> @ViewData["Ki"]</p>
                 <p><img src="/images/attack.png" alt="Attack" class="attack-icon"> @ViewData["Attack"]</p>
                 <p><img src="/images/defense.png" alt="Defense" class="defense-icon"> @ViewData["Defence"]</p>
+                <p><img src="/images/inventory.png" alt="Inventory" class="inventory-icon"></p>
+                @if(Model.PlayerResult.CurrentAttackPlayerItemName != null)
+                {
+                    <p class="center-text">Tool: @Model.PlayerResult.CurrentAttackPlayerItemName</p>
+                }
+                else
+                {
+                    <p class="center-text">You don't have a tool</p>
+                }
+                @if(Model.PlayerResult.CurrentDefensePlayerItemName != null)
+                {
+                    <p class="center-text">Defense: @Model.PlayerResult.CurrentDefensePlayerItemName</p>
+                }
+                else
+                {
+                    <p class="center-text">You don't have armor</p>
+                }
+                @if (Model.PlayerResult.CurrentKiPlayerItemName != null)
+                {
+                    <p class="center-text">Food: @Model.PlayerResult.CurrentKiPlayerItemName</p>
+                    
+                }
+                else
+                {
+                    <p class="center-text">You don't have food</p>
+                }
+
             }
         </div>
     </div>
@@ -77,11 +138,10 @@
                         <p>Who goes into battle or training without armor?, @Model.GameResults.NegativeGameEvent.DefenseWithoutGearDescription</p>
                         <p>You lost @Model.GameResults.NegativeGameEvent.DefenseLoss assets on defence, attack, or ki.</p>
                     }
-                    <p>-------------------------------------</p>
                 }
                 @if (!Model.GameResults.EventMessages.IsNullOrEmpty())
                 {
-                    <h5>Notification:</h5>
+                    <h5>Tip(s):</h5>
                     @foreach (var msg in Model.GameResults.EventMessages)
                     {
                         <p>@msg.Message</p>
@@ -130,5 +190,9 @@
 
 @section Styles {
     <link href="@Url.Content("/css/Game.css")" rel="stylesheet" type="text/css"/>
+}
+
+@section Scripts {
+    <script src="@Url.Content("/js/game.js")"></script>
 }
 
