@@ -83,25 +83,25 @@
                 <p><img src="/images/attack.png" alt="Attack" class="attack-icon"> @ViewData["Attack"]</p>
                 <p><img src="/images/defense.png" alt="Defense" class="defense-icon"> @ViewData["Defence"]</p>
                 <a asp-controller="Game" asp-action="Inventory"><p><img src="/images/inventory.png" alt="Inventory" class="inventory-icon"></p></a>
-                @if(Model.PlayerResult.CurrentAttackPlayerItemName != null)
+                @if(Model.PlayerResult.AttItemName != null)
                 {
-                    <p class="center-text">Tool: @Model.PlayerResult.CurrentAttackPlayerItemName</p>
+                    <p class="center-text">Tool: @Model.PlayerResult.AttItemName</p>
                 }
                 else
                 {
                     <p class="center-text">You don't have a tool</p>
                 }
-                @if(Model.PlayerResult.CurrentDefensePlayerItemName != null)
+                @if(Model.PlayerResult.DefItemName != null)
                 {
-                    <p class="center-text">Defense: @Model.PlayerResult.CurrentDefensePlayerItemName</p>
+                    <p class="center-text">Defense: @Model.PlayerResult.DefItemName</p>
                 }
                 else
                 {
                     <p class="center-text">You don't have armor</p>
                 }
-                @if (Model.PlayerResult.CurrentKiPlayerItemName != null)
+                @if (Model.PlayerResult.KiItemName != null)
                 {
-                    <p class="center-text">Food: @Model.PlayerResult.CurrentKiPlayerItemName</p>
+                    <p class="center-text">Food: @Model.PlayerResult.KiItemName</p>
                     
                 }
                 else
