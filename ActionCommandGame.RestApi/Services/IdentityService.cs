@@ -15,12 +15,14 @@ namespace ActionCommandGame.RestApi.Services
     {
         private readonly JwtSettings _jwtSettings;
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IPlayerService _playerService;
 
-        public IdentityService(JwtSettings jwtSettings, UserManager<IdentityUser> userManager, IPlayerService playerService)
+        public IdentityService(JwtSettings jwtSettings, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, IPlayerService playerService)
         {
             _jwtSettings = jwtSettings;
             _userManager = userManager;
+            _roleManager = roleManager;
             _playerService = playerService;
         }
 
@@ -62,11 +64,16 @@ namespace ActionCommandGame.RestApi.Services
             var user = new IdentityUser(request.Username);
             var result = await _userManager.CreateAsync(user, request.Password);
 
+            if (!await _roleManager.RoleExistsAsync("User"))
+            {
+                await _roleManager.CreateAsync(new IdentityRole("User"));
+            }
+
             await _userManager.AddToRoleAsync(user, "User");
 
             var playerRequest = new PlayerRequest
             {
-                Zeni = 100,
+                Zeni = 0,
                 Experience = 0,
                 Name = request.Player, 
                 UserId = user.Id

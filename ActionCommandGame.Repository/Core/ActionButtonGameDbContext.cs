@@ -57,7 +57,7 @@ namespace ActionCommandGame.Repository.Core
             if (adminUser == null)
             {
                 adminUser = new IdentityUser { UserName = adminName };
-                await userManager.CreateAsync(adminUser, "Test1234."); // Set the password for the admin user
+                await userManager.CreateAsync(adminUser, "Goku1234+"); // Set the password for the admin user
             }
 
             // Check if the "Admin" role exists, if not, create it
@@ -74,7 +74,7 @@ namespace ActionCommandGame.Repository.Core
             Players.Add(new Player { Name = "StockeyAdmin", Zeni = 100000, Experience = 10000, UserId = adminUser.Id });
 
             Players.Add(new Player { Name = "Dev", Zeni = 10000, Experience = 500});
-            Players.Add(new Player { Name = "Bavo", Zeni = 100, Experience = 5 });
+            Players.Add(new Player { Name = "Test", Zeni = 100, Experience = 5 });
             Players.Add(new Player { Name = "Gilles", Zeni = 10, Experience = 50 });
 
 
@@ -87,6 +87,7 @@ namespace ActionCommandGame.Repository.Core
             {
                 Name = "Training with Master Roshi",
                 Description = "You undergo intense training sessions with Master Roshi, honing your martial arts skills and increasing your power level.",
+                Zeni = 10,
                 Probability = 1000
             });
 
@@ -94,6 +95,8 @@ namespace ActionCommandGame.Repository.Core
             {
                 Name = "Dragon Ball Search",
                 Description = "You find a Dragon Ball hidden in a remote location, bringing you one step closer to making a wish.",
+                Zeni = 20,
+                Experience = 8,
                 Probability = 950
             });
 
@@ -101,6 +104,8 @@ namespace ActionCommandGame.Repository.Core
             {
                 Name = "Encounter with Friendly Saiyan",
                 Description = "You encounter a friendly Saiyan warrior who offers to spar with you, helping you improve your combat techniques.",
+                Zeni = 25,
+                Experience = 12,
                 Probability = 900
             });
 
@@ -108,6 +113,8 @@ namespace ActionCommandGame.Repository.Core
             {
                 Name = "Discovering the Hyperbolic Time Chamber",
                 Description = "You stumble upon the Hyperbolic Time Chamber and train inside, mastering new techniques and abilities.",
+                Zeni = 30,
+                Experience = 18,
                 Probability = 850
             });
 
@@ -115,6 +122,8 @@ namespace ActionCommandGame.Repository.Core
             {
                 Name = "Sensei's Wisdom",
                 Description = "You receive wise counsel from Master Korin, gaining valuable insights into unlocking your hidden potential.",
+                Zeni = 50,
+                Experience = 25,
                 Probability = 800
             });
 
@@ -122,6 +131,8 @@ namespace ActionCommandGame.Repository.Core
             {
                 Name = "Gathering Senzu Beans",
                 Description = "You find a field of Senzu Beans and collect them, ensuring you have plenty of healing supplies for your journey.",
+                Zeni = 75,
+                Experience = 30,
                 Probability = 750
             });
 
@@ -136,6 +147,8 @@ namespace ActionCommandGame.Repository.Core
             {
                 Name = "Uncovering Ancient Saiyan Artifact",
                 Description = "You unearth an ancient Saiyan artifact that amplifies your Saiyan powers, boosting your combat abilities.",
+                Zeni = 120,
+                Experience = 75,
                 Probability = 650
             });
 
@@ -143,6 +156,8 @@ namespace ActionCommandGame.Repository.Core
             {
                 Name = "Assistance from Capsule Corp",
                 Description = "You receive technological support from Capsule Corp, upgrading your equipment for better performance in battles.",
+                Zeni = 140,
+                Experience = 85,
                 Probability = 600
             });
 
@@ -150,6 +165,8 @@ namespace ActionCommandGame.Repository.Core
             {
                 Name = "Befriending a Namekian Elder",
                 Description = "You befriend a wise Namekian elder who teaches you ancient Namekian techniques, expanding your repertoire of abilities.",
+                Zeni = 180,
+                Experience = 95,
                 Probability = 550
             });
 
@@ -158,8 +175,8 @@ namespace ActionCommandGame.Repository.Core
             {
                 Name = "Fusion Training with Goku",
                 Description = "You train with Goku to master the Fusion technique, allowing you to fuse with a partner for increased strength in battles.",
-                Zeni = 1,
-                Experience = 1,
+                Zeni = 200,
+                Experience = 100,
                 Probability = 500
             });
 
@@ -167,8 +184,8 @@ namespace ActionCommandGame.Repository.Core
             {
                 Name = "Gathering Energy for Spirit Bomb",
                 Description = "You gather energy from across the universe to create a Spirit Bomb, a powerful weapon against evil forces.",
-                Zeni = 1,
-                Experience = 1,
+                Zeni = 250,
+                Experience = 150,
                 Probability = 450
             });
 
@@ -176,8 +193,8 @@ namespace ActionCommandGame.Repository.Core
             {
                 Name = "Unlocking Potential with Elder Kai",
                 Description = "You undergo a ritual with Elder Kai that unlocks your hidden potential, pushing your power level beyond its limits.",
-                Zeni = 1,
-                Experience = 1,
+                Zeni = 300,
+                Experience = 175,
                 Probability = 400
             });
 
@@ -185,8 +202,8 @@ namespace ActionCommandGame.Repository.Core
             {
                 Name = "Mastering Instant Transmission",
                 Description = "You master the Instant Transmission technique, allowing you to teleport instantly to any location in the universe.",
-                Zeni = 5,
-                Experience = 3,
+                Zeni = 325,
+                Experience = 200,
                 Probability = 350
             });
 
@@ -194,8 +211,8 @@ namespace ActionCommandGame.Repository.Core
             {
                 Name = "Attaining Super Saiyan Transformation",
                 Description = "You achieve the legendary Super Saiyan transformation, unlocking immense power and strength.",
-                Zeni = 10,
-                Experience = 5,
+                Zeni = 350,
+                Experience = 225,
                 Probability = 300
             });
 
@@ -203,8 +220,8 @@ namespace ActionCommandGame.Repository.Core
             {
                 Name = "Evolving into Super Saiyan Blue",
                 Description = "You evolve your Super Saiyan form into Super Saiyan Blue, reaching a new pinnacle of Saiyan power.",
-                Zeni = 10,
-                Experience = 5,
+                Zeni = 375,
+                Experience = 250,
                 Probability = 250
             });
 
@@ -212,8 +229,8 @@ namespace ActionCommandGame.Repository.Core
             {
                 Name = "Unlocking Ultra Instinct",
                 Description = "You unlock the Ultra Instinct form, achieving a state of heightened awareness and reflexes in battle.",
-                Zeni = 10,
-                Experience = 5,
+                Zeni = 400,
+                Experience = 300,
                 Probability = 200
             });
 
@@ -221,8 +238,8 @@ namespace ActionCommandGame.Repository.Core
             {
                 Name = "Learning Kaio-Ken Technique",
                 Description = "You learn the Kaio-Ken technique, allowing you to multiply your power for short bursts of incredible strength.",
-                Zeni = 12,
-                Experience = 6,
+                Zeni = 420,
+                Experience = 310,
                 Probability = 150
             });
 
@@ -230,8 +247,8 @@ namespace ActionCommandGame.Repository.Core
             {
                 Name = "Mastering Kamehameha Wave",
                 Description = "You master the Kamehameha wave, unleashing devastating energy blasts with precision and control.",
-                Zeni = 20,
-                Experience = 8,
+                Zeni = 450,
+                Experience = 340,
                 Probability = 100
             });
 
@@ -239,8 +256,8 @@ namespace ActionCommandGame.Repository.Core
             {
                 Name = "Achieving Perfect Ultra Instinct",
                 Description = "You achieve Perfect Ultra Instinct, transcending mortal limits and attaining godlike power and speed.",
-                Zeni = 30,
-                Experience = 10,
+                Zeni = 500,
+                Experience = 450,
                 Probability = 50
             });
         }
@@ -310,34 +327,33 @@ namespace ActionCommandGame.Repository.Core
 
         private void GenerateAttackItems()
         {
-            Items.Add(new Item { Name = "Power Pole", Attack = 50, Price = 50 });
-            Items.Add(new Item { Name = "Launch's Gun", Attack = 100, Price = 150 });
-            Items.Add(new Item { Name = "Z-Sword", Attack = 300, Price = 300 });
-            Items.Add(new Item { Name = "Kienzan (Destructo Disc)", Attack = 500, Price = 500 });
-            Items.Add(new Item { Name = "Supreme Kamehameha", Attack = 5000, Price = 15000 });
+            Items.Add(new Item { Name = "Enraged Fist", Description = "You punch harder", Attack = 25, Price = 25 });
+            Items.Add(new Item { Name = "Power Pole", Description = "Goku's favorite tool as a child", Attack = 50, Price = 50 });
+            Items.Add(new Item { Name = "Launch's Gun", Description = "The accuracy is insane", Attack = 100, Price = 150 });
+            Items.Add(new Item { Name = "Z-Sword", Description = "Can you wield it?", Attack = 300, Price = 300 });
+            Items.Add(new Item { Name = "Kienzan (Destructo Disc)", Description = "Basic Ki Blast", Attack = 500, Price = 500 });
+            Items.Add(new Item { Name = "Supreme Kamehameha", Description = "Strongest Kamehameha there is", Attack = 5000, Price = 15000 });
         }
 
         private void GenerateDefenseItems()
         {
-            Items.Add(new Item { Name = "Turtle School Gi", Defense = 20, Price = 20 });
-            Items.Add(new Item { Name = "Namekian Regeneration Band", Defense = 150, Price = 200 });
-            Items.Add(new Item { Name = "Saiyan Battle Armor", Defense = 500, Price = 1000 });
-            Items.Add(new Item { Name = "Frieza's Armor", Defense = 2000, Price = 10000 });
-            Items.Add(new Item { Name = "Android Barrier Device", Defense = 2000, Price = 10000 });
-            Items.Add(new Item { Name = "Mystic Robe", Defense = 20000, Price = 10000 });
+            Items.Add(new Item { Name = "Turtle School Gi", Description = "Cheap but durable", Defense = 20, Price = 20 });
+            Items.Add(new Item { Name = "Namekian Regeneration Band", Description = "Minor cuts will heal", Defense = 150, Price = 200 });
+            Items.Add(new Item { Name = "Saiyan Battle Armor", Description = "A Saiyan's most trusted defense", Defense = 500, Price = 1000 });
+            Items.Add(new Item { Name = "Frieza's Armor", Description = "Only Goku could pierce through it", Defense = 2000, Price = 10000 });
+            Items.Add(new Item { Name = "Android Barrier Device", Description = "Don't get it broken or it will explode your enemy and you", Defense = 2000, Price = 10000 });
+            Items.Add(new Item { Name = "Mystic Robe", Description = "ᓵ¡ᔑᓭℸ", Defense = 20000, Price = 10000 });
         }
 
         private void GenerateFoodItems()
         {
-            Items.Add(new Item { Name = "Senzu Bean", ActionCooldownSeconds = 50, Ki = 4, Price = 8 });
-            Items.Add(new Item { Name = "Dino Meat", ActionCooldownSeconds = 45, Ki = 5, Price = 10 });
-            Items.Add(new Item { Name = "Kami's Sacred Water", ActionCooldownSeconds = 30, Ki = 30, Price = 300 });
-            Items.Add(new Item { Name = "Sacred Fruit of the Tree of Might", ActionCooldownSeconds = 25, Ki = 100, Price = 500 });
-            Items.Add(new Item { Name = "King Yemma's Enchanted Rice Cake", ActionCooldownSeconds = 25, Ki = 100, Price = 500 });
-            Items.Add(new Item { Name = "Ramen", ActionCooldownSeconds = 15, Ki = 500, Price = 10000 });
-#if DEBUG
-            Items.Add(new Item { Name = "Developer Food", ActionCooldownSeconds = 1, Ki = 1000, Price = 1 });
-#endif
+            Items.Add(new Item { Name = "Senzu Bean", Description = "Extra-small energy boost", ActionCooldownSeconds = 50, Ki = 4, Price = 8 });
+            Items.Add(new Item { Name = "Dino Meat", Description = "Small energy boost", ActionCooldownSeconds = 45, Ki = 10, Price = 15 });
+            Items.Add(new Item { Name = "Kami's Sacred Water", Description = "Medium energy boost", ActionCooldownSeconds = 30, Ki = 30, Price = 300 });
+            Items.Add(new Item { Name = "Sacred Fruit of the Tree of Might", Description = "High energy boost", ActionCooldownSeconds = 25, Ki = 100, Price = 500 });
+            Items.Add(new Item { Name = "King Yemma's Enchanted Rice Cake", Description = "Large energy boost", ActionCooldownSeconds = 20, Ki = 250, Price = 800 });
+            Items.Add(new Item { Name = "Ramen", Description = "Ultimate energy boost", ActionCooldownSeconds = 15, Ki = 500, Price = 10000 });
+
         }
 
         private void GenerateDecorativeItems()

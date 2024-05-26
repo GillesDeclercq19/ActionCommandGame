@@ -8,9 +8,16 @@
     <div class="nav-center">
         <ul>
             <li class="logo-container logo-guide">
-                <img class="logo" src="/images/logo.png" alt="logo">
+                <img class="logo trans" src="/images/logo.png" alt="logo">
             </li>
         </ul>
+    </div>
+    <div class="nav-right">
+        <form method="post" asp-area="" asp-controller="Account" asp-action="LogOut" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+            <button type="submit" class="nav-link btn btn-link">
+                <img class="nav-img trans" src="/images/logout.png" alt="Logout">
+            </button>
+        </form>
     </div>
 </nav>
 
@@ -42,7 +49,7 @@
 
     <div class="button-container">
         <a asp-action="Play" asp-controller="Game">
-            <img class="image-button" src="/images/play.png" alt="play">
+            <img class="image-button trans" src="/images/play.png" alt="play">
         </a>
     </div>
 </section>

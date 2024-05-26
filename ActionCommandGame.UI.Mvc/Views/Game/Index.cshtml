@@ -12,15 +12,15 @@
         <ul>
             <li>
                 <a asp-controller="Shop" asp-action="Index">
-                    <img class="nav-img-s" src="/images/shop.png" alt="shop"/>
-                </a>    
+                    <img class="nav-img-s trans" src="/images/shop.png" alt="shop"/>
+                </a>
             </li>
             <li class="logo-container">
-                <img class="logo" src="/images/logo.png" alt="logo">
+                <img class="logo trans" src="/images/logo.png" alt="logo">
             </li>
             <li>
                 <a asp-controller="Game" asp-action="Leaderboard">
-                    <img class="nav-img-l" src="/images/leaderboard.png" alt="leaderboard" />
+                    <img class="nav-img-l trans" src="/images/leaderboard.png" alt="leaderboard"/>
                 </a>
             </li>
         </ul>
@@ -28,7 +28,7 @@
     <div class="nav-right">
         <form method="post" asp-area="" asp-controller="Account" asp-action="LogOut" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
             <button type="submit" class="nav-link btn btn-link">
-                <img class="nav-img" src="/images/logout.png" alt="Logout">
+                <img class="nav-img trans" src="/images/logout.png" alt="Logout">
             </button>
         </form>
     </div>
@@ -73,19 +73,25 @@
         <div>
             <img class="stats-img-l" src="/images/stats.png" alt="stats"/>
         </div>
-        <div class="stats">
+        <div>
             @if (Model.PlayerResult != null)
             {
-                <p class="name">@Model.PlayerResult.Name</p>
-                <p><img src="/images/experience.png" alt="Experience" class="exp-icon"> @Model.PlayerResult.Experience</p>
-                <p><img src="/images/zeni.png" alt="Zeni" class="zeni-icon"> @Model.PlayerResult.Zeni</p>
-                <p><img src="/images/ki.png" alt="Ki" class="ki-icon"> @ViewData["Ki"]</p>
-                <p><img src="/images/attack.png" alt="Attack" class="attack-icon"> @ViewData["Attack"]</p>
-                <p><img src="/images/defense.png" alt="Defense" class="defense-icon"> @ViewData["Defence"]</p>
-                <a asp-controller="Game" asp-action="Inventory"><p><img src="/images/inventory.png" alt="Inventory" class="inventory-icon"></p></a>
+                <div class="stats">
+                    <a asp-action="Edit" asp-controller="Game"><p class="name trans">@Model.PlayerResult.Name</p></a>
+                    <div class="middle">
+                        <a></a><p><img src="/images/experience.png" alt="experience" class="exp"> @Model.PlayerResult.Experience</p>
+                        <p><img src="/images/zeni.png" alt="zeni" class="zeni"> @Model.PlayerResult.Zeni</p>
+                        <p><img src="/images/tool.png" alt="tool" class="tool"> @ViewData["Attack"]</p>
+                        <p><img src="/images/armor.png" alt="armor" class="armor"> @ViewData["Defense"]</p>
+                        <p><img src="/images/food.png" alt="food" class="food"> @ViewData["Ki"]</p>
+                    </div>
+                </div>
+                <div class="trans">
+                    <a asp-controller="Game" asp-action="Inventory"><p><img src="/images/inventory.png" alt="Inventory" class="inventory-icon"></p></a>
+                </div>
                 @if(Model.PlayerResult.AttItemName != null)
                 {
-                    <p class="center-text">Tool: @Model.PlayerResult.AttItemName</p>
+                    <p class="center-text"><img class="tool" src="/images/tool.png" alt="tool"/> @Model.PlayerResult.AttItemName</p>
                 }
                 else
                 {
@@ -93,7 +99,7 @@
                 }
                 @if(Model.PlayerResult.DefItemName != null)
                 {
-                    <p class="center-text">Defense: @Model.PlayerResult.DefItemName</p>
+                    <p class="center-text"><img class="armor" src="/images/armor.png" alt="armor" /> @Model.PlayerResult.DefItemName</p>
                 }
                 else
                 {
@@ -101,14 +107,13 @@
                 }
                 @if (Model.PlayerResult.KiItemName != null)
                 {
-                    <p class="center-text">Food: @Model.PlayerResult.KiItemName</p>
+                    <p class="center-text"><img class="food" src="/images/food.png" alt="food" /> @Model.PlayerResult.KiItemName</p>
                     
                 }
                 else
                 {
                     <p class="center-text">You don't have food</p>
                 }
-
             }
         </div>
     </div>
@@ -128,14 +133,14 @@
                 {
                     <h1>@Model.GameResults.NegativeGameEvent.Name</h1>
                     <h2>@Model.GameResults.NegativeGameEvent.Description</h2>
-                    @if (Model.GameResults.NegativeGameEvent.DefenseLoss > Model.PlayerResult.CurrentDefensePlayerItem)
+                    @if (Model.GameResults.NegativeGameEvent.DefenseLoss < Model.PlayerResult.CurrentDefensePlayerItem)
                     {
                         <p>A true Saiyan warrior wears his Saiyan Armor!, @Model.GameResults.NegativeGameEvent.DefenseWithGearDescription</p>
                         <p>Your armor gained @Model.GameResults.NegativeGameEvent.DefenseLoss cracks.</p>
                     }
                     else
                     {
-                        <p>Who goes into battle or training without armor?, @Model.GameResults.NegativeGameEvent.DefenseWithoutGearDescription</p>
+                        <p class="witouthgear">Who goes into battle or training without armor?, @Model.GameResults.NegativeGameEvent.DefenseWithoutGearDescription</p>
                         <p>You lost @Model.GameResults.NegativeGameEvent.DefenseLoss assets on defence, attack, or ki.</p>
                     }
                 }
@@ -155,7 +160,7 @@
             <form id="performActionForm" asp-action="PerformAction" asp-controller="Game" method="post">
                 <div class="buttons">
                     <button type="submit" class="button button-action">
-                        <img class="nav-img" src="/images/train.png" alt="train">
+                        <img class="nav-img trans" src="/images/train.png" alt="train">
                     </button>
                 </div>
             </form>

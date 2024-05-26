@@ -68,14 +68,16 @@ builder.Services.AddScoped<INegativeGameEventService, NegativeGameEventService>(
 builder.Services.AddScoped<IPlayerItemService, PlayerItemService>();
 builder.Services.AddScoped<IPlayerService, PlayerService>();
 builder.Services.AddScoped<IPositiveGameEventService, PositiveGameEventService>();
-builder.Services.AddTransient<DbInitializer>();
 var app = builder.Build();
 
+/* Uncomment to seed database!
 using (var scope = app.Services.CreateScope())
 {
-    var dbInitializer = app.Services.GetRequiredService<DbInitializer>();
-    //await dbInitializer.InitializeAsync();
+    var dbContext = scope.ServiceProvider.GetRequiredService<ActionButtonGameDbContext>();
+    await dbContext.InitializeAsync(scope.ServiceProvider);
 }
+*/
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -90,19 +92,5 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-
-using (var scope = app.Services.CreateScope())
-{
-    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-
-    var roles = new[] { "Admin", "User" };
-    foreach (var role in roles)
-    {
-        if (!await roleManager.RoleExistsAsync(role))
-        {
-            await roleManager.CreateAsync(new IdentityRole(role));
-        }
-    }
-}
 
 app.Run();

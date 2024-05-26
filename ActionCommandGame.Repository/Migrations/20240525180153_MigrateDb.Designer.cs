@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ActionCommandGame.Repository.Migrations
 {
     [DbContext(typeof(ActionButtonGameDbContext))]
-    [Migration("20240523222716_MigrateDb")]
+    [Migration("20240525180153_MigrateDb")]
     partial class MigrateDb
     {
         /// <inheritdoc />
@@ -20,7 +20,7 @@ namespace ActionCommandGame.Repository.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.4")
+                .HasAnnotation("ProductVersion", "8.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);

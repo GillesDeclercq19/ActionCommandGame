@@ -1,8 +1,9 @@
-﻿@model PlayerResult
+﻿@model PlayerRequest
 
 @{
-    ViewData["Title"] = "Inventory";
+    ViewData["Title"] = $"Edit Player Name";
 }
+
 <nav>
     <div class="nav-left">
         <img class="dragonball" src="https://png.pngtree.com/png-vector/20221208/ourmid/pngtree-4-dragon-ball-icon-vector-drgon-illustrtion-png-image_6515607.png" alt="Spinning Dragon Ball">
@@ -33,36 +34,22 @@
     </div>
 </nav>
 
-<section>
-    
+<div class="sectionplayer">
     <div class="center">
-        <img class="inventory" src="/images/inventory2.png" alt="inventory"/>
-    </div>
-    
-    <div class="item-grid">
-        @if (Model.Inventory != null && Model.Inventory.Any())
-        {
-            @foreach (var item in Model.Inventory)
-            {
-                <div class="item">
-                        <h3>@item.ItemName</h3>
-                        <div class="row-items">
-                        <p><img class="tool" src="/images/tool.png" alt="tool"/>@item.RemainingAttack</p>
-                        <p><img class="armor" src="/images/armor.png" alt="armor"/> @item.RemainingDefense</p>
-                        <p><img class="food" src="/images/food.png" alt="food" /> @item.RemainingKi</p>
-                        </div>
-                    </div>
-            }
-        }
-        else
-        {
-            <p>No items in inventory.</p>
-        }
+        <img class="editplayer" src="/images/editplayer.png" alt="edit player" />
     </div>
 
-</section>
+    <div class="form-container">
+        <form method="post">
+            <partial name="EditPartial" model="Model" />
+            <button type="submit"><img class="save" src="/images/save.png" alt="save"/></button>
+        </form>
+    </div>
+</div>
+
 
 @section Styles {
     <link href="@Url.Content("/css/Inventory.css")" rel="stylesheet" type="text/css" />
 }
+
 

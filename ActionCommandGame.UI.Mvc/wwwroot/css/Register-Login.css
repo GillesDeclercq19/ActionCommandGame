@@ -22,6 +22,9 @@
     color: red;
 }
 
+img:hover {
+    transform: scale(1.05);
+}
 
 .form-label {
     font-weight: bold;
@@ -41,6 +44,7 @@
 
 
 .split-container {
+    border: 1px solid black;
     display: flex;
     justify-content: center;
     align-items: center;

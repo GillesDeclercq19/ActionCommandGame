@@ -11,15 +11,15 @@
         <ul>
             <li>
                 <a asp-controller="Game" asp-action="Index">
-                    <img class="nav-img-s" src="images/game.png" alt="game" />
+                    <img class="nav-img-s trans" src="/images/game.png" alt="game"/>
                 </a>
             </li>
             <li class="logo-container">
-                <img class="logo" src="/images/logo.png" alt="logo">
+                <img class="logo trans" src="/images/logo.png" alt="logo">
             </li>
             <li>
                 <a asp-controller="Game" asp-action="Leaderboard">
-                    <img class="nav-img-l" src="images/leaderboard.png" alt="leaderboard" />
+                    <img class="nav-img-l trans" src="/images/leaderboard.png" alt="leaderboard"/>
                 </a>
             </li>
         </ul>
@@ -27,122 +27,107 @@
     <div class="nav-right">
         <form method="post" asp-area="" asp-controller="Account" asp-action="LogOut" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
             <button type="submit" class="nav-link btn btn-link">
-                <img class="nav-img" src="images/logout.png" alt="Logout">
+                <img class="nav-img" src="/images/logout.png" alt="Logout">
             </button>
         </form>
     </div>
 </nav>
 
 <article>
-
     <section>
-
-        <div>
-            <img class="attack-header" src="/images/attack-header.png" alt="attack header"/>
+        <div class="center">
+            <img class="attack-header" src="/images/attack-header.png" alt="attack header" />
         </div>
-
-        <div>
+        <div class="item-grid">
             @foreach (var item in Model.Where(x => x.Attack != 0))
             {
-                <div>
+                <div class="item">
                     <h3>@item.Name</h3>
                     <p>@item.Description</p>
-                    <p>Price: @item.Price</p>
-                    <p>Attack: @item.Attack</p>
-                    <div>
+                    <p><img class="zeni" src="/images/zeni.png" alt="zeni" /> @item.Price</p>
+                    <p><img class="tool" src="/images/tool.png" alt="tool" /> @item.Attack</p>
+                    <div class="buy-container">
                         <form asp-action="Confirm" asp-controller="Shop" method="get">
-                            <input type="hidden" name="itemId" value="@item.Id"/>
-                            <button type="submit" class="btn btn-danger">Buy</button>
+                            <input type="hidden" name="itemId" value="@item.Id" />
+                            <button type="submit"><img class="buy" src="/images/buy.png" alt="buy" /></button>
                         </form>
                     </div>
                 </div>
             }
         </div>
-
     </section>
-    
+
     <section>
-        
-        <div>
-            <img class="defense-header" src="/images/defense-header.png" alt="defense header"/>
+        <div class="center">
+            <img class="defense-header" src="/images/defense-header.png" alt="defense header" />
         </div>
-        
-        <div>
+        <div class="item-grid">
             @foreach (var item in Model.Where(x => x.Defense != 0))
             {
-                <div>
+                <div class="item">
                     <h3>@item.Name</h3>
                     <p>@item.Description</p>
-                    <p>Price: @item.Price</p>
-                    <p>Defense: @item.Defense</p>
-                    <div>
+                    <p><img class="zeni" src="/images/zeni.png" alt="zeni" /> @item.Price</p>
+                    <p><img class="armor" src="/images/armor.png" alt="armor" /> @item.Defense</p>
+                    <div class="buy-container">
                         <form asp-action="Confirm" asp-controller="Shop" method="get">
-                            <input type="hidden" name="itemId" value="@item.Id"/>
-                            <button type="submit" class="btn btn-danger">Buy</button>
+                            <input type="hidden" name="itemId" value="@item.Id" />
+                            <button type="submit"><img class="buy" src="/images/buy.png" alt="buy" /></button>
                         </form>
                     </div>
                 </div>
             }
         </div>
-
     </section>
 
     <section>
-
-        <div>
-            <img class="ki-header" src="/images/ki-header.png" alt="ki header"/>
+        <div class="center">
+            <img class="ki-header" src="/images/ki-header.png" alt="ki header" />
         </div>
-
-        <div>
+        <div class="item-grid">
             @foreach (var item in Model.Where(x => x.Ki != 0))
             {
-                <div>
+                <div class="item">
                     <h3>@item.Name</h3>
                     <p>@item.Description</p>
-                    <p>Price: @item.Price</p>
-                    <p>Energy: @item.Ki</p>
-                    <p>Cooldown: @item.ActionCooldownSeconds</p>
-                    <div>
+                    <p><img class="zeni" src="/images/zeni.png" alt="zeni" /> @item.Price</p>
+                    <p><img class="food" src="/images/food.png" alt="food" /> @item.Ki</p>
+                    <p><img class="cooldown" src="/images/cooldown.png" alt="cooldown" /> @item.ActionCooldownSeconds</p>
+                    <div class="buy-container">
                         <form asp-action="Confirm" asp-controller="Shop" method="get">
-                            <input type="hidden" name="itemId" value="@item.Id"/>
-                            <button type="submit" class="btn btn-danger">Buy</button>
+                            <input type="hidden" name="itemId" value="@item.Id" />
+                            <button type="submit"><img class="buy" src="/images/buy.png" alt="buy" /></button>
                         </form>
                     </div>
                 </div>
             }
         </div>
-
     </section>
-    
+
     <section>
-
-        <div>
-            <img class="decorative-header" src="/images/decorative-header.png" alt="decorative header"/>
+        <div class="center">
+            <img class="decorative-header" src="/images/decorative-header.png" alt="decorative header" />
         </div>
-
-        <div>
+        <div class="item-grid">
             @foreach (var item in Model)
             {
                 if (item.Attack == 0 && item.Ki == 0 && item.Defense == 0)
                 {
-                    <div>
+                    <div class="item">
                         <h3>@item.Name</h3>
                         <p>@item.Description</p>
-                        <p>Price: @item.Price</p>
-                        <div>
+                        <p><img class="zeni" src="/images/zeni.png" alt="zeni"/> @item.Price</p>
+                        <div class="buy-container">
                             <form asp-action="Confirm" asp-controller="Shop" method="get">
-                                <input type="hidden" name="itemId" value="@item.Id"/>
-                                <button type="submit" class="btn btn-danger">Buy</button>
+                                <input type="hidden" name="itemId" value="@item.Id" />
+                                <button type="submit"><img class="buy" src="/images/buy.png" alt="buy" /></button>
                             </form>
                         </div>
                     </div>
                 }
             }
         </div>
-
     </section>
-
-
 </article>
 
 @section Styles {

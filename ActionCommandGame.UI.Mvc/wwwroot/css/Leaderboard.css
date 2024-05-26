@@ -28,6 +28,10 @@ nav {
     position: relative;
 }
 
+a:hover {
+    transform: scale(1.05);
+}
+
 .nav-right {
     margin: 0 10px;
 }
@@ -37,12 +41,13 @@ ul {
 }
 
 .nav-center {
-    flex-grow: 1;
     text-align: center;
 }
 
     .nav-center ul {
+        display: flex;
         margin: 0;
+        align-items: center;
         list-style: none;
     }
 
@@ -58,6 +63,13 @@ ul {
     height: 100px;
 }
 
+.trans:hover {
+    transform: scale(1.05);
+}
+
+button:hover {
+    transform: scale(1.05);
+}
 
 .nav-img {
     width: 88px;
@@ -93,6 +105,7 @@ ul {
 }
 
 section {
+    border: 1px solid black;
     margin: auto;
     padding-top: 20px;
     padding-bottom: 20px;
@@ -129,7 +142,6 @@ td {
 }
 
 .leaderboard-img{
-    width: 200px;
     height: 85px;
 }
 

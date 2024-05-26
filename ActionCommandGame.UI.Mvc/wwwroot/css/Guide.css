@@ -31,6 +31,11 @@ nav {
     position: relative;
 }
 
+a:hover {
+    transform: scale(1.05);
+}
+
+
 .nav-right {
     margin: 0 10px;
 }
@@ -86,7 +91,12 @@ nav {
     }
 }
 
+.trans:hover{
+    transform: scale(1.05);
+}
+
 section {
+    border: 1px solid black;
     margin: auto;
     padding-top: 20px;
     padding-bottom: 20px;
