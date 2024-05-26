@@ -119,7 +119,7 @@
     </div>
 
     <div class="right-side">
-        <div class="GameResults">
+        <div class="game">
             @if (Model.GameResults != null)
             {
                 @if (Model.GameResults.PositiveGameEvent != null && Model.GameResults.NegativeGameEvent == null)
@@ -133,10 +133,15 @@
                 {
                     <h1>@Model.GameResults.NegativeGameEvent.Name</h1>
                     <h2>@Model.GameResults.NegativeGameEvent.Description</h2>
-                    @if (Model.GameResults.NegativeGameEvent.DefenseLoss < Model.PlayerResult.CurrentDefensePlayerItem)
+                    @if (Model.PlayerResult.CurrentDefensePlayerItem - Model.GameResults.NegativeGameEvent.DefenseLoss > 0)
                     {
                         <p>A true Saiyan warrior wears his Saiyan Armor!, @Model.GameResults.NegativeGameEvent.DefenseWithGearDescription</p>
-                        <p>Your armor gained @Model.GameResults.NegativeGameEvent.DefenseLoss cracks.</p>
+                        <p>Your armor gained @Model.GameResults.NegativeGameEvent.DefenseLoss crack(s).</p>
+                    }
+                    else if (Model.PlayerResult.CurrentDefensePlayerItem - Model.GameResults.NegativeGameEvent.DefenseLoss == 0)
+                    {
+                        <p>A true Saiyan warrior wears his Saiyan Armor!, @Model.GameResults.NegativeGameEvent.DefenseWithGearDescription</p>
+                        <p>Your armor has broken.</p>
                     }
                     else
                     {
