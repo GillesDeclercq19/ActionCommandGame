@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
 using System;
+using Microsoft.EntityFrameworkCore.Design;
 
 namespace ActionCommandGame.Repository.Core
 {
@@ -21,7 +22,7 @@ namespace ActionCommandGame.Repository.Core
         public DbSet<Player> Players { get; set; }
         public DbSet<PlayerItem> PlayerItems { get; set; }
 
-        /* uncomment to migrate db
+        
         public class ActionButtonGameDbContextFactory : IDesignTimeDbContextFactory<ActionButtonGameDbContext>
         {
             public ActionButtonGameDbContext CreateDbContext(string[] args)
@@ -31,7 +32,7 @@ namespace ActionCommandGame.Repository.Core
 
                 return new ActionButtonGameDbContext(optionsBuilder.Options);
             }
-        } */
+        } 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
