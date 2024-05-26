@@ -1,13 +1,9 @@
-﻿using ActionCommandGame.Model;
-using ActionCommandGame.Sdk;
+﻿using ActionCommandGame.Sdk;
 using ActionCommandGame.Services.Model.Requests;
 using ActionCommandGame.Services.Model.Results;
 using ActionCommandGame.UI.Mvc.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Numerics;
-
 
 namespace ActionCommandGame.UI.Mvc.Controllers
 {

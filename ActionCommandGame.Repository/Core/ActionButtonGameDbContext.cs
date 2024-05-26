@@ -3,7 +3,6 @@ using ActionCommandGame.Repository.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
 using System;
@@ -22,6 +21,7 @@ namespace ActionCommandGame.Repository.Core
         public DbSet<Player> Players { get; set; }
         public DbSet<PlayerItem> PlayerItems { get; set; }
 
+        /* uncomment to migrate db
         public class ActionButtonGameDbContextFactory : IDesignTimeDbContextFactory<ActionButtonGameDbContext>
         {
             public ActionButtonGameDbContext CreateDbContext(string[] args)
@@ -31,15 +31,13 @@ namespace ActionCommandGame.Repository.Core
 
                 return new ActionButtonGameDbContext(optionsBuilder.Options);
             }
-        }
+        } */
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ConfigureRelationships();
             base.OnModelCreating(modelBuilder);
         }
-
-
 
         public async Task InitializeAsync(IServiceProvider serviceProvider)
         {
@@ -76,7 +74,6 @@ namespace ActionCommandGame.Repository.Core
             Players.Add(new Player { Name = "Dev", Zeni = 10000, Experience = 500});
             Players.Add(new Player { Name = "Test", Zeni = 100, Experience = 5 });
             Players.Add(new Player { Name = "Gilles", Zeni = 10, Experience = 50 });
-
 
             await SaveChangesAsync();
         }

@@ -150,7 +150,7 @@ namespace ActionCommandGame.UI.Mvc.Controllers
             {
                 claims.Add(new Claim(ClaimTypes.Role, role));
             }
-            //HttpContext required a "Name" claim to display a User Name
+            
             var usernameClaim = token.Claims.SingleOrDefault(c => c.Type == JwtRegisteredClaimNames.Sub);
             if (usernameClaim is not null)
             {

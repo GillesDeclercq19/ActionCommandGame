@@ -1,5 +1,4 @@
 ﻿using ActionCommandGame.RestApi.Services;
-using ActionCommandGame.Security.Model.Abstractions;
 using ActionCommandGame.Services.Model.Requests;
 using Microsoft.AspNetCore.Mvc;
 

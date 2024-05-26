@@ -32,7 +32,6 @@ namespace ActionCommandGame.UI.Mvc.Controllers
             return RedirectToAction("Index", "Shop");
         }
 
-
         [HttpGet]
         public async Task<IActionResult> Confirm(int playerId, int itemId)
         {
