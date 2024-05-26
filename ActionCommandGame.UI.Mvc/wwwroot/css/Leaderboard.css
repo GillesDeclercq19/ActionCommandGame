@@ -127,7 +127,8 @@ tr {
 
 
 th {
-    padding-left: 67px;
+    padding-left: 92px;
+    width: 30%;
 }
 
 td {
@@ -150,8 +151,7 @@ td {
 }
 
 .tablename2{
-    width: 150px;
-    height: 65px;
+    height: 60px;
 }
 
 .rows{

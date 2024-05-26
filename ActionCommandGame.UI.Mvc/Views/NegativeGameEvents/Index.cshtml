@@ -3,28 +3,55 @@
     ViewData["Title"] = "NegativeGameEvents";
 }
 
+<nav>
+    <div class="nav-left">
+        <img class="dragonball" src="https://png.pngtree.com/png-vector/20221208/ourmid/pngtree-4-dragon-ball-icon-vector-drgon-illustrtion-png-image_6515607.png" alt="Spinning Dragon Ball">
+    </div>
+    <div class="nav-center">
+        <ul>
+            <li class="logo-container logo-guide">
+                <a asp-controller="Game" asp-action="Index">
+                    <img class="logo trans" src="/images/logo.png" alt="logo">
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="nav-right">
+        <form method="post" asp-area="" asp-controller="Account" asp-action="LogOut" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+            <button type="submit" class="nav-link btn btn-link">
+                <img class="nav-img trans" src="/images/logout.png" alt="Logout">
+            </button>
+        </form>
+    </div>
+</nav>
+
+
 <h1>@ViewData["Title"]</h1>
 
 <a class="btn btn-primary" asp-action="Create">New NegativeGameEvent</a>
 
 <table class="table table-striped table-dark">
     <thead>
-        <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>DefenseWithGearDescription</th>
-            <th>DefenseWithoutGearDescription</th>
-            <th>DefenseLoss</th>
-            <th>Probability</th>
-            <th>Action</th>
-        </tr>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>DefenseWithGearDescription</th>
+        <th>DefenseWithoutGearDescription</th>
+        <th>DefenseLoss</th>
+        <th>Probability</th>
+        <th>Action</th>
+    </tr>
     </thead>
     <tbody>
-        @foreach (var negativeGameEvent in Model)
-        {
-            <partial name="RowPartial" model="negativeGameEvent" />
-        }
+    @foreach (var negativeGameEvent in Model)
+    {
+        <partial name="RowPartial" model="negativeGameEvent" />
+    }
     </tbody>
 </table>
+
+@section Styles {
+    <link href="@Url.Content("/css/Crud.css")" rel="stylesheet" type="text/css" />
+}
 
 
