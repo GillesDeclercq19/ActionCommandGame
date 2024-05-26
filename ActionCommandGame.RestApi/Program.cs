@@ -70,13 +70,13 @@ builder.Services.AddScoped<IPlayerService, PlayerService>();
 builder.Services.AddScoped<IPositiveGameEventService, PositiveGameEventService>();
 var app = builder.Build();
 
-
+/* Uncomment to seed database!
 using (var scope = app.Services.CreateScope())
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<ActionButtonGameDbContext>();
     await dbContext.InitializeAsync(scope.ServiceProvider);
 }
-
+*/
 
 
 // Configure the HTTP request pipeline.
