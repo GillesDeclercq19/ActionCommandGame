@@ -1,0 +1,19 @@
+﻿@model ItemResult
+
+<tr>
+    <td>@Model.Name</td>
+    <td>@Model.Description</td>
+    <td>@Model.Price</td>
+    <td>@Model.Attack</td>
+    <td>@Model.Ki</td>
+    <td>@Model.Defense</td>
+    <td>@Model.ActionCooldownSeconds</td>
+    <td>
+        <a class="btn btn-secondary" asp-action="Edit" asp-route-id="@Model.Id">
+            ~
+        </a>
+        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@Model.Id">
+            -
+        </a>
+    </td>
+</tr>

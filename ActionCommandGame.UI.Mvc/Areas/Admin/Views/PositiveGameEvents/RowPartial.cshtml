@@ -1,0 +1,17 @@
+﻿@model PositiveGameEventResult
+
+<tr>
+    <td>@Model.Name</td>
+    <td>@Model.Description</td>
+    <td>@Model.Zeni</td>
+    <td>@Model.Experience</td>
+    <td>@Model.Probability</td>
+    <td class="test">
+        <a class="btn btn-secondary" asp-action="Edit" asp-route-id="@Model.Id">
+            ~
+        </a>
+        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@Model.Id">
+            -
+        </a>
+    </td>
+</tr>

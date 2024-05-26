@@ -102,7 +102,7 @@ section {
     padding-bottom: 20px;
     background-color: #F3E0BE;
     border-radius: 20px;
-    width: 1400px;
+    width: 1500px;
     min-height: 450px;
 }
 
@@ -278,10 +278,6 @@ article {
     max-height: 350px
 }
 
-.button-container {
-    text-align: center;
-}
-
 .image-button {
     width: 140px;
     height: 80px;
@@ -289,4 +285,28 @@ article {
 
 .logo-guide {
     margin-right: 150px;
+}
+
+.center{
+    text-align: center;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.test {
+    width: 90px;
+}
+
+form{
+    text-align: center;
+    font-weight: bold;
+}
+
+.form-control {
+    margin: auto;
+    width: 30%;
 }
