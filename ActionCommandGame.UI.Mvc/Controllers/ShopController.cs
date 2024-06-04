@@ -29,7 +29,7 @@ namespace ActionCommandGame.UI.Mvc.Controllers
             var playerId = int.Parse(User.Claims.FirstOrDefault(o => o.Type == "PlayerId")?.Value ?? "0");
             var result = await _gameSdk.Buy(playerId, itemId);
 
-            return RedirectToAction("Index", "Shop");
+            return RedirectToAction("Index", "Shop", result);
         }
 
         [HttpGet]
